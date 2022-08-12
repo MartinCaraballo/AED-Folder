@@ -1,0 +1,19 @@
+Lectura materiales Oracle: http://docs.oracle.com/javase/tutorial/java/index.html
+
+Básicas de Java: http://docs.oracle.com/javase/tutorial/java/nutsandbolts/index.html
+
+Clases y objetos : http://docs.oracle.com/javase/tutorial/java/javaOO/index.html (leer solo categorías Classes, Objects y More on Classes)
+
+Números y strings : http://docs.oracle.com/javase/tutorial/java/data/index.html
+
+The Java Tutorial - Oracle http://docs.oracle.com/javase/tutorial/java/index.html 
+
+Clases y objetos : http://docs.oracle.com/javase/tutorial/java/javaOO/index.html (leer solo categorías Classes, Objects y More on Classes) 
+
+Strings: http://docs.oracle.com/javase/tutorial/java/data/strings.html 
+
+Characters: http://docs.oracle.com/javase/tutorial/java/data/characters.html 
+
+Numbers: http://docs.oracle.com/javase/tutorial/java/data/numbers.html 
+
+https://www.udacity.com/course/cs046

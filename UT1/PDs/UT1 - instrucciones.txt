@@ -1,0 +1,12 @@
+UT1 EJERCICIOS DOMICILIARIOS
+Remitir las tareas realizadas en la UT1, cada PD realizada debe ser remitida en archivos separados. Por ejemplo "PD1.zip" con el trabajo realizado en el PD1, "PD2.zip" con el trabajo realizado en el PD2, etc.
+
+Algunos de estos ejercicios deben ser a su vez entregados en GitHub Classroom, para esto se debe acceder a cada uno de los siguientes enlaces, donde se creará automáticamente un repositorio con la estructura del ejercicio y se deberán programar las funciones faltantes a implementar y subir el código al repositorio, este código será evaluado automáticamente y podrá recibir una retroalimentación de si este está funcionando correctamente o no.
+
+UT1_PD1 Ejercicio 3: https://classroom.github.com/a/zyRpKmOU
+
+UT1_PD1 Ejercicio 5: https://classroom.github.com/a/sdVjw41V
+
+Todos los ejercicios se suben a través de esta tarea.
+
+Respetar los nombres de las firmas especificados en las letras de los ejercicios.
