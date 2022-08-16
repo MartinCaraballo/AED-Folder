@@ -17,7 +17,20 @@ public class Program {
         // EJERCICIO 1:
         Tablero.imprimirTablero(1, 9);
         
-        // EJERCICIO 2:
-        LectorArchivos.leerEntradaArchivo("E:\\Juegos y TODO\\Archivos\\Usuarios\\Martin\\GITHUB\\AED-Folder\\UT1\\PDs\\PD6\\EjerciciosPD6\\src\\main\\java\\com\\mycompany\\ejerciciospd6\\entrada.txt");
+        // EJERCICIO 2 - A:
+        LectorArchivos.leerEntradaArchivo("C:\\Users\\marti\\OneDrive - Universidad Católica del Uruguay\\Escritorio\\Algoritmos y Estructuras de Datos\\UT1\\PDs\\PD6\\EjerciciosPD6\\src\\main\\java\\com\\mycompany\\ejerciciospd6\\entrada.txt");
+        
+        // EJERCICIO 2 - B:
+        LectorArchivos.leerEntradaStdin();
+        
+        // EJERCICIO 3:
+        ManejoStrings.transformarTextoT9("C:\\Users\\marti\\OneDrive - Universidad Católica del Uruguay\\Escritorio\\Algoritmos y Estructuras de Datos\\UT1\\PDs\\PD6\\EjerciciosPD6\\src\\entrada.txt");
+        ManejoStrings.transformarT9Texto("C:\\Users\\marti\\OneDrive - Universidad Católica del Uruguay\\Escritorio\\Algoritmos y Estructuras de Datos\\UT1\\PDs\\PD6\\EjerciciosPD6\\src\\parte b\\entrada.txt");
+        
+        // EJERCICIO 4:
+        int[] arr1 = {2, 3, 5, 6, 3, 2};
+        int[] arr2 = {9, 4, 9, 1, 4, 3};
+        System.out.println("\nLa multipliación de los arrays dio como resultado: " + ArraysMutiplication.arrayMultiplication(arr1, arr2));
+        
     }
 }
