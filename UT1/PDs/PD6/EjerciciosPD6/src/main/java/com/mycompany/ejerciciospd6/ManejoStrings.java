@@ -24,16 +24,16 @@ public class ManejoStrings {
     
     
     enum digito {
-        a("abcABC", "2"),
-        d("defDEF", "3"),
-        g("ghiGHI", "4"),
-        j("jklJKL", "5"),
-        m("mnñoMNÑO", "6"),
-        p("pqrsPQRS", "7"),
-        t("tuvTUV", "8"),
-        w("wxyzWXYZ", "9"),
-        esp(" ", "0"),
-        pun("." , "1");
+        A("abcABC", "2"),
+        D("defDEF", "3"),
+        G("ghiGHI", "4"),
+        J("jklJKL", "5"),
+        M("mnñoMNÑO", "6"),
+        P("pqrsPQRS", "7"),
+        T("tuvTUV", "8"),
+        W("wxyzWXYZ", "9"),
+        ESP(" ", "0"),
+        PUN("." , "1");
     
         
         public String letras;
