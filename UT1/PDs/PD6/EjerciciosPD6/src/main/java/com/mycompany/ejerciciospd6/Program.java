@@ -18,14 +18,16 @@ public class Program {
         Tablero.imprimirTablero(1, 9);
         
         // EJERCICIO 2 - A:
-        LectorArchivos.leerEntradaArchivo("C:\\Users\\marti\\OneDrive - Universidad Católica del Uruguay\\Escritorio\\Algoritmos y Estructuras de Datos\\UT1\\PDs\\PD6\\EjerciciosPD6\\src\\main\\java\\com\\mycompany\\ejerciciospd6\\entrada.txt");
-        
+       // LectorArchivos.leerEntradaArchivo("E:\\Juegos y TODO\\Archivos\\Usuarios\\Martin\\GITHUB\\AED-Folder\\UT1\\PDs\\PD6\\EjerciciosPD6\\src\\main\\java\\com\\mycompany\\ejerciciospd6\\entrada.txt");
+                
         // EJERCICIO 2 - B:
-        LectorArchivos.leerEntradaStdin();
+        double[] resultadosAreaPerimetro = LectorArchivos.leerEntradaStdin();
+        System.out.println("La circunferencia con radio " + resultadosAreaPerimetro[0] + " tiene:\nUn área de: " + resultadosAreaPerimetro[1] + "\nY un perímetro de: " + resultadosAreaPerimetro[2]);
+        
         
         // EJERCICIO 3:
-        ManejoStrings.transformarTextoT9("C:\\Users\\marti\\OneDrive - Universidad Católica del Uruguay\\Escritorio\\Algoritmos y Estructuras de Datos\\UT1\\PDs\\PD6\\EjerciciosPD6\\src\\entrada.txt");
-        ManejoStrings.transformarT9Texto("C:\\Users\\marti\\OneDrive - Universidad Católica del Uruguay\\Escritorio\\Algoritmos y Estructuras de Datos\\UT1\\PDs\\PD6\\EjerciciosPD6\\src\\parte b\\entrada.txt");
+        //ManejoStrings.transformarTextoT9("C:\\Users\\marti\\OneDrive - Universidad Católica del Uruguay\\Escritorio\\Algoritmos y Estructuras de Datos\\UT1\\PDs\\PD6\\EjerciciosPD6\\src\\entrada.txt");
+        //ManejoStrings.transformarT9Texto("C:\\Users\\marti\\OneDrive - Universidad Católica del Uruguay\\Escritorio\\Algoritmos y Estructuras de Datos\\UT1\\PDs\\PD6\\EjerciciosPD6\\src\\parte b\\entrada.txt");
         
         // EJERCICIO 4:
         int[] arr1 = {2, 3, 5, 6, 3, 2};

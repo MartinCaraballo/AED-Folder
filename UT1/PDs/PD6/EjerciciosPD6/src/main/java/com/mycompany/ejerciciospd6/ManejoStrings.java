@@ -83,34 +83,40 @@ public class ManejoStrings {
     }
     
     public static void transformarT9Texto(String rutaArchivo) throws FileNotFoundException, IOException {
-        File archivoEntrada = new File(rutaArchivo);
-        BufferedReader reader = new BufferedReader(new FileReader(archivoEntrada));
-        BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\marti\\OneDrive - Universidad Católica del Uruguay\\Escritorio\\Algoritmos y Estructuras de Datos\\UT1\\PDs\\PD6\\EjerciciosPD6\\src\\parte b\\salida.txt", true));
-        
-        String linea = reader.readLine();
-        while (linea != null) {
-            // Al generar la salida en la parte anterior, deje un espacio entre los digitos para poder
-            // obtener la letra de una manera facil. Para obtener la letra simplemente invocamos
-            // el metodo .split(" ").
-            String[] letras = linea.split(" ");
-            // Recorremos el array de letras de manera invertida
-            for (int i = letras.length - 1; i >= 0; i--) {
-                // Obtenemos el digito que se 'presionó'
-                String letra = letras[i];
-                // Guardamos la posicion de la letra en la enumeracion
-                int posicionLetra = letra.length() - 1;
-                // Recorremos la enumeracion
-                for (digito d : digito.values()) {
-                    if (d.digitos.contains(String.valueOf(letra.charAt(0)))) {
-                        // Finalemente escribimos en el archivo la letra
-                        writer.write(d.letras.charAt(posicionLetra));
+        try {
+            File archivoEntrada = new File(rutaArchivo);
+            BufferedReader reader = new BufferedReader(new FileReader(archivoEntrada));
+            BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\marti\\OneDrive - Universidad Católica del Uruguay\\Escritorio\\Algoritmos y Estructuras de Datos\\UT1\\PDs\\PD6\\EjerciciosPD6\\src\\parte b\\salida.txt", true));
+
+            String linea = reader.readLine();
+            while (linea != null) {
+                // Al generar la salida en la parte anterior, deje un espacio entre los digitos para poder
+                // obtener la letra de una manera facil. Para obtener la letra simplemente invocamos
+                // el metodo .split(" ").
+                String[] letras = linea.split(" ");
+                // Recorremos el array de letras de manera invertida
+                for (int i = letras.length - 1; i >= 0; i--) {
+                    // Obtenemos el digito que se 'presionó'
+                    String letra = letras[i];
+                    // Guardamos la posicion de la letra en la enumeracion
+                    int posicionLetra = letra.length() - 1;
+                    // Recorremos la enumeracion
+                    for (digito d : digito.values()) {
+                        if (d.digitos.contains(String.valueOf(letra.charAt(0)))) {
+                            // Finalemente escribimos en el archivo la letra
+                            writer.write(d.letras.charAt(posicionLetra));
+                        }
                     }
                 }
+                linea = reader.readLine();
             }
-            linea = reader.readLine();
+            writer.newLine();
+            reader.close();
+            writer.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Error al leer el archivo " + rutaArchivo);
+        } catch (IOException e) {
+            System.out.println("Error al leer el archivo " + rutaArchivo);
         }
-        writer.newLine();
-        reader.close();
-        writer.close();
     }
 }

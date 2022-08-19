@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Scanner;
 
 /**
  *
@@ -39,27 +40,30 @@ public class LectorArchivos {
         }
     }
 
-    public static void leerEntradaStdin() throws FileNotFoundException, IOException {
+    public static double[] leerEntradaStdin() throws IllegalArgumentException {
         try {
-            String path = "C:\\Users\\marti\\OneDrive - Universidad Católica del Uruguay\\Escritorio\\Algoritmos y Estructuras de Datos\\UT1\\PDs\\PD6\\EjerciciosPD6\\src\\main\\java\\com\\mycompany\\ejerciciospd6\\stdin.txt";
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Ingresa el radio de la circunferencia: ");
+            double userInputRadioValue = scanner.nextDouble();
+            
+            if (userInputRadioValue == 0) {
+                throw new IllegalArgumentException();
+            }
+            double[] resultados = new double[3];
+            
+            double circArea = Math.PI * Math.pow(userInputRadioValue, 2);
+            double circPerimeter = 2 * Math.PI * userInputRadioValue;
+            resultados[0] = userInputRadioValue;
+            resultados[1] = circArea;
+            resultados[2] = circPerimeter;
+            
+            return resultados;
 
-            File file = new File(path);
-            BufferedReader reader = new BufferedReader(new FileReader(file));
-            StringBuilder response = new StringBuilder();
-            String fileReaded = reader.readLine();
-
-            int radioValue = Integer.valueOf(fileReaded.split("=")[1].trim());
-            double circArea = Math.PI * Math.pow(radioValue, 2);
-            double circPerimeter = 2 * Math.PI * radioValue;
-
-            response.append("El área de la circunferencia de " + radioValue + " cm de radio es: " + circArea
-                    + "\nY su perímetro es de " + circPerimeter + ".");
-            System.out.println(response.toString());
-        } catch (FileNotFoundException e) {
-            System.out.println("Error al leer el archivo.");
-        } catch (IOException e) {
-            System.out.println("Error al leer el archivo.");
+        } catch (IllegalArgumentException e) {
+            System.out.println("No se ingresaron parámetros.");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
+        return null;
     }
 }
