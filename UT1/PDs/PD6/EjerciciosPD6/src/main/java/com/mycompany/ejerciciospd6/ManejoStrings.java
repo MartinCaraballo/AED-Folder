@@ -50,7 +50,7 @@ public class ManejoStrings {
             File archivoEntrada = new File(rutaArchivo);
             String pathArchivoSalida = "";
             BufferedReader reader = new BufferedReader(new FileReader(archivoEntrada));
-            BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\marti\\OneDrive - Universidad Católica del Uruguay\\Escritorio\\Algoritmos y Estructuras de Datos\\UT1\\PDs\\PD6\\EjerciciosPD6\\src\\salida.txt", true));
+            BufferedWriter writer = new BufferedWriter(new FileWriter("src\\salida.txt", true));
 
             String linea = reader.readLine();
             while (linea != null) {
@@ -86,7 +86,7 @@ public class ManejoStrings {
         try {
             File archivoEntrada = new File(rutaArchivo);
             BufferedReader reader = new BufferedReader(new FileReader(archivoEntrada));
-            BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\marti\\OneDrive - Universidad Católica del Uruguay\\Escritorio\\Algoritmos y Estructuras de Datos\\UT1\\PDs\\PD6\\EjerciciosPD6\\src\\parte b\\salida.txt", true));
+            BufferedWriter writer = new BufferedWriter(new FileWriter("src\\parte b\\salida.txt", true));
 
             String linea = reader.readLine();
             while (linea != null) {

@@ -50,6 +50,6 @@ public class Program {
             }
         };
         // Cada 500 ms se actualizan las lecturas.
-        timer.schedule(refrescarValores, 0, 500);    
+        timer.schedule(refrescarValores, 0, 500);
     }
 }
