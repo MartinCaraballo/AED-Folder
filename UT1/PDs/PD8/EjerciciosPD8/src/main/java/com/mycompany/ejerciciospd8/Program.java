@@ -21,10 +21,10 @@ Documentación: https://docs.oracle.com/javase/tutorial/java/nutsandbolts/dataty
         La maxima fuerza a la que fue expuesto es un numero de 64 bits, ocupa 8 bytes.
         El tiempo entre latidos es un numero de 32 bits, ocupa 4 bytes.
         El nivel de bateria restante es un numero de 64 bits, ocupa 8 bytes.
-        El codigo del fabricante es un String, ocupa aproximadamente un byte por caracter, 
-        lo cual al ser un codigo de 8 digitos, nos deja un peso de 8 bytes.
+        El codigo del fabricante es un String, ocupa aproximadamente dos bytes por caracter, 
+        lo cual al ser un codigo de 8 digitos, nos deja un peso de 16 bytes.
         
-        Peso total: 2 + 2 + 2 + 8 + 4 + 8 + 8 = 34 bytes.
+        Peso total: 2 + 2 + 2 + 8 + 4 + 8 + 16 = 42 bytes.
 */
 
 
