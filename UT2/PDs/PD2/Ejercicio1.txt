@@ -1,0 +1,26 @@
+Ejercicio 1 -->
+
+1)factorial (numero)
+	Si numero es igual a 1 o a 0 	// caso base
+		retornar 1		// sentencia del caso base
+	si no
+		retornar (numero * factorial(numero - 1))
+
+Si el número ingresado es mayor a 1, este se va a estar multiplicando entre si mismo y lo que retorne la funcion factorial
+pasándole como parametro el numero menos 1. Como el número va decreciendo de a 1, cuando éste tenga valor 1, se termina la
+ejecución. En el caso de que el numero ingresado sea 1 o 0, la funcion devuelve 1.
+
+2) factorial (numero)
+	Si numero es igual a 1 o a 0	O(1)
+		retornar 1		O(1)
+	si no
+		retornar (numero * factorial(numero - 1)) O(1)
+
+El orden de ejecución de este algoritmo es O(n)
+
+3) Cuando se ingresa un número negativo, se produce una excepción del tipo StackOverflowError, ya que el numero ingresado
+nunca llega a ser 1, y por lo tanto las llamadas se vuelven infinitas.
+
+Ejercicio 2 -->
+
+1)
