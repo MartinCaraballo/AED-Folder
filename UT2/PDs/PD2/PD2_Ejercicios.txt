@@ -1,0 +1,138 @@
+Ejercicio 1 -->
+
+1)
+factorial (numero: int)
+	Si numero es igual a 1 o a 0 	// caso base
+		retornar 1		// sentencia que contepla el caso base
+	si no
+		retornar (numero * factorial(numero - 1))
+
+Si el número ingresado es mayor a 1, este se va a estar multiplicando entre si mismo y lo que retorne la funcion factorial
+pasándole como parametro el numero menos 1. Como el número va decreciendo de a 1, cuando éste tenga valor 1, se termina la
+ejecución. En el caso de que el numero ingresado sea 1 o 0, la funcion devuelve 1.
+
+2)
+factorial (numero: int)
+	Si numero es igual a 1 o a 0	O(1)
+		retornar 1		O(1)
+	si no
+		retornar (numero * factorial(numero - 1)) O(1)
+
+El orden de ejecución de este algoritmo es O(n)
+
+3) Cuando se ingresa un número negativo, se produce una excepción del tipo StackOverflowError, ya que el numero ingresado
+nunca llega a ser 1, y por lo tanto las llamadas se vuelven infinitas.
+
+
+Ejercicio 2 -->
+
+1)
+sumaLineal(A: int[], n: int):
+Entrada: Un array de enteros A y un entero n >= 1, tal que A tiene al menos n elementos
+Salida: 
+La suma de los primeros n enteros en A
+
+COM
+	SI n = 1			// caso base
+		devolver A[0]	// sentencia que contempla el caso base
+	SINO
+		devolver SumaLineal(A, n - 1) + A[n - 1]
+	FINSI
+FIN
+
+Cuando se llama a la función, si n es mayor a 1 se vuelve a llamar la función con n - 1, por lo tanto al llegar
+al caso base (n = 1) se termina de ejecutar. Por lo tanto aseguramos que el algoritmo progresará hasta el caso base.
+
+2)
+sumaLineal(A, n):
+Entrada: Un array de enteros A y un entero n >= 1, tal que A tiene al menos n elementos
+Salida: 
+La suma de los primeros n enteros en A
+
+COM
+	SI n = 1			O(1)
+		devolver A[0]	O(1)
+	SINO
+		devolver SumaLineal(A, n - 1) + A[n - 1] O(n)
+	FINSI
+FIN
+
+El orden de ejecución del algoritmo es O(n).
+
+3) Si le pasamos un número menor o igual a 0, el programa entra en loop infinito, y nos arroja la excepción StackOverflow.
+Si le pasamos un array vacío, nos da una excepción de índice.
+
+Ejercicio 3 -->
+1)
+potencia(numero: int, exponente: int)
+Entrada: un número al que se le va a aplicar el exponente.
+Salida: El resultado de elevar el numero al exponente.
+
+COM
+	SI exponente = 0		// caso base
+		devolver 1		// sentencia que contempla el caso base
+	SINO
+		devolver potencia(numero, exponente - 1)
+	FINSI
+FIN 
+
+Cuando llamamos a la función potencia se le pasan dos parametros, un entero numero y un entero
+exponente. Mientras el exponente sea mayor a 0, se vuelve a llamar la función pero decrementando 
+exponente en 1, por lo tanto todo indica que ingresando valores naturales y si el algoritmo progresa 
+correctamente se llegará al caso base dando como finalizado el proceso y mostrando el resultado.
+
+2)
+potencia(numero: int, exponente: int)
+Entrada: un número al que se le va a aplicar el exponente.
+Salida: El resultado de elevar el numero al exponente.
+
+COM
+	SI = 0		O(1)
+		devolver 1	O(1)
+	SINO
+		devolver potencia(numero, exponente - 1) O(n)
+	FINSI
+FIN
+
+El tiempo de ejecución del algoritmo es O(n).
+
+3)
+Para el caso de que se le pasen 2 numeros reales como parámetro, ocurre algo similar a los ejercicios anteriores,
+se produce una excepción del tipo StackOverflow debido a que se genera un loop infinito, y así llenándose la memoria.
+Si la base es real o entera, el programa se ejecuta correctamente, pero el exponente no puede ser ni negativo ni real,
+ya que si lo es se produce el loop infinito.
+
+Ejercicio 4 -->
+1)
+Algoritmo InvertirArray(A: int[], i: int, j: int)
+	Entrada: Un array A de enteros e índices enteros no negativos i y j 
+	Salida: Los elementos de A entre los índices i y j, invertidos
+COM 
+	SI i < j then				// caso base
+		Intercambiar A[i] y A[ j]		// sentencia 1 que contempla el caso base
+		InvertirArray(A, i + 1, j - 1)	// sentencia 2 que contempla el caso base
+	FINSI 
+FIN
+
+El algoritmo progresa hacia el caso base porque a medida que se va ejecutando el indice "i" incrementa
+de a una unidad, mientras que j decrementa de a una unidad. Cuando i deja de ser menor a j el algoritmo
+finaliza. En este caso el caso base es i < j pero la condición de finalización es i > j.
+
+2)
+Algoritmo InvertirArray(A: int[], i: int, j: int)
+	Entrada: Un array A de enteros e índices enteros no negativos i y j 
+	Salida: Los elementos de A entre los índices i y j, invertidos
+COM 
+	SI i < j then					O(1)
+		Intercambiar A[i] y A[ j]		O(1)
+		InvertirArray(A, i + 1, j - 1)	O(n) llamada de orden 1, pero al ser una función recursiva se repite n veces.
+	FINSI 
+FIN
+
+El tiempo de ejecución del algoritmo es O(n).
+
+3) Si le pasamos índices incorrectos, simplemente arroja una excepción indicandonos que no encontro un elemento
+en esa posición y se termina de ejecutar el programa.
+Si le pasamos un array vacío, y ambos índices de valor 0, la función no hace nada. (deja el array vacio). Sucede
+lo mismo cuando le pasamos un array con un elemento, la función no hace nada, deja el array como lo encontró.
+ 

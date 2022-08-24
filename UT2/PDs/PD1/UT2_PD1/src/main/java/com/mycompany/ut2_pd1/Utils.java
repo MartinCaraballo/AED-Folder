@@ -17,7 +17,7 @@ import java.lang.reflect.Array;
  */
 public class Utils {
 
-    public int[] miFuncion(String rutaArchivo) {
+    public void miFuncion(String rutaArchivo) {
         try {
             int valorI;
             int valorJ;
@@ -33,14 +33,14 @@ public class Utils {
                 arrResultados[c] = Integer.parseInt(reader.readLine());
             }
 
-            for (int i = 0, j = numeroLineas - 1; i <= numeroLineas; i++, j--) {
-                if (i < j) {
+            for (int i = 0; i < numeroLineas; i++) {
+                for (int j = numeroLineas - 1; j > i; j--) {
                     contador++;
-                    valorI = arrResultados[i];
-                    valorJ = arrResultados[j];
-
-                    Array.setInt(arrResultados, i, valorJ);
-                    Array.setInt(arrResultados, j, valorI);
+                    if (arrResultados[j] < arrResultados[j - 1]) {
+                        int jValue = arrResultados[j];
+                        arrResultados[j] = arrResultados[j - 1];
+                        arrResultados[j - 1] = jValue;
+                    }
                 }
             }
 
@@ -49,14 +49,10 @@ public class Utils {
             System.out.println("Primera posición del array: " + arrResultados[0]);
             System.out.println("Última posición del array: " + arrResultados[numeroLineas - 1]);
 
-            return arrResultados;
-
         } catch (FileNotFoundException e) {
             System.out.println("Error al leer el archivo " + rutaArchivo);
         } catch (IOException e) {
             System.out.println("Error al leer el archivo " + rutaArchivo);
         }
-        return null;
     }
 }
-
