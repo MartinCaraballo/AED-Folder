@@ -1,0 +1,7 @@
+a) si es posible utilizar dividir y conquistar para resolver el problema, el problema tiene dos elementos que son disjuntos
+b) Que el árbol no este vacío
+c) calcular la altura de ambos lados, y verificar cual es mas alta
+d) Se almacena llamando al mismo metodo, es decir retorna la altura por recursividad.
+e) Sigo la cadena por el camino de nodos mas grandes hasta llegar una hoja, en ese momento devuelvo un 1 (o 0, dependiendo
+de la notacion, y vuelvo hacia arriba con ese 1 como base para los calculos.
+f) El orden de ejecución es O(N * Log2 N)
