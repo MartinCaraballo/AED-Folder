@@ -1,0 +1,51 @@
+UT2_PD5
+
+Ejercicio 1 -->
+
+	Versión 1
+
+	public boolean hasTwoTrueValues(boolean[] arr) {
+		int count = 0;		O(1)
+		for (int i = 0; i < arr.length; i++) {	se repite n veces: O(n)
+			if (arr[i])		O(1)
+				count++;	O(1)
+		}
+		return count >=2;		O(1)
+	}
+
+	La version 1 tiene un tiempo de ejecución de O(n).
+
+________________________________________________________________________________________________
+
+	Versión 2
+
+	public boolean hasTwoTrueValues(boolean[] arr) {
+		for (int i = 0; i < arr.length; j++) {	-->	se repite n veces: O(n)
+			for (int j = i + 1; j < arr.length; j++) {  -->	se repite n - 1 veces O(n)
+				if (arr[i] && arr[j])	O(1)
+					return true;	O(1)
+ 			}
+		}
+		return false;	O(1)
+	}
+
+	La versión 2 tiene un tiempo de ejecución de O(n2).
+
+________________________________________________________________________________________________
+
+	Versión 3
+	
+	public boolean hasTwoTrueValues(boolean[] arr) {
+		for (int i = 0; i < arr.length; i++) {	--> 	se repite n veces: O(n)
+			if (arr[i] )	O(1)
+				for (int j = i + 1; j < arr.length; j++) {  --> se repite n - 1 veces: O(n)
+					if (arr[j])			O(1)
+						return true; 	O(1)
+				}
+		}
+		return false;	O(1)
+	}
+
+	La versión 3 tiene un tiempo de ejecución de O(n2).
+
+________________________________________________________________________________________________
