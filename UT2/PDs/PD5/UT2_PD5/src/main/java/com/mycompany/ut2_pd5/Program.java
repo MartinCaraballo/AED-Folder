@@ -45,16 +45,16 @@ public class Program {
         System.out.println("La ejecución de la version 3 del algoritmo llevó: " + (finEjecucionV3 - inicioEjecucionV3) / 1000000F + " ms.");
 
         // EJERCICIO 2:
-        /*
+        
         BinarySearch binarySearchInstance = new BinarySearch();
-        Integer[] ordenedIntArray = utilsInstance.generateOrdenedIntArray(20000000);
+        Integer[] ordenedIntArray = utilsInstance.generateOrdenedIntArray(10);
         System.out.println("\nEJERCICIO 2:");
         long inicioEjecucionBinarySearch = System.nanoTime();
-        binarySearchInstance.binarySearch(ordenedIntArray, 20000000);
+        binarySearchInstance.binarySearch(ordenedIntArray, 10);
         //System.out.println("Elemento 10 encontrado en la posicion: " + binarySearchInstance.binarySearch(ordenedIntArray, 10));
         long finEjecucionBinarySearch = System.nanoTime();
         System.out.println("Para una entrada de " + ordenedIntArray.length + " elementos el algoritmo demoró "
-                + (finEjecucionBinarySearch - inicioEjecucionBinarySearch) / 1000000F + " ms.");*/
+                + (finEjecucionBinarySearch - inicioEjecucionBinarySearch) / 1000000F + " ms.");
     }
 }
 
@@ -96,4 +96,6 @@ Ejercicio 2:
    Con un array de 12.000.000 elementos, el algoritmo binarySearch demoró aproximadamente 0.0177 ms. (probado comentando todas las operaciones del ej1)
    Con un array de 10 elementos, el algoritmo binarySearch demoró aproximadamente 0.0123 ms. (probado comentando todas las operaciones del ej1)
 
+Al ser un algoritmo con tiempo de ejecución O(log(n)), en las pruebas realizadas se refleja que al aumentar la entrada abismalmente los tiempos incrementan muy poco,
+por ejemplo la diferencia de tiempo entre una entrada de 20.000.000 elementos (0.0209 ms) y una entrada de 10 elementos (0.0123 ms) es de 0.0086 ms. 
  */
