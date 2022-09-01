@@ -7,6 +7,7 @@ package com.mycompany.ut3_pd3;
 /**
  *
  * @author Martin
+ * @param <T> Tipo de dato del nodo.
  */
 public class Nodo<T> implements INodo {
     

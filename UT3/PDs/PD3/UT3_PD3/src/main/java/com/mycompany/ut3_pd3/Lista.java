@@ -11,33 +11,36 @@ package com.mycompany.ut3_pd3;
  */
 public class Lista<T> implements ILista<T> {
 
-    private Nodo<T> cabeza = null;
+    private Nodo<T> primero = null;
     private int longitud = 0;
 
     @Override
     public void insertar(Nodo<T> nodo) {
-        if (cabeza == null) {
-            cabeza = nodo;
+        if (this.primero == null) {
+            this.primero = nodo;
+            this.primero.setSiguiente(null);
+            this.longitud++;
         } else {
-            INodo<T> puntero = cabeza;
-            
+            INodo<T> puntero = this.primero;
+
             while (puntero.getSiguiente() != null) {
                 puntero = puntero.getSiguiente();
             }
             puntero.setSiguiente(nodo);
-            longitud++;
+            this.longitud++;
         }
     }
 
     @Override
     public Nodo<T> buscar(Comparable clave) {
-        if (cabeza == null)
+        if (this.esVacia()) {
             return null;
-        else {
-            Nodo<T> nodoActual = cabeza;
+        } else {
+            Nodo<T> nodoActual = this.primero;
             while (nodoActual != null) {
-                if (nodoActual.getEtiqueta().equals(clave))
+                if (nodoActual.getEtiqueta().equals(clave)) {
                     return nodoActual;
+                }
                 nodoActual = nodoActual.getSiguiente();
             }
             return null;
@@ -46,23 +49,29 @@ public class Lista<T> implements ILista<T> {
 
     @Override
     public boolean eliminar(Comparable clave) {
-        Nodo<T> nodoActual = cabeza;
-        if (cabeza == null)
+        if (this.esVacia()) {
             return false;
-        else if (longitud == 1) {
-            if (cabeza.getEtiqueta().equals(clave)) {
-                cabeza = null;
-                return true;
-            }      
         } else {
-            Nodo<T> nodoSiguiente = nodoActual.getSiguiente();
-            while (nodoSiguiente != null) {
-                if (nodoSiguiente.getEtiqueta().equals(clave)) {
-                    nodoActual.setSiguiente(nodoSiguiente.getSiguiente());
-                    nodoSiguiente = null;
+            Nodo<T> nodoAnterior = this.primero;
+            Nodo<T> nodoActual = this.primero.getSiguiente();
+            if (nodoAnterior.getEtiqueta().equals(clave)) {
+                this.primero = primero.getSiguiente();
+                longitud--;
+                return true;
+            }
+            while (nodoActual != null) {
+                if (nodoActual.getEtiqueta().equals(clave)) {
+                    if (nodoActual.getSiguiente() != null) {
+                        nodoAnterior.setSiguiente(nodoActual.getSiguiente());
+                        this.longitud--;
+                        return true;
+                    }
+                    nodoAnterior.setSiguiente(null);
+                    this.longitud--;
                     return true;
                 }
-                nodoActual = nodoSiguiente;
+                nodoAnterior = nodoActual;
+                nodoActual = nodoActual.getSiguiente();
             }
         }
         return false;
@@ -70,29 +79,48 @@ public class Lista<T> implements ILista<T> {
 
     @Override
     public String imprimir() {
+        Nodo<T> puntero = this.primero;
+        if (puntero == null) {
+            return "Lista vacía.";
+        }
 
+        StringBuilder stringBuilder = new StringBuilder();
+        while (puntero != null) {
+            stringBuilder.append(puntero.getEtiqueta().toString());
+            puntero = puntero.getSiguiente();
+        }
+        return stringBuilder.toString();
     }
 
     @Override
     public String imprimir(String separador) {
+        Nodo<T> puntero = this.primero;
+        if (puntero == null) {
+            return "Lista vacía.";
+        }
 
+        StringBuilder stringBuilder = new StringBuilder();
+        while (puntero != null) {
+            stringBuilder.append(puntero.getEtiqueta().toString() + separador);
+            puntero = puntero.getSiguiente();
+        }
+        return stringBuilder.toString();
     }
 
     @Override
     public int cantElementos() {
-        return longitud;
+        return this.longitud;
     }
 
     @Override
     public boolean esVacia() {
-        return longitud == 0;
+        return this.longitud == 0;
     }
 
     @Override
     public void setPrimero(Nodo<T> unNodo) {
-        Nodo<T> cabezaAntiguo = cabeza;
-        cabeza = unNodo;
-        cabeza.setSiguiente(cabezaAntiguo);
+        this.primero = unNodo;
+        this.longitud++;
     }
 
 }
