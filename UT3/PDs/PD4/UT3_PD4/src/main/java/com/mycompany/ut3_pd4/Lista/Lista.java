@@ -1,26 +1,21 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package com.mycompany.ut3_pd3;
+package com.mycompany.ut3_pd4.Lista;
 
-/**
- *
- * @author Martin
- * @param <T> Node data type.
- */
+
+import com.mycompany.ut3_pd4.Nodo.Nodo;
+import com.mycompany.ut3_pd4.Lista.ILista;
+
 public class Lista<T> implements ILista<T> {
 
     private Nodo<T> primero;
-    // Para no tener que recorrer la lista cada vez que queramos obtener el largo,
-    // guardamos en una variable y vamos incrementando y decrementando a medida que
-    // insertamos y eliminamos elementos.
     private int longitud;
-    
+
     public Lista() {
         primero = null;
         longitud = 0;
     }
+
+
+    // implementar los metodos indicados en la interfaz
 
     @Override
     public void insertar(Nodo<T> nodo) {
@@ -30,7 +25,6 @@ public class Lista<T> implements ILista<T> {
             longitud++;
         } else {
             Nodo<T> nodoActual = primero;
-
             while (nodoActual.getSiguiente() != null) {
                 nodoActual = nodoActual.getSiguiente();
             }
@@ -60,12 +54,12 @@ public class Lista<T> implements ILista<T> {
         if (primero == null) {
             return false;
         } else {
-            // Si es el unico elemento en la lista, y es el nodo que queremos borrar, primero se vuelve null (lo eliminamos)
+            // Si es el unico elemento en la lista, y es el que queremos borrar, primero se vuelve null
             if (primero.getSiguiente() == null && primero.getEtiqueta().equals(clave)) {
                 primero = null;
                 longitud--;
                 return true;
-                // Si es el primer elemento el que queremos borrar.
+            // Si es el primer elemento de la lista el que queremos borrar.
             } else if (primero.getEtiqueta().equals(clave)) {
                 setPrimero(primero.getSiguiente());
                 longitud--;

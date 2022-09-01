@@ -23,23 +23,27 @@ public class Program {
         lista.insertar(nodo4);
 
         System.out.println("Los elementos de la lista son: " + lista.imprimir());
-        
+        System.out.println("Resultado de buscar \"2\": " + lista.buscar("2").getEtiqueta());
+
         Lista<Integer> lista2 = new Lista<>();
         nodo1 = new Nodo<Integer>("1", 1);
         nodo2 = new Nodo<Integer>("2", 2);
         nodo3 = new Nodo<Integer>("3", 3);
         nodo4 = new Nodo<Integer>("4", 4);
-        
+
         lista2.setPrimero(nodo4);
-        System.out.println("Los elementos de la lista son: " + lista2.imprimir());
+        System.out.println("\nLos elementos de la lista2 son: " + lista2.imprimir());
         lista2.insertar(nodo1);
         lista2.insertar(nodo2);
         lista2.insertar(nodo3);
-        System.out.println("Los elementos de la lista son: " + lista2.imprimir());
+        System.out.println("Los elementos de la lista2 son: " + lista2.imprimir());
 
-        System.out.println("Buscar 4 lista 2: " + lista2.buscar("4").getEtiqueta().toString());
+        System.out.println("Buscar 4 en lista2: " + lista2.buscar("4").getEtiqueta());
         System.out.println("Largo de la lista 2: " + lista2.cantElementos());
-        System.out.println("Resultado de borrar el nodo con etiqueta 4: " + lista2.eliminar("4"));
+        System.out.println("Los elementos de la lista2 son: " + lista2.imprimir());
+        System.out.println("Eliminar 2: " + lista2.eliminar("2"));
+        System.out.println("Los elementos de la lista2 son: " + lista2.imprimir());
+        System.out.println("Largo de la lista2: " + lista2.cantElementos());
 
     }
 }
