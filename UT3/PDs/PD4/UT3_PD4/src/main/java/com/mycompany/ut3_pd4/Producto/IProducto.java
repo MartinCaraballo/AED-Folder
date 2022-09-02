@@ -1,14 +1,12 @@
-package com.mycompany.ut3_pd4.Producto;
 
-
-public interface IProducto {
+public interface IProducto{
 
     /**
      * Retorna el codigo del Producto.
      *
      * @return codigo del Producto.
      */
-    public Comparable getEtiqueta();
+    public Comparable getCodProducto();
 
     /**
      * Retorna el precio unitario del Producto.
@@ -26,7 +24,9 @@ public interface IProducto {
      */
     public Integer getStock();
 
-    public void setStock(Integer stock);
+    public void agregarCantidadStock(Integer stock);
+
+    public void restarCantidadStock(Integer stock);
 
     /**
      * Retorna la descripcion/nombre del Producto.

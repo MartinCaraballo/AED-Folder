@@ -1,8 +1,3 @@
-package com.mycompany.ut3_pd4.Almacen;
-
-import com.mycompany.ut3_pd4.Lista.Lista;
-import com.mycompany.ut3_pd4.Producto.Producto;
-
 
 public interface IAlmacen {
 
@@ -16,7 +11,9 @@ public interface IAlmacen {
 
     public String getNombre();
 
-    public Lista getListaProductos();
+    public Lista<Producto> getListaProductos();
+    
+    public long obtenerValorStock();
 
     /**
      * Incorporar un nuevo producto al supermercado.
@@ -31,7 +28,7 @@ public interface IAlmacen {
      * @param clave
      * @return
      */
-    public boolean eliminar(Comparable clave);
+    public boolean eliminarProducto(Comparable codProducto);
 
     /**
      * Imprime la lista de productos
@@ -56,7 +53,7 @@ public interface IAlmacen {
      * @param cantidad
      * @return
      */
-    public Boolean agregarStock(Comparable clave, Integer cantidad);
+    public Boolean agregarStock(Comparable codProducto, Integer cantidad);
 
     /**
      * Simular la venta de un producto (reducir el stock de un producto
@@ -66,7 +63,7 @@ public interface IAlmacen {
      * @param cantidad
      * @return
      */
-    public Integer restarStock(Comparable clave, Integer cantidad);
+    public Integer restarStock(Comparable codProducto, Integer cantidad);
 
     /**
      * Dado un código de producto, indicar las existencias del mismo en el
@@ -75,7 +72,7 @@ public interface IAlmacen {
      * @param clave
      * @return
      */
-    public Producto buscarPorCodigo(Comparable clave);
+    public Producto buscarPorCodigo(Comparable codProducto);
 
     /**
      * Listar todos los productos registrados, ordenados por nombre, presentando

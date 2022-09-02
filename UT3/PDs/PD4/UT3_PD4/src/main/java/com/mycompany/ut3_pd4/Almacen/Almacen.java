@@ -1,29 +1,26 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.ut3_pd4.Almacen;
-
-import com.mycompany.ut3_pd4.Lista.Lista;
-import com.mycompany.ut3_pd4.Nodo.Nodo;
-import com.mycompany.ut3_pd4.Producto.Producto;
-
 /**
  *
  * @author Martin
  */
 public class Almacen implements IAlmacen {
-    
-    String direccion;
-    String telefono;
-    String nombre;
-    Lista<Producto> listaProductos;
-    
-    public Almacen(String direccion, String telefono, String nombre) {
+
+    private String direccion;
+    private String telefono;
+    private String nombre;
+    private Lista<Producto> listaProductos;
+    private ListaOrdenada<Producto> listaVentas;
+
+    public Almacen(String nombre, String direccion, String telefono) {
+        this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
-        this.nombre = nombre;
-        this.listaProductos = new Lista<>();
+        listaProductos = new Lista<>();
+        listaVentas = new ListaOrdenada<>();
     }
 
     @Override
@@ -43,7 +40,7 @@ public class Almacen implements IAlmacen {
 
     @Override
     public void setTelefono(String telefono) {
-        this.telefono = (!telefono.isEmpty() ? telefono : this.direccion);
+        this.telefono = (!telefono.isEmpty() ? telefono : this.telefono);
     }
 
     @Override
@@ -52,62 +49,164 @@ public class Almacen implements IAlmacen {
     }
 
     @Override
-    public Lista getListaProductos() {
+    public Lista<Producto> getListaProductos() {
         return listaProductos;
     }
 
     @Override
-    public void insertarProducto(Producto unProducto) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public long obtenerValorStock() {
+        long valorStock = 0;
+        if (listaProductos.esVacia()) {
+            return valorStock;
+        } else {
+            Nodo<Producto> nodoActual = listaProductos.getPrimero();
+            Producto producto = nodoActual.getDato();
+            while (nodoActual != null) {
+                valorStock += producto.getPrecio();
+                nodoActual = nodoActual.getSiguiente();
+                producto = nodoActual.getDato();
+            }
+            return valorStock;
+        }
     }
 
     @Override
-    public boolean eliminar(Comparable clave) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void insertarProducto(Producto unProducto) {
+        Nodo unNodo = new Nodo(unProducto.getCodProducto(), unProducto);
+        listaProductos.insertar(unNodo);
+
+    }
+
+    @Override
+    public boolean eliminarProducto(Comparable codProducto) {
+        return (listaProductos.eliminar(codProducto));
     }
 
     @Override
     public String imprimirProductos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (listaProductos.esVacia()) {
+            return "Lista vacía.";
+        } else {
+            StringBuilder stringBuilder = new StringBuilder("Los productos son:\n");
+            Nodo<Producto> nodoActual = listaProductos.getPrimero();
+            Producto producto = nodoActual.getDato();
+            while (nodoActual != null) {
+                producto = nodoActual.getDato();
+                stringBuilder.append("Nombre: ").append(producto.getNombre())
+                        .append(" | Precio: ").append(producto.getPrecio())
+                        .append(" | Stock: ").append(producto.getStock())
+                        .append(" | Código de Producto: ").append(producto.getCodProducto()).append("\n");
+                nodoActual = nodoActual.getSiguiente();
+            }
+            return stringBuilder.toString();
+        }
     }
 
     @Override
     public String imprimirSeparador(String separador) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (listaProductos.esVacia()) {
+            return "Lista vacía.";
+        } else {
+            StringBuilder stringBuilder = new StringBuilder("Los productos son:\n");
+            Nodo<Producto> nodoActual = listaProductos.getPrimero();
+            Producto producto = nodoActual.getDato();
+            while (nodoActual != null) {
+                stringBuilder.append(producto.getNombre()).append(separador).append(" ");
+                nodoActual = nodoActual.getSiguiente();
+                producto = nodoActual.getDato();
+            }
+            return stringBuilder.toString();
+        }
     }
 
     @Override
-    public Boolean agregarStock(Comparable clave, Integer cantidad) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Boolean agregarStock(Comparable codProducto, Integer cantidad) {
+        Nodo<Producto> nodoAIncrementar = listaProductos.buscar(codProducto);
+        if (nodoAIncrementar == null) {
+            return false;
+        } else {
+            nodoAIncrementar.getDato().agregarCantidadStock(cantidad);
+            return true;
+        }
+    }
+    
+    public void vender(Producto producto, Integer cantidad) {
+        Comparable codProducto = producto.getCodProducto();
+        restarStock(codProducto, cantidad);
+        Comparable nombre = producto.getNombre();
+        listaVentas.insertarOrdenado(new Nodo(nombre, producto));
     }
 
     @Override
-    public Integer restarStock(Comparable clave, Integer cantidad) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Integer restarStock(Comparable codProducto, Integer cantidad) {
+        Nodo<Producto> nodoProducto = listaProductos.buscar(codProducto);
+        Producto producto = nodoProducto.getDato();
+        int stockActual = producto.getStock();
+        int nuevoStock = stockActual - cantidad;
+        producto.setStock(nuevoStock);
+        return nuevoStock;
     }
 
     @Override
-    public Producto buscarPorCodigo(Comparable clave) {
-        Nodo<Producto> nodoResultado = listaProductos.buscar(clave);
+    public Producto buscarPorCodigo(Comparable codProducto) {
+        Nodo<Producto> nodoResultado = listaProductos.buscar(codProducto);
         return nodoResultado.getDato();
-        
     }
+    
 
     @Override
     public void listarOrdenadoPorNombre() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ListaOrdenada<Producto> listaOrdenada = new ListaOrdenada<>();
+        Nodo<Producto> nodoActual = listaProductos.getPrimero();
+        Producto producto = nodoActual.getDato();
+
+        while (nodoActual != null) {
+            producto = nodoActual.getDato();
+            listaOrdenada.insertarOrdenado(new Nodo(producto.getNombre(), producto));
+            nodoActual = nodoActual.getSiguiente();
+        }
+        listaOrdenada.imprimir();
     }
 
     @Override
     public Producto buscarPorDescripcion(String descripcion) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Nodo<Producto> nodoActual = listaProductos.getPrimero();
+        Producto producto = nodoActual.getDato();
+        String etiquetaDescripcion = producto.getNombre();
+
+        while (nodoActual != null) {
+            if (descripcion.equalsIgnoreCase(etiquetaDescripcion)) {
+                return producto;
+            }
+            nodoActual = nodoActual.getSiguiente();
+            producto = nodoActual.getDato();
+            etiquetaDescripcion = producto.getNombre();
+        }
+        return null;
     }
 
     @Override
     public int cantidadProductos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return listaProductos.cantElementos();
+    }
+    
+    public String imprimirProductosVendidos() {
+        if (listaVentas.esVacia()) {
+            return "Lista vacía.";
+        } else {
+            StringBuilder stringBuilder = new StringBuilder("Los productos son:\n");
+            Nodo<Producto> nodoActual = listaVentas.getPrimero();
+            Producto producto = nodoActual.getDato();
+            while (nodoActual != null) {
+                producto = nodoActual.getDato();
+                stringBuilder.append("Nombre: ").append(producto.getNombre())
+                        .append(" | Precio: ").append(producto.getPrecio())
+                        .append(" | Stock: ").append(producto.getStock())
+                        .append(" | Código de Producto: ").append(producto.getCodProducto()).append("\n");
+                nodoActual = nodoActual.getSiguiente();
+            }
+            return stringBuilder.toString();
+        }
     }
 
-    
-    
 }

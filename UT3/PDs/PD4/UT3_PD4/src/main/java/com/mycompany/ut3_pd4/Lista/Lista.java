@@ -1,12 +1,7 @@
-package com.mycompany.ut3_pd4.Lista;
-
-
-import com.mycompany.ut3_pd4.Nodo.Nodo;
-import com.mycompany.ut3_pd4.Lista.ILista;
 
 public class Lista<T> implements ILista<T> {
 
-    private Nodo<T> primero;
+    public Nodo<T> primero;
     private int longitud;
 
     public Lista() {
@@ -14,9 +9,7 @@ public class Lista<T> implements ILista<T> {
         longitud = 0;
     }
 
-
     // implementar los metodos indicados en la interfaz
-
     @Override
     public void insertar(Nodo<T> nodo) {
         if (primero == null) {
@@ -25,6 +18,7 @@ public class Lista<T> implements ILista<T> {
             longitud++;
         } else {
             Nodo<T> nodoActual = primero;
+
             while (nodoActual.getSiguiente() != null) {
                 nodoActual = nodoActual.getSiguiente();
             }
@@ -54,12 +48,12 @@ public class Lista<T> implements ILista<T> {
         if (primero == null) {
             return false;
         } else {
-            // Si es el unico elemento en la lista, y es el que queremos borrar, primero se vuelve null
+            // Si es el unico elemento en la lista, y es el nodo que queremos borrar, primero se vuelve null (lo eliminamos)
             if (primero.getSiguiente() == null && primero.getEtiqueta().equals(clave)) {
                 primero = null;
                 longitud--;
                 return true;
-            // Si es el primer elemento de la lista el que queremos borrar.
+                // Si es el primer elemento el que queremos borrar.
             } else if (primero.getEtiqueta().equals(clave)) {
                 setPrimero(primero.getSiguiente());
                 longitud--;
@@ -89,7 +83,7 @@ public class Lista<T> implements ILista<T> {
         Nodo<T> nodoActual = primero;
         StringBuilder stringBuilder = new StringBuilder();
         while (nodoActual != null) {
-            stringBuilder.append(nodoActual.getDato());
+            stringBuilder.append(nodoActual.getEtiqueta());
             nodoActual = nodoActual.getSiguiente();
         }
         return stringBuilder.toString();
@@ -103,7 +97,7 @@ public class Lista<T> implements ILista<T> {
         Nodo<T> nodoActual = primero;
         StringBuilder stringBuilder = new StringBuilder();
         while (nodoActual != null) {
-            stringBuilder.append(nodoActual.getDato()).append(separador);
+            stringBuilder.append(nodoActual.getEtiqueta()).append(separador);
             nodoActual = nodoActual.getSiguiente();
         }
         return stringBuilder.toString();
@@ -116,19 +110,16 @@ public class Lista<T> implements ILista<T> {
 
     @Override
     public boolean esVacia() {
-        return longitud == 0;
+        return (primero == null);
     }
 
     @Override
     public void setPrimero(Nodo<T> unNodo) {
-        if (primero == null) {
-            primero = unNodo;
-            longitud++;
-        } else {
-            // antes de borrar el nodo, apuntamos su siguiente a null, para no tener punteros perdidos.
-            primero.setSiguiente(null);
-            primero = unNodo;
-            longitud++;
-        }
+        primero = unNodo;
+        longitud++;
+    }
+
+    public Nodo<T> getPrimero() {
+        return primero;
     }
 }
