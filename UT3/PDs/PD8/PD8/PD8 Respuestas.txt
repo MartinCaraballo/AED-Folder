@@ -1,0 +1,17 @@
+2) Esta nueva implementación se basa en la clase ArrayList de Java, y frente a la implementación
+del PD6 tiene la desventaja de que ArrayList necesita redimensionarse si la cantidad de elementos
+supera el limite de la cantidad de elementos actual, por el contrario, en la implementación con el TDA
+lista esto no sucede, gracias a la forma en que opera la lista mediante los nodos y sus etiquetas.
+
+3) El consumo de memoria es superior en la implementación con TDA Lista, esto se debe al costo que supone
+almacenar la referencia de cada nodo dentro de la misma.
+
+4) Ejecutar cada método de mi implementación con ArrayList tiene un orden de ejecución de N (cada uno).
+
+5) 	1. 	Respuesta D: 107
+	2. 	Respuesta C: Shenzhen
+	3. 	Luego de realizada la operación se borra la ciudad de Tokio, y como Shenzhen no se encuentra, 
+		simplemente no hace nada, pero en ningún momento el programa arroja errores. Como resultado
+		la empresa no contiene ninguna sucursal.
+	4.	El resultado del listado de sucursales es:
+		System.out.println(EmpresaPrueba2.listarSucursales());

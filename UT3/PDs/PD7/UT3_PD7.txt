@@ -1,0 +1,115 @@
+UT3_PD7
+
+Ejercicio 1:
+
+Union
+
+Lenguaje natural -> Primero, creamos una nueva lista, que sera la union de los dos conjuntos. Entonces, recorremos el primer conjunto,
+                    y utilizando la funcion buscar en la lista de la union, buscamos si el elemento del primer conjunto se encuentra en
+                    la lista de la union, si se encuentra lo ignoramos, y si no se encuetra lo agregamos. Lo mismo hacemos para el otro
+                    conjunto.
+
+Precondiciones ->   Las listas no pueden estar vacías.
+                    Ambas listas deben ser del mismo tipo.
+
+Postcondiciones ->  La lista que se forma con la unión de los dos conjuntos, debe tener todos los elementos de ambas listas ingresadas como
+                    parámetro, sin repetir.
+                    En caso de que una de las listas ingresadas esté vacía, se retorna la otra. Si ambas estan vacías, se retorna una lista vacía.
+                    Las listas que se pasan como parámetros, no pueden sufrir modificaciones, es decir deben permanecer iguales.
+
+unionConjuntos(lista1, lista2)
+COM
+    Si lista1 es vacia entonces                                         O(1)
+        devolver lista2                                                 O(1)
+    Fin si
+    Si lista2 es vacia entonces                                         O(1)
+        devolver lista1                                                 O(1)
+    Fin si
+
+    Lista listaUnion                                                    O(1)
+    Nodo nodoActual <- lista1.primero                                   O(1)
+    Mientras nodoActual <> nulo hacer   -> se repite n veces
+        Si listaUnion.buscar(nodoActual.dato) = nulo entonces           O(n)
+            listaUnion.insertar(nodoActual)                             O(n)
+        Fin si
+        nodoActual <- nodoActual.siguiente                              O(1)
+    Fin Mientras
+
+    nodoActual <- lista2.primero                                        O(1)
+    Mientras nodoActual <> nulo hacer   -> se repite n veces
+        Si listaUnion.buscar(nodoActual.dato) = nulo entonces           O(n)
+            listaUnion.insertar(nodoActual)                             O(n)
+        Fin si
+        nodoActual <- nodoActual.siguiente                              O(1)
+    Fin Mientras
+
+    devolver listaUnion                                                 O(1)
+Fin
+
+Dado que por cada elemento en un conjunto, ejecuta la búsqueda que es O(n), el orden de ejecucion de este algoritmo es de O(n2).
+Con el método insertar pasa lo mismo, pero como se ejecuta luego de terminar la búsqueda, se mantiene el orden O(n2).
+
+Casos de prueba:
+A partir de dos conjuntos disjuntos, aplicar el algoritmo y comprobar que:
+	a) Todos los elementos del primer conjunto esten en el conjunto devuelto.
+	b) Todos los elementos del segundo conjunto esten en el conjunto devuelto.
+    c) Las listas pasadas como parámetro permanezcan sin modificaciones.
+    d) Si una de las listas esta vacia, retorne la otra.
+    e) Si ambas listas estan vacias, que retorne una lista vacia.
+    f) Si las listas son de diferentes tipos, no se genere una excepcion si no que se comunique el error.
+    g) La lista que se retorna, debe tener el largo de la lista1 + la lista2.
+
+A partir de dos conjuntos con elementos compartidos, aplicar el algoritmo y comprobar que:
+	a) Los elementos que comparten ambos conjuntos no se encuentren repetidos.
+    b) Las listas pasadas como parámetro permanezcan sin modificaciones.
+    c) Si una de las listas esta vacia, retorne la otra.
+    d) Si ambas listas estan vacias, que retorne una lista vacia.
+    e) Si las listas son de diferentes tipos, no se genere una excepcion si no que se comunique el error.
+
+_______________________________________________________________________________________________________________________________________________________________
+
+Interseccion
+
+Lenguaje natural -> Primero, creamos una nueva lista que será la interseccion de los conjuntos, entonces por cada elemento
+                    de una de las listas, nos fijamos si se encuentra en la otra (a través del método buscar), si se encuentra,
+                    entonces la añadimos a la lista de la interseccion. En caso contrario, lo ignoramos. Si una de las listas
+                    o ambas son vacías, retornamos nulo o un mensaje de error.
+
+Precondiciones ->   Ambas listas deben de contener elementos.
+                    Ambas listas deben de ser del mismo tipo.
+
+Postcondiciones ->  Las listas pasadas como parámetro no deben sufir modificaciones.
+                    La lista resultante de la interseccion debe contener todos los elementos que se encuentran en una lista y en
+                    la otra.
+
+interseccionConjuntos(lista1, lista2)
+COM
+    Si lista1 o lista2 es vacia entonces                        O(1)
+        devolver nulo                                           O(1)
+    Fin si
+
+    Lista listaInterseccion                                     O(1)
+    Nodo nodoActual <- lista1.primero                           O(1)
+
+    Mientras nodoActual <> nulo hacer   -> se repite n veces    
+        Si lista2.buscar(nodoActual.dato) <> nulo entonces      O(n)
+            listaInterseccion.insertar(nodoActual)              O(n)
+        Fin si
+        nodoActual <- nodoActual.siguiente                      O(1)
+    Fin Mientras
+
+    devolver listaInterseccion                                  O(1)
+Fin
+
+Dado que por cada elemento en un conjunto, ejecuta la búsqueda que es O(n), el orden de ejecucion de este algoritmo es de O(n2).
+Con el método insertar pasa lo mismo, pero como se ejecuta luego de terminar la búsqueda, se mantiene el orden O(n2).
+
+Casos de prueba:
+A partir de dos conjuntos con elementos compartidos, aplicar el algoritmo y comprobar que:
+	a) Los elementos que no se encuentran en ambas listas ingresadas, tampoco se encuentran en la lista devuelta.
+	b) Se encuentran todos los elementos compartidos, pero no repetidos.
+    c) Si se insertan listas vacias, devuelva nulo.
+    d) No se modifiquen las listas pasadas como parámetro.
+
+A partir de dos conjuntos disjuntos, aplicar el algoritmo y comprobar que:
+	a) Se devuelve un conjunto sin elementos.

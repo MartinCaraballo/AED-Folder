@@ -17,7 +17,6 @@ public class ListaOrdenada<T> extends Lista<T> {
         longitud = 0;
     }
 
-    // falta arrelar, no ordena del todo bien
     public void insertarOrdenado(Nodo<T> nodo) {
         if (primero == null) {
             primero = nodo;
@@ -35,7 +34,7 @@ public class ListaOrdenada<T> extends Lista<T> {
                 while (nodoActual != null) {
                     if (nodoActual.getEtiqueta().compareTo(nodo.getEtiqueta()) > 0) {
                         nodoAnterior.setSiguiente(nodo);
-                        nodoAnterior.setSiguiente(nodoActual);
+                        nodo.setSiguiente(nodoActual);
                         longitud++;
                         return;
                     }
@@ -65,5 +64,10 @@ public class ListaOrdenada<T> extends Lista<T> {
     public void setPrimero(Nodo<T> unNodo) {
         primero = unNodo;
         longitud++;
+    }
+    
+    @Override
+    public int cantElementos() {
+        return longitud;
     }
 }

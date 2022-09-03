@@ -1,7 +1,7 @@
-package com.mycompany.ut3_pd6.Lista;
+package com.mycompany.ut3_pd7.Lista;
 
 
-import com.mycompany.ut3_pd6.Nodo.Nodo;
+import com.mycompany.ut3_pd7.Nodo.Nodo;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
