@@ -7,12 +7,12 @@ package com.mycompany.pd8;
 
 /**
  *
- * @author Ikken
+ * @author Martin
  */
 public class Main {
 
     public static void main(String[] args) {
-        Empresa AED = new Empresa();
+        ManejadorSucursales AED = new ManejadorSucursales();
         String[] sucursales = LectorArchivos.leerArchivo("src\\sucursales.txt");
         for (String localidad : sucursales) {
             Sucursal sucursal = new Sucursal(localidad);
@@ -20,54 +20,53 @@ public class Main {
         }
 
         System.out.println(AED.listarSucursales());
-        Sucursal sucursal1 = AED.buscarSucursalPorLocalidad("Montevideo");
+        Sucursal sucursal1 = AED.buscarSucursal("Montevideo");
         Sucursal sucursal2 = new Sucursal("Minas");
         AED.agregarSucursal(sucursal2);
-        AED.imprimirPorConsolaSucursal(sucursal1);
         System.out.println(AED.listarSucursales());
         AED.eliminarSucursal(sucursal1);
         System.out.println(AED.listarSucursales());
         AED.eliminarSucursalPorLocalidad("Minas");
         System.out.println(AED.listarSucursales());
         System.out.println("Cantidad de sucursales: " + AED.cantidadSucursales());
-        System.out.println(AED.directorioEstaVacio());
+        System.out.println(AED.existenSucursales());
 
 
         /*
         Pruebas comparativas TA_10
          */
         System.out.println("Pruebas comparativas TA_10");
-        Empresa EmpresaPrueba = new Empresa();
+        ManejadorSucursales manejadorSucursales = new ManejadorSucursales();
         String[] sucursalesPrueba = LectorArchivos.leerArchivo("src\\suc1.txt");
         for (String localidad : sucursalesPrueba) {
             Sucursal sucursal = new Sucursal(localidad);
-            EmpresaPrueba.agregarSucursal(sucursal);
+            manejadorSucursales.agregarSucursal(sucursal);
         }
 
-        System.out.println(EmpresaPrueba.listarSucursales());
-        System.out.println("La cantidad de sucursales es: " + EmpresaPrueba.cantidadSucursales());
-        EmpresaPrueba.eliminarSucursalPorLocalidad("Chicago");
-        System.out.println(EmpresaPrueba.listarSucursales());
+        System.out.println(manejadorSucursales.listarSucursales());
+        System.out.println("La cantidad de sucursales es: " + manejadorSucursales.cantidadSucursales());
+        manejadorSucursales.eliminarSucursalPorLocalidad("Chicago");
+        System.out.println(manejadorSucursales.listarSucursales());
 
-        Empresa EmpresaPrueba2 = new Empresa();
+        ManejadorSucursales manejadorSucursales2 = new ManejadorSucursales();
         String[] sucursalesPrueba2 = LectorArchivos.leerArchivo("src\\suc2.txt");
         for (String localidad : sucursalesPrueba2) {
             Sucursal sucursal = new Sucursal(localidad);
-            EmpresaPrueba2.agregarSucursal(sucursal);
+            manejadorSucursales2.agregarSucursal(sucursal);
         }
 
-        System.out.println(EmpresaPrueba2.listarSucursales());
-        EmpresaPrueba2.eliminarSucursalPorLocalidad("Tokio");
-        EmpresaPrueba2.eliminarSucursalPorLocalidad("Shenzen");
-        System.out.println(EmpresaPrueba2.listarSucursales());
+        System.out.println(manejadorSucursales2.listarSucursales());
+        manejadorSucursales2.eliminarSucursalPorLocalidad("Tokio");
+        manejadorSucursales2.eliminarSucursalPorLocalidad("Shenzen");
+        System.out.println(manejadorSucursales2.listarSucursales());
 
-        Empresa EmpresaPrueba3 = new Empresa();
+        ManejadorSucursales manejadorSucursales3 = new ManejadorSucursales();
         String[] sucursalesPrueba3 = LectorArchivos.leerArchivo("src\\suc3.txt");
         for (String localidad : sucursalesPrueba3) {
             Sucursal sucursal = new Sucursal(localidad);
-            EmpresaPrueba3.agregarSucursal(sucursal);
+            manejadorSucursales3.agregarSucursal(sucursal);
         }
 
-        System.out.println(EmpresaPrueba3.listarSucursalesSeparador(";_"));
+        System.out.println(manejadorSucursales3.listarSucursalesSeparador(";_"));
     }
 }

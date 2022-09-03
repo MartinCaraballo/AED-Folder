@@ -72,6 +72,12 @@ public class ManejadorSucursales {
         }
     }
     
+    
+    /**
+     * Retorna un string con todas las sucursales ingresadas separadas por el separador ingresado.
+     * 
+     * @return String.
+    */
     public String listarSucursales(String separador) {
         if (sucursales.esVacia()) {
             return "Lista vacía.";

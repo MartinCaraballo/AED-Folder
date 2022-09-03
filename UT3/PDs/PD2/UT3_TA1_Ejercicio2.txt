@@ -1,0 +1,28 @@
+insertarOrdenado(producto)
+COM
+	Nodo nuevoNodo <- Nodo(producto)  
+	Si lista esVacia entonces
+		primero <- nuevoNodo
+	Si no si buscar(elemento) <> nulo
+		elemento <- buscar(nuevoNodo)
+		Si elemento no es nulo
+			elemento.stock += 1
+		Fin si
+	Si no si pimero.siguiente = null entonces
+		Si nuevoNodo.clave < primero.clave entonces
+			nuevoNodo.siguiente <- primero
+			primero <- nuevoNodo
+		Si no
+			primero.siguiente <- nuevoNodo
+		Fin si
+	Si no
+		Nodo nodoActual <- primero
+		
+		Mientras nuevoNodo.clave < nodoActual.clave hacer
+			nodoActual <- nodoActual.siguiente
+		Fin mientras
+		Nodo temp <- nodoActual.siguiente
+		nodoActual.siguiente <- nuevoNodo
+		nuevoNodo.siguiente <- temp.siguiente
+	Fin si
+FIN
