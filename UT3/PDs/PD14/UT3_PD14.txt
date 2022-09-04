@@ -1,0 +1,30 @@
+UT3_PD14
+
+Ejercicio 1:
+
+Lenguaje natural -> Guardamos dos numeros enteros, fin (corresponde al largo del array) y inicio (seria la posicion actual).
+                    Si inicio es igual a fin entonces llegamos al final de la cola, y debemos volver a la posicion 0. Si ésta esta
+                    ocupada, quiere decir que el buffer esta lleno y no podemos insertar.
+
+Precondiciones  ->  El elemento ingresado debe ser del mismo tipo del arreglo.
+                    Si el buffer está lleno no se podrá agregar el nodo.
+
+Postcondiciones ->  En caso de que el atributo primero sea null (buffer vacío) entonces el dato ingresado será el primero y el último.
+                    El buffer alterará su estado con el nuevo dato, en caso de que este lleno no lo hará.
+
+PoneEnCola (nuevoElemento):
+COM
+	Si es vacia entonces
+        devolver falso
+    Fin Si
+    
+    fin <- (fin + 1) % cola.largo
+    cola[fin] <- nuevoElemento
+    tamañoActual <- tamañoActual + 1
+
+fin
+
+
+Ejercicio 2:
+
+Lenguaje natural -> 
