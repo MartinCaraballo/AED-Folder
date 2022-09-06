@@ -28,3 +28,79 @@ fin
 Ejercicio 2:
 
 Lenguaje natural -> 
+
+
+
+
+public static void main(String[] args) {
+        
+        /*
+            entero inicio
+            entero fin
+            entero[] cola
+            booleano extraido
+            booleano insertado
+            colaCircular(tamaño : entero){
+                COM
+                    cola <- nuevo entero[tamaño]
+                    inicio <- 0
+                    fin <- inicio
+                    extraido <- verdadero
+                    insertado <- falso
+            }
+        
+        
+            poneEnCola(unElemento : var)
+                COM
+                    SI !estaLlena()
+                       cola[fin] <- unElemento
+                       SI fin es igual cola.length-1
+                            fin <- 0
+                       SINO
+                            FIN++
+                       FINSI
+                       extraido <- falso
+                       insertado <- verdadero
+                    FINSI
+                    devolver "cola llena"
+                FIN
+        
+            quitaDeCola() : var
+                COM
+                    SI !esVacia
+                        extraido <- verdadero
+                        insertado <- falso
+                        SI INICIO es igual a cola.length-1
+                            inicio <- 0
+                            devolver cola[cola.length-1]
+                        FINSI
+                        inicio++
+                        devolver cola[inicio-1]
+                    FINSI
+                    devolver "cola vacia"
+                FIN
+        
+            esVacia() : booleano
+                COM
+                    SI inicio es igual fin
+                        SI !insertado
+                            devolver verdadero
+                        FINSI
+                        devolver falso
+                    FINSI
+                    devolver falso
+                FIN
+        
+            estaLlena() : booleano
+                COM
+                    SI inicio es igual fin
+                        SI !extraido
+                            devolver verdadero
+                        FINSI
+                            devolver falso
+                    FINSI
+                    devolver falso
+                FIN
+        */  
+    }
+}
