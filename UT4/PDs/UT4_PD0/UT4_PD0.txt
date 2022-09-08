@@ -1,0 +1,40 @@
+UT4_PD0
+
+Ejercicio 1:
+
+Lenguaje natural -> Recorremos el árbol binario hasta encontrar la clave que deseamos sustituir,
+                    cuando la encontremos, cambiamos el dato del nodo por el valor que queremos
+                    insertar.
+                    Para evaluar la expresión del nodo e imprimir el resultado total, recorremos
+                    el árbol en inorden, y cada vez que salimos del nodo devolvemos el operador
+                    o valor.
+
+Precondiciones ->   Las etiquetas de los nodos deben estar bien definidas.
+                    El valor por el cual sustituir la variable debe ser válido.
+
+Postcondiciones ->  El árbol debe permanecer exactamente en el mismo estado que antes de ejecutar
+                    el algoritmo, solamente el nodo con la variable a cambiar debe modificarse.
+
+reemplazarVariable(String: variableAReemplazar, String: valor) : booleano
+COM
+    Si nodo.etiqueta <> variableAReemplazar entonces
+        Si nodo.hijoIzquierdo <> nulo entonces
+            reemplazarVariable(variableAReemplazar, valor)
+        Fin Si
+        Si nodo.hijoDerecho <> nulo entonces
+            reemplazarVariable(variableAReemplazar, valor)
+        Fin Si
+    Si no 
+        nodo.etiqueta <- valor
+    Fin Si
+Fin
+
+evaluarExpresion()
+
+
+
+________________________________________________________________________________________________________________
+
+Ejercicio 2:
+
+Lenguaje natural -> 
