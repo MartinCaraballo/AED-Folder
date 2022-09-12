@@ -1,0 +1,18 @@
+if (elemento.etiqueta.compareTo(etiqueta) < 0) {
+            if (hijoIzq == null) {
+                hijoIzq = elemento;
+                return true;
+            } else {
+                hijoIzq.insertar(elemento);
+            }
+        } else if (elemento.getEtiqueta().compareTo(etiqueta) > 0) {
+            if (hijoDer == null) {
+                hijoDer = elemento;
+                return true;
+            } else {
+                hijoDer.insertar(elemento);
+            }
+        } else {
+            return false; // ya está en el árbol.
+        }
+        return true;

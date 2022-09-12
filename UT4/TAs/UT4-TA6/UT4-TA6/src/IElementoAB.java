@@ -1,5 +1,3 @@
-package com.mycompany.ut4_pd2;
-
 
 public interface IElementoAB<T> {
 
@@ -46,8 +44,6 @@ public interface IElementoAB<T> {
      */
     public TElementoAB<T> buscar(Comparable unaEtiqueta);
 
- 
-
     /**
      * Inserta un elemento dentro del arbol.
      *
@@ -57,25 +53,32 @@ public interface IElementoAB<T> {
     public boolean insertar(TElementoAB<T> elemento);
 
     /**
-     * Imprime en preorden el arbol separado por guiones.
-     *
-     * @return String conteniendo el PreOrden
-     */
-    public String preOrden();
-
-    /**
      * Imprime en inorden el arbol separado por guiones.
      *
      * @return String conteniendo el InOrden
      */
     public String inOrden();
-
+    
     /**
-     * Imprime en postorden el arbol separado por guiones.
+     * Imprime en preOrden el arbol separado por guiones.
      *
-     * @return String conteniendo el PostOrden
+     * @return String conteniendo el InOrden
+     */
+    public String preOrden();
+    
+    /**
+     * Imprime en postOrden el arbol separado por guiones.
+     *
+     * @return String conteniendo el InOrden
      */
     public String postOrden();
+
+    /**
+     * pone las etiquetas del recorrido en inorden en una TLista.
+     *
+     * @param unaLista
+     */
+    public void inOrden(Lista<T> unaLista);
 
     /**
      * Retorna los datos contenidos en el elemento.
@@ -83,12 +86,36 @@ public interface IElementoAB<T> {
      * @return
      */
     public T getDatos();
-	
-	 /**
-     * Elimina un elemento dada una etiqueta.
-     * @param unaEtiqueta
-     * @return 
+
+    /**
+     * Retorna la altura del arbol cuya raiz es la del nodo actual.
+     *
+     * @return Altura del subarbol.
      */
+    public int obtenerAltura();
+
+    /**
+     * Retorna el tamaño del arbol cuya raiz es la del nodo actual.
+     *
+     * @return tamaño del subarbol.
+     */
+    public int obtenerTamanio();
+
+    /**
+     * Retorna el nivel del elemento cuya etiqueta es la pasada por par�metro.
+     *
+     * @param unaEtiqueta
+     * @return Nivel
+     */
+    public int obtenerNivel(Comparable unaEtiqueta);
+
+    /**
+     * Retorna la cantidad de hojas del arbol cuya raiz es la del nodo actual.
+     *
+     * @return Cantidad de hojas del subarbol.
+     */
+    public int obtenerCantidadHojas();
+
     public TElementoAB eliminar(Comparable unaEtiqueta);
 
 }

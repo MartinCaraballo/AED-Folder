@@ -1,5 +1,6 @@
 package com.mycompany.ut4_pd2;
 
+
 public interface IArbolBB<T> {
 
     /**
@@ -52,7 +53,5 @@ public interface IArbolBB<T> {
      */
     public void eliminar(Comparable unaEtiqueta);
 
-	
-	
 }
 

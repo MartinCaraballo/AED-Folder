@@ -1,14 +1,16 @@
-package com.mycompany.ut4_pd2;
-
 
 public class TElementoAB<T> implements IElementoAB<T> {
 
     private Comparable etiqueta;
-    private TElementoAB hijoIzq;
-    private TElementoAB hijoDer;
+    private TElementoAB<T> hijoIzq;
+    private TElementoAB<T> hijoDer;
     private T datos;
 
-
+    /**
+     * @param unaEtiqueta
+     * @param unosDatos
+     */
+    @SuppressWarnings("unchecked")
     public TElementoAB(Comparable unaEtiqueta, T unosDatos) {
         etiqueta = unaEtiqueta;
         datos = unosDatos;
@@ -22,7 +24,11 @@ public class TElementoAB<T> implements IElementoAB<T> {
         return hijoDer;
     }
 
-
+    /**
+     * @param unElemento
+     * @return
+     */
+    @SuppressWarnings("unchecked")
     @Override
     public boolean insertar(TElementoAB<T> unElemento) {
         if (unElemento.getEtiqueta().compareTo(etiqueta) < 0) {
@@ -45,7 +51,10 @@ public class TElementoAB<T> implements IElementoAB<T> {
         }
     }
 
-
+    /**
+     * @param unaEtiqueta
+     * @return
+     */
     @Override
     public TElementoAB<T> buscar(Comparable unaEtiqueta) {
 
@@ -64,6 +73,9 @@ public class TElementoAB<T> implements IElementoAB<T> {
         }
     }
 
+    /**
+     * @return recorrida en inorden del subArbol que cuelga del elemento actual
+     */
     @Override
     public String inOrden() {
         StringBuilder tempStr = new StringBuilder();
@@ -79,7 +91,7 @@ public class TElementoAB<T> implements IElementoAB<T> {
 
         return tempStr.toString();
     }
-
+    
     @Override
     public String preOrden() {
         StringBuilder tempStr = new StringBuilder();
@@ -92,9 +104,10 @@ public class TElementoAB<T> implements IElementoAB<T> {
             tempStr.append(TArbolBB.SEPARADOR_ELEMENTOS_IMPRESOS);
             tempStr.append(getHijoDer().preOrden());
         }
+        
         return tempStr.toString();
     }
-
+    
     @Override
     public String postOrden() {
         StringBuilder tempStr = new StringBuilder();
@@ -107,7 +120,20 @@ public class TElementoAB<T> implements IElementoAB<T> {
             tempStr.append(TArbolBB.SEPARADOR_ELEMENTOS_IMPRESOS);
         }
         tempStr.append(imprimir());
+        
         return tempStr.toString();
+    }
+
+    @Override
+    public void inOrden(Lista<T> unaLista) {
+        if (hijoIzq != null) {
+            hijoIzq.inOrden(unaLista);
+        }
+        unaLista.insertar(new Nodo<T>(this.etiqueta, this.datos));
+        if (hijoDer != null) {
+            hijoDer.inOrden(unaLista);
+        }
+
     }
 
     @Override
@@ -115,7 +141,9 @@ public class TElementoAB<T> implements IElementoAB<T> {
         return etiqueta;
     }
 
-
+    /**
+     * @return
+     */
     public String imprimir() {
         return (etiqueta.toString());
     }
@@ -137,51 +165,76 @@ public class TElementoAB<T> implements IElementoAB<T> {
     }
 
     @Override
-    public TElementoAB<T> eliminar(Comparable unaEtiqueta) {
-        if (unaEtiqueta.compareTo(this.getEtiqueta()) < 0) {
-            if (this.hijoIzq != null) {
-                this.hijoIzq = hijoIzq.eliminar(unaEtiqueta);
+    public int obtenerAltura() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int obtenerTamanio() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int obtenerNivel(Comparable unaEtiqueta) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int obtenerCantidadHojas() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public TElementoAB eliminar(Comparable unaEtiqueta) {
+        // Si esta, está en el subárbol izquierdo
+        if (unaEtiqueta.compareTo(etiqueta) < 0) {
+            if (hijoIzq != null) {
+                // actualiza el hijo, con el mismo u otro valor
+                hijoIzq = hijoIzq.eliminar(unaEtiqueta);
             }
+            // al padre le devuelve el mismo hijo
             return this;
         }
-
-        if (unaEtiqueta.compareTo(this.getEtiqueta()) > 0) {
-            if (this.hijoDer != null) {
-                this.hijoDer = hijoDer.eliminar(unaEtiqueta);
-
+        // Si esta, está en el subárbol derecho
+        if (unaEtiqueta.compareTo(etiqueta) > 0) {
+            if (hijoDer != null) {
+                // actualiza el hijo, con el mismo u otro valor
+                hijoDer = hijoDer.eliminar(unaEtiqueta);
             }
+            // al padre le devuelve el mismo hijo
             return this;
         }
-
+        // esta, hay que eliminarlo, al padre le devuelve el nuevo hijo
         return quitaElNodo();
     }
 
-    private TElementoAB<T> quitaElNodo() {
-        if (hijoIzq == null) {    // solo tiene un hijo o es hoja
+    private TElementoAB quitaElNodo() {
+        // le falta el hijo izquierdo o es hoja, puede retornar un nulo
+        if (hijoIzq == null) {
             return hijoDer;
         }
-
-        if (hijoDer == null) { // solo tiene un hijo o es hoja
+        // le falta el hijo derecho
+        if (hijoDer == null) {
             return hijoIzq;
         }
-        // tiene los dos hijos, buscamos el lexicograficamente anterior
-        TElementoAB<T> elHijo = hijoIzq;
-        TElementoAB<T> elPadre = this;
-
-        while (elHijo.getHijoDer() != null) {
+        // es un nodo completo
+        // va al subárbol izquierdo
+        TElementoAB elHijo = hijoIzq;
+        TElementoAB elPadre = this;
+        while (elHijo.hijoDer != null) {
             elPadre = elHijo;
-            elHijo = elHijo.getHijoDer();
+            elHijo = elHijo.hijoDer;
         }
 
+        // elHijo es el mas a la derecha del subárbol izquierdo
         if (elPadre != this) {
-            elPadre.setHijoDer(elHijo.getHijoIzq());
-            elHijo.setHijoIzq(hijoIzq);
+            elPadre.hijoDer = elHijo.hijoIzq;
+            elHijo.hijoIzq = hijoIzq;
         }
 
-        elHijo.setHijoDer(hijoDer);
-        setHijoIzq(null);  // para que no queden referencias y ayudar al collector
-        setHijoDer(null);
+        // elHijo quedara en lugar de this
+        elHijo.hijoDer = hijoDer;
         return elHijo;
     }
-	
+
 }
