@@ -1,0 +1,85 @@
+UT3_PD7
+
+Operaciones sobre conjuntos:
+
+Union:
+
+lenguaje natural -> Creamos un nuevo conjunto, que va almacenar todos los elementos de ambos conjuntos.
+                    Recorremos uno de los conjuntos a unir, y si el elemento en el que estamos "parados"
+                    no se encuentra en el conjunto nuevo, entonces lo agregamos a él. Repetimos para el 
+                    otro conjunto, y al finalizar deberíamos de tener la unión de ambos conjuntos sin
+                    tener elementos repetidos en ese nuevo conjunto que creamos al principio.
+
+Precondiciones ->   Al menos uno de los dos conjuntos a unir debe ser contener al menos un elemento.
+
+Postcondiciones ->  Al finalizar, debemos tener en un conjunto nuevo la union de los otros dos conjuntos.
+                    Los conjuntos que se van a unir no deben de sufrir modificaciones, solamente se "copian"
+                    los elementos a uno nuevo.
+                    En caso de que uno de los dos conjuntos no tenga elementos, se devuelve el otro.
+                    Si los dos conjuntos son vacíos, no se retorna nada.
+
+unionConjuntos(conjunto: otroConjunto) : conjunto con la union de ambos
+COM
+    Si esteConjunto.esVacio entonces
+        devolver otroConjunto
+    Fin si
+    Si otroConjunto.esVacio entonces
+        devolver esteConjunto
+    Fin si
+    Conjunto conjuntoResultado <- Nuevo Conjunto
+    Nodo nodoActual <- esteConjunto.primero
+    Mientras nodoActual <> nulo hacer
+        Si conjuntoResultado.buscar(nodoActual.etiqueta) = nulo entonces
+            Nodo nuevoNodo <- Nuevo Nodo(nodoActual.etiqueta, nodoActual.dato)
+            conjuntoResultado.insertar(nuevoNodo)
+        Fin si
+        nodoActual <- nodoActual.siguiente
+    Fin Mientras
+    nodoActual <- otroConjunto.primero
+    Mientras nodoActual <> nulo hacer
+        Si conjuntoResultado.buscar(nodoActual.etiqueta) = nulo entonces
+            Nodo nuevoNodo <- Nuevo Nodo(nodoActual.etiqueta, nodoActual.dato)
+            conjuntoResultado.insertar(nuevoNodo)
+        Fin si
+        nodoActual <- nodoActual.siguiente
+    Fin Mientras
+    devolver conjuntoResultado
+FIN
+
+
+Intersección:
+
+Lenguaje natural -> Creamos un nuevo conjunto, que va a almacenar los elementos que se encuentren en ambos conjuntos.
+                    Recorremos solamente uno de los conjuntos, ya que la operación intersección consiste en encontrar
+                    los elementos que se encuentren en ambos conjuntos, por lo tanto solamente es necesario recorrer
+                    uno de los dos conjuntos.
+                    Si el elemento en el que estamos "parados" en la recorrida, se encuentra en el otro conjunto, entonces
+                    lo agregamos al conjunto nuevo. Al finalizar, deberíamos de tener en ese nuevo conjunto la interseccion
+                    de ambos conjuntos.
+
+Precondiciones ->   Ambos conjuntos deben de contener al menos un elemento.
+
+Postcondiciones ->  Al finalizar, debemos tener en un conjunto nuevo la interseccion de los otros dos conjuntos.
+                    Los conjuntos que se van a utilizar no deben de sufrir modificaciones, solamente se "copian"
+                    los elementos a uno nuevo.
+                    En caso de que uno de los conjuntos no tenga elementos, no devolvemos nada.
+
+interseccionConjuntos(conjunto otroConjunto) : conjunto con la interseccion de Ambos
+COM
+    Si esteConjunto.esVacio OR otroConjunto.esVacio entonces
+        devolver nulo
+    Fin si
+    Conjunto conjuntoResultado <- Nuevo Conjunto
+    Nodo nodoActual <- esteConjunto.primero
+    Mientras nodoActual <> nulo hacer
+        Si otroConjunto.buscar(nodoActual.etiqueta) = nodoActual.etiqueta entonces
+	    Si (conjuntoResultado.buscar(nodoActual.etiqueta) = nulo entonces
+                Nodo nuevoNodo <- Nuevo Nodo(nodoActual.etiqueta, nodoActual.dato)
+                conjuntoResultado.insertar(nuevoNodo)
+	    Fin si
+        Fin si
+        nodoActual <- nodoActual.siguiente
+    Fin Mientras
+    devolver conjuntoResultado
+FIN
+

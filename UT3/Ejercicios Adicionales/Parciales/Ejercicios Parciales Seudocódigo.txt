@@ -1,0 +1,150 @@
+Ejercicios de parciales anteriores.
+
+PRIMER PARCIAL Parte 1 2015
+
+Ejercicio 1:
+
+Lenguaje natural -> Para mezclar dos listas ordenadas, primero creamos una nueva lista ordenada, llamemósle resultado, en la cual iremos agregando
+                    los elementos. Si alguna de las dos listas esta vacía, devolvemos la otra. Luego, comenzamos a recorrer una de las dos listas,
+                    y por cada elemento de la lista que estamos recorriendo, lo agregamos a la nueva lista. Luego de hacer lo mismo con las dos
+                    listas, seteamos el primero de ambas listas en nulo.
+
+Precondiciones ->   Dos listas ordenadas, al menos una tiene que tener elementos.
+
+Postcondiciones ->  Obtendremos una lista ordenada que será la mezcla de las dos ingresadas.
+                    Ambas listas ingresadas terminarán vacías.
+
+mezclarCon(TipoListaOrdenada otraLista) : TipoListaOrdenada
+COM
+    ListaOrdenada listaResultado <- Nueva ListaOrdenada     O(1)
+    Nodo nodoActual <- estaLista.primero                    O(1)
+    Mientras nodoActual <> nulo hacer   -> se repite n veces
+        listaResultado.insertar(nodoActual)                 O(n) (ya que inserta al final)
+        nodoActual <- nodoActual.siguiente                  O(1)
+    Fin Mientras
+    nodoActual <- otraLista.primero                         O(1)
+    Mientras nodoActual <> nulo hacer   -> se repite n veces
+        listaResultado.insertar(nodoActual)                 O(n)
+        nodoActual <- nodoActual.siguiente                  O(1)
+    Fin Mientras
+    estaLista.primero <- nulo                               O(1)
+    otraLista.primero <- nulo                               O(1)
+    devolver listaResultado                                 O(1)
+Fin
+
+El orden de ejecución del algoritmo es O(n2).
+
+Ejercicio 2:
+
+Lenguaje natural -> Para eliminar todos los elementos duplicados de una lista, la mejor forma es, por cada elemento de la lista que queremos corregir
+                    los añadimos a una lista nueva solamente si ya no fueron agregados, y luego de terminar, tendríamos una copia de la lista en la
+                    lista previamente creada, pero que no contendría elementos duplicados.
+                    Para finalizar, nuestra nueva lista será la nueva que fue creada.
+                    Para que la lista antigua no quede "boyando", lo que hacemos es luego de agregar el elemento a la nueva, antes de pasar al
+                    siguiente seteamos el siguiente al elemento actual como nulo. Entonces, el lenguaje debería de encargarse de limpiar la memoria.
+
+Precondiciones ->   Una lista con al menos un elemento.
+
+Postcondiciones ->  La lista pasa a ser una nueva pero que no contiene elementos duplicados. La lista vieja desaparece.
+
+eliminarDuplicados()
+COM
+    Si esVacia entonces                                                         O(1)
+        devolver                                                                O(1)
+    Fin si
+    TipoLista listaSinDuplicados <- Nuevo TipoLista                             O(1)
+    Nodo nodoActual <- primero                                                  O(1)
+    Nodo nodoSiguiente <- primero.siguiente                                     O(1)
+    Mientras nodoActual <> nulo AND nodoSiguiente <> nulo hacer     -> se repite n veces
+        nodoSiguiente <- nodoActual.siguiente                                   O(1)
+        nodoActual.siguiente <- nulo                                            O(1)
+        Si listaSinDuplicados.buscar(nodoActual.etiqueta) = nulo entonces       O(n)
+            listaSinDuplicados.insertar(nodoActual)                             O(n) ya que inserta al final
+        Fin si
+        nodoActual <- nodoSiguiente                                             O(1)
+    Fin Mientras
+    estaLista.primero <- listaSinDuplicados.primero                             O(1)
+    listaSinDuplicados.primero <- nulo                                          O(1)
+FIN
+
+El orden de ejecución del algoritmo es O(n2).
+
+___________________________________________________________________________________________________________________________________________________
+
+PRIMER PARCIAL Parte 1 2016
+
+Ejercicio 1:
+
+Lenguaje natural -> Para implementar la diferencia simétrica, lo que hacemos es primero crear un nuevo conjunto, que será nuestro conjunto resultado.
+                    Si uno de los conjuntos esta vacio, devolvemos el otro. Comenzamos a recorrer uno de los conjuntos, y solamente agrego el elemento
+                    si no se encuentra en el otro conjunto y si no fue agregado previamente. Luego repito para el otro conjunto. Al finalizar deberíamos 
+                    de tener en el conjunto previamente creado la diferencia simétrica entre ambos conjuntos.
+
+Precondiciones ->   Dos conjuntos de elementos, al menos uno de los dos debe contener elementos.
+
+Postcondiciones ->  Los conjuntos que se utilizan como entradas, no deben de ser modificados, solamente se leen los elementos de ellos, no se modifican.
+                    Al finalizar, debemos de tener un nuevo conjunto con la diferencia simetrica de ambos.
+
+diferenciaSimetrica(TipoConjunto: otroConjunto) : TipoConjunto
+COM
+    Si esteConjunto.esVacio entonces                                                                                                O(1)
+        devolver otroConjunto                                                                                                       O(1)
+    Fin si
+    Si otroconjunto.esVacio entonces                                                                                                O(1)
+        devolver esteConjunto                                                                                                       O(1)
+    Fin si
+    Conjunto conjuntoResultado <- Nuevo Conjunto                                                                                    O(1)
+    Nodo nodoActual <- esteConjunto.primero                                                                                         O(1)
+    Mientras nodoActual <> nulo hacer      -> se repite n veces
+        Si otroConjunto.buscar(nodoActual.etiqueta) = nulo AND conjuntoResultado.buscar(nodoActual.etiqueta) = nulo entonces        O(n)
+            Nodo nodoNuevo <- Nuevo Nodo(nodoActual.etiqueta, nodoActual.dato)                                                      O(1)
+            conjuntoResultado.insertar(nuevoNodo)                                                                                   O(n) ya que inserta al final
+        Fin si
+        nodoActual <- nodoActual.siguiente                                                                                          O(1)
+    Fin Mientras
+    nodoActual <- otroConjunto.primero                                                                                              O(1)
+    Mientras nodoActual <> nulo hacer      -> se repite n veces
+        Si esteConjunto.buscar(nodoActual.etiqueta) = nulo AND conjuntoResultado.buscar(nodoActual.etiqueta) = nulo entonces        O(n)
+            Nodo nodoNuevo <- Nuevo Nodo(nodoActual.etiqueta, nodoActual.dato)                                                      O(1)
+            conjuntoResultado.insertar(nuevoNodo)                                                                                   O(n)
+        Fin si
+        nodoActual <- nodoActual.siguiente                                                                                          O(1)
+    Fin Mientras
+    devolver conjuntoResultado                                                                                                      O(1)
+FIN
+
+El orden de ejecución del algoritmo es O(n2).
+
+
+Ejercicio 2:
+
+Lenguaje natural -> Si el conjunto A es vacio, entonces devolvemos el conjunto Universal. Primero, creamos un nuevo conjunto, el cual contendrá
+                    el complemento del conjunto A. Comenzamos a recorrer el conjunto universal, y si el elemento no se encuentra en el conjunto A
+                    entonces lo agregamos al conjunto resultado siempre y cuando no haya sido agregado previamente.
+
+Precondiciones  ->  Un conjunto universal que tenga al menos un elemento.
+                    El conjunto A puede estar vacio o no.
+
+Postcondiciones ->  Los conjuntos que se toman como entradas no deben sufrir modificaciones.
+                    Se devuelve un nuevo conjunto con el complemento del conjunto A.
+
+complemento(TipoConjunto: conjuntoUniversal) : TipoConjunto
+COM
+    Si conjuntoUniversal.esVacio entonces                                                                                           O(1)
+        devolver nulo                                                                                                               O(1)
+    Fin si
+    Conjunto conjuntoResultado <- Nuevo Conjunto                                                                                    O(1)
+    Nodo nodoActual <- conjuntoUniversal.primero                                                                                    O(1)
+    Mientras nodoActual <> nulo hacer       -> se repite n veces
+        Si esteConjunto.buscar(nodoActual.etiqueta) = nulo AND conjuntoResultado.buscar(nodoActual.etiqueta) = nulo entonces        O(n)
+            Nodo nuevoNodo <- Nuevo Nodo(nodoActual.etiqueta, nodoActual.dato)                                                      O(1)
+            conjuntoResultado.insertar(nuevoNodo)                                                                                   O(n) ya que inserta al final
+        Fin si
+        nodoActual <- nodoActual.siguiente                                                                                          O(1)
+    Fin Mientras
+    devolver conjuntoResultado                                                                                                      O(1)
+FIN
+
+El orden de ejecución del algoritmo es O(n2).
+
+___________________________________________________________________________________________________________________________________________________
