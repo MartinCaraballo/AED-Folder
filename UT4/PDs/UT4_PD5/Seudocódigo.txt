@@ -1,0 +1,21 @@
+Ejercicio 1:
+
+1) Obtener la menor clave del árbol.
+
+Lenguaje natural -> Recorremos el subárbol izquierdo de manera recursiva, hasta que éste no tenga hijos izquierdos,
+                    ya que en un árbol binario de búsqueda éste será el nodo con menor clave.
+
+Precondiciones  ->  El árbol debe de tener al menos un elemento, es decir, la raiz debe ser distinta de nulo.
+
+Postcondiciones ->  El árbol no debe sufrir modificaciones.
+                    En caso de que el árbol tenga solamente la raíz, la devuelve.
+                    El nodo devuelto no tendrá hijo izquierdo.
+
+menorClave(TElementoAB) : TElementoAB
+COM
+    Si TElementoAB.hijoIzq = nulo entonces
+        devolver TElementoAB
+    devolver menorClave(TElementoAB.hijoIzq)
+FIN
+
+2) Obtener la mayor clave del árbol.
