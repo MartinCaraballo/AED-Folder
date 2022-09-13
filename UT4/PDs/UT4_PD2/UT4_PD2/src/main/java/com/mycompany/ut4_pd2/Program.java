@@ -23,7 +23,7 @@ public class Program {
         String inOrden = "Inorden: " + arbolBinarioClavesPrueba.inOrden();
         String postOrden = "postOrden: " + arbolBinarioClavesPrueba.postOrden();
         String[] recorridos = {preOrden, inOrden, postOrden};
-        //ManejadorArchivosGenerico.escribirArchivo("src/salidaRecorridos.txt", recorridos);
+        ManejadorArchivosGenerico.escribirArchivo("src/salidaRecorridos.txt", recorridos);
         TArbolBB<Integer> arbolBinarioClaves = new TArbolBB<>();
         String[] claves = ManejadorArchivosGenerico.leerArchivo("src/claves1.txt");
         for (String clave : claves) {

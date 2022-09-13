@@ -11,11 +11,157 @@ Postcondiciones ->  El árbol no debe sufrir modificaciones.
                     En caso de que el árbol tenga solamente la raíz, la devuelve.
                     El nodo devuelto no tendrá hijo izquierdo.
 
-menorClave(TElementoAB) : TElementoAB
+menorClave(TElementoAB) : TElementoAB   -> se repite n veces
 COM
-    Si TElementoAB.hijoIzq = nulo entonces
-        devolver TElementoAB
-    devolver menorClave(TElementoAB.hijoIzq)
+    Si TElementoAB.hijoIzq = nulo entonces      O(1)
+        devolver TElementoAB                    O(1)
+    FIn Si
+    devolver menorClave(TElementoAB.hijoIzq)    O(1)
 FIN
 
+Orden de ejecución del algoritmo es O(n).
+
 2) Obtener la mayor clave del árbol.
+
+Lenguaje natural -> Recorremos el subárbol derecho de manera recursiva, hasta que éste no tenga hijos derechos. De
+                    esa forma, al tratarse de un árbol binario será la mayor clave.
+
+Precondiciones ->   El árbol debe de tener al menor un elemento, es decir, la raiz debe ser distinta de nulo.
+
+Postcondiciones ->  El árbol no debe sufrir modificaciones.
+                    El nodo devuelto no tendrá hijo derecho, en cuanto al izquierdo, puede tener o no.
+                    En caso de que el árbol tenga solamente la raíz, la devuelve.
+
+mayorClave() : TElementoAB      -> se repite n veces
+COM
+    Si TElementoAB.hijoDer = nulo entonces          O(1)
+        devolver TElementoAB                        O(1)
+    Fin Si
+    devolver mayorClave(TElementoAB.hijoDer)        O(1)
+FIN
+
+El orden de ejecución del algoritmo es O(n).
+
+3) Obtener la clave inmediata anterior a una clave dada (pasada por parámetro).
+
+Lenguaje natural -> Recorremos el árbol en preorden, y cuando la etiqueta de uno de los hijos coincida con la pasada
+                    por parámetro, devolvemos el elemento.
+
+Precondiciones ->   Las etiquetas se deben de poder comparar.
+                    El árbol debe tener al menos un elemento.
+
+Postcondiciones ->  El árbol no debe sufrir modificaciones luego de la ejecución.
+                    En caso de que no encuentre el elemento, devuelve nulo.
+                    En caso de que la raíz del árbol sea nula, devuelve nulo.
+
+obtenerClaveAnterior(clave: etiqueta) : etiqueta    -> se repite n veces
+COM
+    Si hijoIzq.etiqueta = clave OR hijoDer.etiqueta = clave entonces    O(1)
+        devolver etiqueta                                               O(1)
+    Fin Si
+
+    Si etiqueta < clave entonces                                        O(1)
+        Si hijoDer <> nulo entonces                                     O(1)
+            Si hijoDer.etiqueta = clave entonces                        O(1)
+                devolver etiqueta                                       O(1)
+            Fin Si
+            devolver hijoDer.obtenerClaveAnterior(clave)                O(n)
+        Fin Si
+    Sino
+        Si hijoIzq <> nulo entonces                                     O(1)
+            Si hijoIzq.etiqueta = clave entonces                        O(1)
+                devolver etiqueta                                       O(1)
+            Fin Si
+            devolver hijoIzq.obtenerClaveAnterior(clave)                O(1)
+        Fin Si
+    Fin Si
+    devolver nulo
+FIN
+
+El orden de ejecución del algoritmo es de O(n * log(n)).
+
+4) Obtener la cantidad de nodos de un nivel dado (por parámetro).
+
+Lenguaje natural -> Desde el árbol se llama a la raíz con el nivel a buscar, en caso de que sea distinta de nulo, 
+                    el código del TElementoAB se fija si el hijo izquierdo es distinto de nulo, en ese caso vuelve
+                    a llamar recursivamente a través de su hijo izquierdo decrementando el nivel en 1. Luego, hace
+                    lo mismo con el hijo derecho. Cuando el nivel llega a 0, devuelve 1 (es el caso de corte) ya que
+                    significa que se llego al nivel deseado.
+
+Precondiciones -> 
+
+Postcondiciones ->
+
+obtenerCantidadNodosEnNivel(nivel: entero) : entero     -> se repite n veces
+COM
+    Si nivel = 0 entonces                                                   O(1)
+        devolver 1                                                          O(1)
+    Fin Si
+
+    suma <- 0                                                               O(1)
+    Si hijoIzq <> nulo entonces                                             O(1)
+        suma <- suma + hijoIzq.obtenerCantidadNodosEnNivel(nivel - 1)       O(n)
+    Fin Si
+
+    Si hijoDer <> nulo entonces                                             O(1)
+        suma <- suma + hijoDer.obtenerCantidadNodosEnNivel(nivel - 1)       O(n)
+    Fin Si
+
+    devolver suma
+FIN
+
+El orden de ejecución del algoritmo es O(n).
+
+5) Listar todas las hojas cada una con su nivel.
+
+Lenguaje natural -> Recorremos el árbol en preorden, llevando la cuenta del nivel en el que estamos (comienza por 0)
+                    y cuando el elemento no tiene hijos (ni izquierdo ni derecho) lo imprimimos junto con su nivel.
+
+Precondiciones ->   Se le debe pasar como parámetro el nivel 0.
+
+Postcondiciones ->  No se altera el orden ni el estado de los elementos del árbol.
+                    Si se ingresa un número diferente a 0 en la primer llamada al método, entonces devolverá el nivel 
+                    de las hojas + el número ingresado por parámetro.
+
+listarHojas(nivel)  -> se repite n veces.
+COM
+    Si hijoIzq = nulo AND hijoDer = nulo entonces       O(1)
+        imprimir(etiqueta, nivel)                       O(1)
+    Fin si
+
+    Si hijoIzq <> nulo entonces                         O(1)
+        hijoIzq.listarHojas(nivel + 1)                  O(n)
+    Fin si
+    Si hijoDer <> nulo entonces                         O(1)
+        hijoDer.listarHojas(nivel + 1)                  O(n)
+    Fin si
+FIN
+
+El orden de ejecución del algoritmo es O(n).
+
+6) Verificar si el árbol es de búsqueda.
+
+Lenguaje natural -> Se recorre el árbol en preorden, evaluando si el hijo izquierdo es menor que el hijo derecho.
+                    Si esto se cumple, entonces devolvemos verdadero. En caso contrario devolvemos falso.
+
+Precondiciones ->   El árbol debe tener hojas.
+
+Postcondiciones ->  El árbol no debe ser modificado, ya que solamente lo recorremos.
+                    Si el árbol tiene solamente un elemento, devuelve verdadero.
+
+verificarArbolBB()  -> se repite n veces
+COM
+    Si hijoIzq = nulo AND hijoDer = nulo entonces                               O(1)
+        devolver verdadero                                                      O(1)
+    Fin si
+    condicion <- (hijoDer > elementoActual) and (hijoIzq < elementoActual)      O(1)
+    Si hijoIzq <> nulo entonces                                                 O(1)
+        condicion <- condicion AND hijoIzq.verificarArbolBB()                   O(n)
+    Fin si
+    Si hijoDer <> nulo entonces                                                 O(1)
+        condicion <- condicion AND hijoIzq.verificarArbolBB()                   O(n)
+    Fin si
+    devolver condicion                                                          O(1)
+FIN
+
+El orden de ejecución del algoritmo es O(n).
