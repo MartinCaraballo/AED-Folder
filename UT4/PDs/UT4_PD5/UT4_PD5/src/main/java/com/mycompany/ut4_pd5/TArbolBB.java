@@ -1,3 +1,5 @@
+package com.mycompany.ut4_pd5;
+
 
 
 public class TArbolBB<T> implements IArbolBB<T> {
@@ -68,21 +70,19 @@ public class TArbolBB<T> implements IArbolBB<T> {
     }
     
     @Override
-    public Comparable obtenerMenorClave(TElementoAB<T> elemento) {
-        if (esVacio()) {
-            return null;
-        } else {
-            return raiz.obtenerMenorClave(elemento);
+    public Comparable obtenerMenorClave() {
+        if(raiz != null) {
+            return raiz.obtenerMenorClave();
         }
+        return null;
     }
     
     @Override
-    public Comparable obtenerMayorClave(TElementoAB<T> elemento) {
-        if (esVacio()) {
-            return null;
-        } else {
-            return raiz.obtenerMayorClave(elemento);
+    public Comparable obtenerMayorClave() {
+        if(raiz != null) {
+            return raiz.obtenerMayorClave();
         }
+        return null;
     }
     
     @Override
@@ -104,11 +104,9 @@ public class TArbolBB<T> implements IArbolBB<T> {
     }
     
     @Override
-    public String listarHojas(int nivel) {
-        if (esVacio()) {
-            return "Es un árbol vacío.";
-        } else {
-            return (raiz.listarHojas(0));
+    public void listarHojas() {
+        if (!esVacio()) {
+            raiz.listarHojas(0);
         }
     }
     

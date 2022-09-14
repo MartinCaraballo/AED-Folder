@@ -11,12 +11,12 @@ Postcondiciones ->  El árbol no debe sufrir modificaciones.
                     En caso de que el árbol tenga solamente la raíz, la devuelve.
                     El nodo devuelto no tendrá hijo izquierdo.
 
-menorClave(TElementoAB) : TElementoAB   -> se repite n veces
+menorClave() : Etiqueta   -> se repite n veces
 COM
-    Si TElementoAB.hijoIzq = nulo entonces      O(1)
-        devolver TElementoAB                    O(1)
+    Si hijoIzq = nulo entonces                  O(1)
+        devolver etiqueta                       O(1)
     FIn Si
-    devolver menorClave(TElementoAB.hijoIzq)    O(1)
+    devolver menorClave(hijoIzq.menorClave())   O(1)
 FIN
 
 Orden de ejecución del algoritmo es O(n).
@@ -32,12 +32,12 @@ Postcondiciones ->  El árbol no debe sufrir modificaciones.
                     El nodo devuelto no tendrá hijo derecho, en cuanto al izquierdo, puede tener o no.
                     En caso de que el árbol tenga solamente la raíz, la devuelve.
 
-mayorClave() : TElementoAB      -> se repite n veces
+mayorClave() : Etiqueta      -> se repite n veces
 COM
-    Si TElementoAB.hijoDer = nulo entonces          O(1)
-        devolver TElementoAB                        O(1)
+    Si hijoDer = nulo entonces          O(1)
+        devolver etiqueta                       O(1)
     Fin Si
-    devolver mayorClave(TElementoAB.hijoDer)        O(1)
+    devolver mayorClave(hijoDer.mayorClave())        O(1)
 FIN
 
 El orden de ejecución del algoritmo es O(n).
@@ -56,10 +56,6 @@ Postcondiciones ->  El árbol no debe sufrir modificaciones luego de la ejecuci�
 
 obtenerClaveAnterior(clave: etiqueta) : etiqueta    -> se repite n veces
 COM
-    Si hijoIzq.etiqueta = clave OR hijoDer.etiqueta = clave entonces    O(1)
-        devolver etiqueta                                               O(1)
-    Fin Si
-
     Si etiqueta < clave entonces                                        O(1)
         Si hijoDer <> nulo entonces                                     O(1)
             Si hijoDer.etiqueta = clave entonces                        O(1)
@@ -154,7 +150,7 @@ COM
     Si hijoIzq = nulo AND hijoDer = nulo entonces                               O(1)
         devolver verdadero                                                      O(1)
     Fin si
-    condicion <- (hijoDer > elementoActual) and (hijoIzq < elementoActual)      O(1)
+    condicion <- (hijoDer.etiqueta > etiqueta) and (hijoIzq.etiqueta < etiqueta)      O(1)
     Si hijoIzq <> nulo entonces                                                 O(1)
         condicion <- condicion AND hijoIzq.verificarArbolBB()                   O(n)
     Fin si

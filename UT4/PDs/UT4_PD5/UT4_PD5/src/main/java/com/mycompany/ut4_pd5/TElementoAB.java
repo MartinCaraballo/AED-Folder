@@ -1,3 +1,5 @@
+package com.mycompany.ut4_pd5;
+
 
 public class TElementoAB<T> implements IElementoAB<T> {
 
@@ -109,27 +111,23 @@ public class TElementoAB<T> implements IElementoAB<T> {
     }
     
     @Override
-    public Comparable obtenerMenorClave(TElementoAB<T> elemento) {
-        if (elemento.hijoIzq == null) {
-            return elemento.etiqueta;
+    public Comparable obtenerMenorClave() {
+        if(hijoIzq == null) {
+            return etiqueta;
         }
-        return obtenerMenorClave(elemento.hijoIzq);
+        return hijoIzq.obtenerMenorClave();
     }
     
     @Override
-    public Comparable obtenerMayorClave(TElementoAB<T> elemento) {
-        if (elemento.hijoDer == null) {
-            return elemento.etiqueta;
+    public Comparable obtenerMayorClave() {
+        if(hijoDer == null) {
+            return etiqueta;
         }
-        return obtenerMayorClave(elemento.hijoDer);        
+        return hijoDer.obtenerMayorClave();
     }
     
     @Override
     public Comparable obtenerClaveAnterior(Comparable unaEtiqueta) {
-        if (hijoIzq.etiqueta.equals(unaEtiqueta) || hijoDer.etiqueta.equals(unaEtiqueta)) {
-            return etiqueta;
-        }
-        
         if (etiqueta.compareTo(unaEtiqueta) < 0) {
             if (hijoDer != null) {
                 if (hijoDer.etiqueta.equals(unaEtiqueta)) {
@@ -150,23 +148,51 @@ public class TElementoAB<T> implements IElementoAB<T> {
     
     @Override
     public int obtenerCantNodosNivel(int nivel) {
+        if (nivel == 0) {
+            return 1;
+        }
+        int suma = 0;
+        if (hijoIzq != null) {
+            suma += hijoIzq.obtenerCantNodosNivel(nivel - 1);
+        }
+        if (hijoDer != null) {
+            suma += hijoDer.obtenerCantNodosNivel(nivel - 1);
+        }
         
-        return 0;
-        
+        return suma;
     }
     
     @Override
-    public String listarHojas(int nivel) {
-        
-        return null;
-        
+    public void listarHojas(int nivel) {
+        if (hijoIzq == null && hijoDer == null) {
+            System.out.println("Elemento: " + etiqueta + "| Nivel: " + nivel);
+        }
+        if (hijoIzq != null) {
+            hijoIzq.listarHojas(nivel + 1);
+        }
+        if (hijoDer != null) {
+            hijoDer.listarHojas(nivel + 1);
+        }
     }
     
     @Override
     public boolean verificarArbol() {
+        if (hijoIzq == null && hijoDer == null) {
+            return true;
+        }
         
-        return false;
+        int compHijoIzq = (hijoIzq != null) ? etiqueta.compareTo(hijoIzq.etiqueta) : 1;
+        int compHijoDer = (hijoDer != null) ? etiqueta.compareTo(hijoDer.etiqueta) : -1;
         
+        boolean condicion = compHijoDer < 0 && compHijoIzq > 0;
+        if (hijoIzq != null) {
+            condicion = condicion && hijoIzq.verificarArbol();
+        }
+        
+        if (hijoDer != null) {
+            condicion = condicion && hijoDer.verificarArbol();
+        }
+        return condicion;
     }
     
 

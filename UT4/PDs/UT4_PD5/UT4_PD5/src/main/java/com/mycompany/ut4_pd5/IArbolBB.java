@@ -1,3 +1,5 @@
+package com.mycompany.ut4_pd5;
+
 
 public interface IArbolBB<T> {
 
@@ -48,13 +50,13 @@ public interface IArbolBB<T> {
      * Método para obtener la menor clave de un árbol.
      * @return la menor clave del árbol.
      */
-    public Comparable obtenerMenorClave(TElementoAB<T> elemento);
+    public Comparable obtenerMenorClave();
     
     /**
      * Método para obtener la mayor clave de un árbol.
      * @return la mayor clave del árbol.
      */
-    public Comparable obtenerMayorClave(TElementoAB<T> elemento);
+    public Comparable obtenerMayorClave();
     
     /**
      * Método para obtener la clave inmediata anterior a una clave dada (pasada por parámetro)
@@ -75,7 +77,7 @@ public interface IArbolBB<T> {
      * @param nivel Nivel desde donde empezar, debe ser 0.
      * @return Las hojas con su nivel.
      */
-    public String listarHojas(int nivel);
+    public void listarHojas();
     
     /**
      * Verifica si el árbol es de búsqueda
