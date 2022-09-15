@@ -32,7 +32,7 @@ public class Producto implements IProducto {
         return stock;
     }
 
-    public void agergarStock(Integer stock) {
+    public void agregarStock(Integer stock) {
         this.stock += stock;
     }
     

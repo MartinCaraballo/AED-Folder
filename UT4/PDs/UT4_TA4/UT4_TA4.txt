@@ -1,0 +1,161 @@
+Ejercicio 1:
+
+Cantidad de hojas.
+
+Lenguaje natural -> Se recorre el árbol de manera recursiva (en preorden), analizando si ambos hijos son nulos, en tal caso retorna 1.
+                    En caso contrario se realiza la llamada recursiva, llegando a un nodo en el que sus hijos sean nulos, para así
+                    retornar 1.
+
+Precondiciones ->   El árbol debe ser distinto de nulo.
+                    El árbol no puede ser cíclico, es decir, un nodo hijo no puede apuntar a un nodo que sea ancestro de él.
+                
+Postcondiciones ->  El estado del árbol no debe cambiar luego de la ejecución del método.
+
+TArboBB cantidadHojas() : entero
+COM
+    Si raiz = nulo entonces                             O(1)
+        devolver 0                                      O(1)
+    Sino
+        devolver raiz.cantidadHojas();                  O(n)
+    Fin si
+FIN
+
+TElementoAB cantidadHojas() : entero
+COM
+    Si hijoIzq = nulo AND hijoDer = nulo entonces       O(1)
+        devolver 1                                      O(1)
+    Fin si
+    suma <- 0                                           O(1)
+    Si hijoIzq <> nulo entonces                         O(1)
+        suma <- suma + hijoIzq.cantidadHojas()          O(n)
+    Fin si
+    Si hijoDer <> nulo entonces                         O(1)
+        suma <- suma + hijoDer.cantidadHojas()          O(n)
+    Fin si
+    devolver suma                                       O(1)
+FIN
+
+El orden del tiempo de ejecución del algoritmo es O(n).
+
+Tests:
+
+testcantidadHojasArbolVacio():
+	TArbolBB arbol <- nuevo Arbol
+
+	cantidadHojas <- arbol.cantidadHojas()
+
+	sonIguales(cantidadHojas, 0)
+fin
+
+testcantidadHojasUnElemento():
+	TArbolBB arbol <- nuevo Arbol
+	arbol.insertar(nuevo TElementoAB(1, 1))
+
+	cantidadHojas <- arbol.cantidadHojas()
+
+	sonIguales(cantidadHojas, 1)
+fin
+
+testcantidadHojasUnElementoUnHijo():
+	TArbolBB arbol <- nuevo Arbol
+	arbol.insertar(nuevo TElementoAB(1, 1))
+	arbol.insertar(nuevo TElementoAB(2, 2))
+
+	cantidadHojas <- arbol.cantidadHojas()
+
+	sonIguales(cantidadHojas, 1)
+fin
+
+testcantidadHojasVariosElementos():
+	TArbolBB arbol <- nuevo Arbol
+	arbol.insertar(nuevo TElementoAB(2, 2))
+	arbol.insertar(nuevo TElementoAB(4, 4))
+	arbol.insertar(nuevo TElementoAB(3, 3))
+	arbol.insertar(nuevo TElementoAB(1, 1))
+	arbol.insertar(nuevo TElementoAB(10, 10))
+
+	cantidadHojas <- arbol.cantidadHojas()
+
+	sonIguales(cantidadHojas, 3)
+fin
+
+Indicar en que nivel se encuentra una clave.
+
+TArbolBB
+TArboBB nivel (de tipoClave unaClave): entero
+	Si raiz <> nulo entonces
+		raiz.nivel(clave)
+	Si 
+	Sino
+		devolver nulo
+	fin Si
+fin
+
+TElementoAB:
+TElementoAB nivel (de tipoClave unaClave): entero
+	Si etiqueta = clave entonces				    O(1)
+		devolver 0						            O(1)
+
+	Sino Si etiqueta > clave entonces			    O(1)
+		Si hijoIzq <> nulo entonces			        O(1)
+			nivel <- hijoIzq.nivel(clave)		    O(log n)
+			Si nivel >= 0 entonces			        O(1)
+				devolver nivel + 1		            O(1)
+			Sino
+				devolver -1				            O(1)
+		Sino
+			devolver -1					            O(1)	
+		fin Si
+
+	Sino
+		Si hijoDer <> nulo entonces			        O(1)
+			nivel <- hijoDer.nivel(clave)		    O(log n)
+			Si nivel >= 0 entonces			        O(1)
+				devolver nivel + 1		            O(1)
+			Sino
+				devolver -1				            O(1)
+		Sino
+			devolver -1					            O(1)
+		fin Si
+
+	fin Si
+fin
+
+Tiempo de ejecución Log(n).
+
+Tests:
+
+testNivelArbolVacio():
+	TArbolBB arbol <- nuevo Arbol
+
+	nivel <- arbol.nivel(1)
+
+	sonIguales(nivel, -1)
+fin
+
+
+testNivelClaveAmbigua():
+	TArbolBB arbol <- nuevo Arbol
+
+	arbol.insertar(nuevo TElementoAB(1, 1))
+	arbol.insertar(nuevo TElementoAB(2, 2))
+
+	nivel <- arbol.nivel(10)
+
+	sonIguales(nivel, -1)
+fin
+
+
+testNivelVariosElementos():
+	TArbolBB arbol = nuevo Arbol
+
+	arbol.insertar(nuevo TElementoAB(1, 1))
+	arbol.insertar(nuevo TElementoAB(2, 2))
+	arbol.insertar(nuevo TElementoAB(20, 20))
+	arbol.insertar(nuevo TElementoAB(16, 16))
+	arbol.insertar(nuevo TElementoAB(5, 5))
+	nivel = arbol.nivel(5)
+
+	sonIguales(nivel, 4)
+fin
+

@@ -21,6 +21,10 @@ FIN
 
 Orden de ejecución del algoritmo es O(n).
 
+Casos de Prueba:
+    - Para probar este método, creamos un árbol con parámetros ingresados por nosotros, y cuando ejecutamos
+    el método, nos fijamos si devuelve el menor valor que ingresamos.
+
 2) Obtener la mayor clave del árbol.
 
 Lenguaje natural -> Recorremos el subárbol derecho de manera recursiva, hasta que éste no tenga hijos derechos. De
@@ -41,6 +45,10 @@ COM
 FIN
 
 El orden de ejecución del algoritmo es O(n).
+
+Casos de Prueba:
+    - Para probar este método, creamos un árbol con parámetros ingresados por nosotros, y cuando ejecutamos
+    el método, nos fijamos si devuelve el mayor valor que ingresamos.
 
 3) Obtener la clave inmediata anterior a una clave dada (pasada por parámetro).
 
@@ -76,6 +84,10 @@ FIN
 
 El orden de ejecución del algoritmo es de O(n * log(n)).
 
+Casos de Prueba:
+    - Para probar este método, creamos un árbol con parámetros ingresados por nosotros, y cuando ejecutamos
+    el método, nos fijamos si devuelve la clave anterior inmediata a la que le pasamos al método.
+
 4) Obtener la cantidad de nodos de un nivel dado (por parámetro).
 
 Lenguaje natural -> Desde el árbol se llama a la raíz con el nivel a buscar, en caso de que sea distinta de nulo, 
@@ -84,9 +96,13 @@ Lenguaje natural -> Desde el árbol se llama a la raíz con el nivel a buscar, e
                     lo mismo con el hijo derecho. Cuando el nivel llega a 0, devuelve 1 (es el caso de corte) ya que
                     significa que se llego al nivel deseado.
 
-Precondiciones -> 
+Precondiciones ->   Que el árbol no sea cícilico, es decir que un nodo hijo no puede apuntar a uno de sus
+                    ancestros.
 
-Postcondiciones ->
+Postcondiciones ->  El árbol no debe ser modificado luego de la ejecución del algoritmo.
+                    Si el árbol tiene solamente la raíz, devuelve 1.
+                    Si la raíz es nula, devuelve 0.
+
 
 obtenerCantidadNodosEnNivel(nivel: entero) : entero     -> se repite n veces
 COM
@@ -107,6 +123,10 @@ COM
 FIN
 
 El orden de ejecución del algoritmo es O(n).
+
+Casos de Prueba:
+    - Para probar este método, creamos un árbol con parámetros ingresados por nosotros, y cuando ejecutamos
+    el método, nos fijamos si en el nivel ingresado hay la misma cantidad de nodos que devuelve el método.
 
 5) Listar todas las hojas cada una con su nivel.
 
@@ -135,6 +155,10 @@ FIN
 
 El orden de ejecución del algoritmo es O(n).
 
+Casos de prueba:
+    - Para probar este método, creamos un árbol con parámetros ingresados por nosotros, y luego checkeamos
+    que lo que devuelve el método es correcto, fijándonos en las hojas y sus niveles.
+
 6) Verificar si el árbol es de búsqueda.
 
 Lenguaje natural -> Se recorre el árbol en preorden, evaluando si el hijo izquierdo es menor que el hijo derecho.
@@ -161,3 +185,8 @@ COM
 FIN
 
 El orden de ejecución del algoritmo es O(n).
+
+Casos de prueba:
+    - Para probar este método podríamos crear un árbol con el método insertar (que sabemos que es un árbol de búsqueda) y 
+    también probar el método insertando manualmente los elementos, para así insertarlos de manera que no el resultado no
+    sea un árbol binario y así poder probar todos los escenarios.

@@ -77,7 +77,9 @@ public interface IArbolBB<T> {
      * @param nivel Nivel desde donde empezar, debe ser 0.
      * @return Las hojas con su nivel.
      */
-    public void listarHojas();
+    public void imprimirHojas();
+    
+    public Lista<Comparable> listarHojas();
     
     /**
      * Verifica si el árbol es de búsqueda

@@ -65,6 +65,21 @@ public class ArbolTest {
     }
     
     @Test
+    public void listarHojasTest() {
+        Lista<Comparable> listaHojas;
+        listaHojas = arbol.listarHojas();
+        int contadorResultados = 0;
+        Comparable[] expected = {6, 9, 12};
+        for (int i = 0; i < expected.length; i++) {
+            Comparable expectedValue = expected[i];
+            if (listaHojas.buscar(expectedValue) != null) {
+                contadorResultados++;
+            }
+        }
+        assertTrue(expected.length == contadorResultados);
+    }
+    
+    @Test
     public void esBinarioTest() {
         boolean esBinario = arbol.verificarArbol();
         assertTrue(esBinario);

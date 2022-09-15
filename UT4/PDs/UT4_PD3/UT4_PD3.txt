@@ -1,0 +1,193 @@
+Ejercicio 1:
+
+Lenguaje natural -> 
+                    Para TElemento: Para realizar la inserción en un árbol binario tomando un elemento
+                    como parámetro, primero obtenemos la etiqueta del elemento pasado como parámetro,
+                    para así evaluar si es menor a la raíz o mayor. Si es menor a la raíz, la inserción
+                    ocurrirá en el subárbol izquierdo, en caso contrario en el subárbol derecho.
+                    Luego de saber en que hijo de la raíz ocurrirá la inserción, nuevamente nos fijamos
+                    si es menor o mayor al hijo "en el que estamos parados", y dependiendo de si es mayor
+                    o menor, sabremos en que subárbol debemos continuar.
+                    Cuando lleguemos a una hoja, ocurre la inserción.
+                    Para TArbol: Si la raíz es distinta de nulo, entonces llamamos al método insertar
+                    de la raíz, si la raíz es nulo entonces la nueva raíz es el elemento pasado como
+                    parámetro.
+
+Precondiciones  ->  La etiqueta del elemento pasado como parámetro debe de ser comparable respecto a las
+                    demás, para así evitar errores en la comparación.
+
+Postcondiciones ->  Si la raíz del árbol es nula, entonces la nueva raíz es el elemento pasado como parámetro.
+                    Si la raíz es distinta de nulo, entonces se llama al método insertar de la raíz, si el
+                    elemento nuevo es mayor a la raíz, la inserción ocurre en el subárbol derecho, sino en el
+                    izquierdo.
+
+Para TArbol:
+    insertar(TElemento)
+    COM
+        Si raiz = nulo entonces             O(1)
+            raiz <- TElemento               O(1)
+        Fin si
+        Sino
+            raiz.insertar(TElemento)        O(n)
+        Fin si
+    FIN
+
+Para TElemento:
+    insertar(TElemento)     -> se repite n veces
+    COM
+        Si TElemento.etiqueta < etiqueta entonces               O(1)
+            Si hijoIzq <> nulo entonces                         O(1)
+                hijoIzq.insertar(TElemento)                     O(n)
+            Sino
+                hijoIzq <- TElemento                            O(1)
+            Fin si
+        Sino si TElemento.etiqueta > etiqueta entonces          O(1)
+            Si hijoDer <> nulo entonces                         O(1)
+                hijoDer.insertar(TElemento)                     O(n)
+            Sino
+                hijoDer <- TElemento                            O(1)
+            Fin si
+        Fin si
+    END
+
+El orden de ejecución de los algoritmos es de O(n).
+
+_________________________________________________________________________________________________________________________________
+
+Ejercicio 2:
+
+Lenguaje natural -> Recorremos el árbol en preorden, y si no tiene hijos (ni izquierdo ni derecho)
+                    sabemos que es una hoja, entonces devolvemos 1. Al juntar todos valores devueltos
+                    por las llamadas recursivas tendremos la cantidad de hojas del árbol.
+
+Precondiciones ->   El árbol debe tener un elemento.
+                    El árbol no puede ser cíclico, es decir un nodo hijo no puede apuntar a uno de sus
+                    ancestros.
+
+Postcondiciones ->  El árbol no debe ser modificado luego de la ejecución del algoritmo.
+                    Si el árbol tiene solamente la raíz, devuelve 1.
+                    Si la raíz es nula, devuelve 0.
+
+Para TArbol:
+    contarHojas()
+    COM
+        Si raiz <> nulo entonces        O(1)
+            raiz.contarHojas()          O(n)
+        Sino
+            devolver 0                  O(1)
+        Fin si
+    FIN
+
+Para TElemento:
+    contarHojas()
+    COM
+        Si hijoIzq = nulo AND hijoDer = nulo entonces                       O(1)
+            devolver 1                                                      O(1)
+        Fin si
+        
+        cantidadHojas <- 0                                                  O(1)
+        
+        Si hijoIzq <> nulo entonces                                         O(1)
+            cantidadHojas <- cantidadHojas + hijoIzq.contarHojas()          O(n)
+        Fin si
+
+        Si hijoDer <> nulo entonces                                         O(1)
+            cantidadHojas <- cantidadHojas + hijoDer.contarHojas()          O(n)
+        Fin si
+
+        devolver cantidadHojas                                              O(n)
+    FIN
+
+El tiempo de ejecución de los algoritmos es O(n).
+
+_________________________________________________________________________________________________________________________________
+
+Ejercicio 3:
+
+Lenguaje natural -> Si la raíz es nula, devolvemos 0. En caso contrario, llamamos al método del elemento.
+                    Para obtener la suma de los elementos, primero inicializamos una variable, y a medida
+                    que visitamos cada uno de los nodos aumentamos esa variable con el valor del elemento.
+
+Precondiciones ->   Que el árbol no sea cícilico, es decir que un nodo hijo no puede apuntar a uno de sus
+                    ancestros.
+
+Postcondiciones ->  El árbol no debe ser modificado luego de la ejecución del algoritmo.
+                    Si el árbol tiene solamente la raíz, devuelve 1.
+                    Si la raíz es nula, devuelve 0.
+
+Para TArbol:
+    sumaElementos()
+    COM
+        Si raiz <> nulo entonces            O(1)
+            devolver raiz.sumaElementos     O(1)
+        Sino
+            devolver 0                      O(1)
+        Fin Si
+    FIN
+
+Para TElemento:
+    sumaElementos()
+    COM
+        suma = suma + clave                             O(1)
+
+        Si hijoIzq <> nulo entonces                     O(1)
+            suma = suma + hijoIzq.sumaElementos()       O(n)
+        Fin si
+
+        Si hijoDer <> nulo entonces                     O(1)
+            suma = suma + hijoDer.sumaElementos()       O(n)
+        Fin si
+        devolver suma                                   O(1)
+    FIN
+
+
+El tiempo de ejecución de los algoritmos es O(n).
+
+_________________________________________________________________________________________________________________________________
+
+Ejercicio 4:
+
+Lenguaje natural -> Desde el árbol se llama a la raíz con el nivel a buscar, en caso de que sea distinta de nulo, 
+                    el código del TElementoAB se fija si el hijo izquierdo es distinto de nulo, en ese caso vuelve
+                    a llamar recursivamente a través de su hijo izquierdo decrementando el nivel en 1. Luego, hace
+                    lo mismo con el hijo derecho. Cuando el nivel llega a 0, devuelve 1 (es el caso de corte) ya que
+                    significa que se llego al nivel deseado.
+
+Precondiciones ->   Que el árbol no sea cícilico, es decir que un nodo hijo no puede apuntar a uno de sus
+                    ancestros.
+
+Postcondiciones ->  El árbol no debe ser modificado luego de la ejecución del algoritmo.
+                    Si el árbol tiene solamente la raíz, devuelve 1.
+                    Si la raíz es nula, devuelve 0.
+
+Para TArbol:
+    obtenerCantidadNodosEnNivel(nivel)
+    COM
+        Si raiz <> nulo entonces                                    O(1)
+            devolver raiz.obtenerCantidadNodosEnNivel(nivel)        O(n)
+        Sino
+            devolver 0                                              O(1)
+        Fin si
+    FIN
+
+Para TElemento:
+    obtenerCantidadNodosEnNivel(nivel)     -> se repite n veces
+    COM
+        Si nivel = 0 entonces                                                   O(1)
+            devolver 1                                                          O(1)
+        Fin Si
+
+        suma <- 0                                                               O(1)
+        Si hijoIzq <> nulo entonces                                             O(1)
+            suma <- suma + hijoIzq.obtenerCantidadNodosEnNivel(nivel - 1)       O(n)
+        Fin Si
+
+        Si hijoDer <> nulo entonces                                             O(1)
+            suma <- suma + hijoDer.obtenerCantidadNodosEnNivel(nivel - 1)       O(n)
+        Fin Si
+
+        devolver suma
+    FIN
+
+El orden de ejecución del algoritmo es O(n).
+

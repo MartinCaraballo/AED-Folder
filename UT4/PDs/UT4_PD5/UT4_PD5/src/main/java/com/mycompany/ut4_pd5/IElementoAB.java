@@ -108,7 +108,14 @@ public interface IElementoAB<T> {
      * @param nivel Nivel desde donde empezar, debe ser 0.
      * @return Las hojas con su nivel.
      */
-    public void listarHojas(int nivel);
+    public void imprimirHojas(int nivel);
+    
+    /**
+     * Método para devolver en una lista todas las hojas del árbol junto con su nivel.
+     * @param nivel
+     * @return 
+     */
+    public Lista<Comparable> listarHojas(int nivel);
     
     /**
      * Verifica si el árbol es de búsqueda

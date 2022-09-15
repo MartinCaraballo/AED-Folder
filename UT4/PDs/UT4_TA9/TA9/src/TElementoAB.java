@@ -1,3 +1,4 @@
+
 public class TElementoAB<T> implements IElementoAB<T> {
 
     private Comparable etiqueta;
@@ -7,7 +8,7 @@ public class TElementoAB<T> implements IElementoAB<T> {
 
     /**
      * @param unaEtiqueta
-     * @param unosDatos 
+     * @param unosDatos
      */
     @SuppressWarnings("unchecked")
     public TElementoAB(Comparable unaEtiqueta, T unosDatos) {
@@ -77,13 +78,29 @@ public class TElementoAB<T> implements IElementoAB<T> {
      */
     @Override
     public String inOrden() {
-          throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        StringBuilder tempStr = new StringBuilder();
+        if (hijoIzq != null) {
+            tempStr.append(getHijoIzq().inOrden());
+            tempStr.append(TArbolBB.SEPARADOR_ELEMENTOS_IMPRESOS);
+        }
+        tempStr.append(imprimir());
+        if (hijoDer != null) {
+            tempStr.append(TArbolBB.SEPARADOR_ELEMENTOS_IMPRESOS);
+            tempStr.append(getHijoDer().inOrden());
+        }
+
+        return tempStr.toString();
     }
 
-   @Override
+    @Override
     public void inOrden(Lista<T> unaLista) {
-          throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        
+        if (hijoIzq != null) {
+            hijoIzq.inOrden(unaLista);
+        }
+        unaLista.insertar(new Nodo<T>(etiqueta, datos));
+        if (hijoDer != null) {
+            hijoDer.inOrden(unaLista);
+        }
     }
 
     @Override
@@ -114,41 +131,103 @@ public class TElementoAB<T> implements IElementoAB<T> {
         this.hijoDer = elemento;
     }
 
-    
-
     @Override
     public int obtenerAltura() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int altIzq = -1;
+        int altDer = -1;
+        
+        if (this.hijoIzq != null) {
+            altIzq = this.hijoIzq.obtenerAltura();
+        }
+        if (this.hijoDer != null) {
+            altDer = this.hijoDer.obtenerAltura();
+        }
+        
+        return Math.max(altIzq, altDer) + 1;
     }
 
     @Override
     public int obtenerTamanio() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int res = 1;
+        
+        if (this.hijoIzq != null) {
+            res += this.hijoIzq.obtenerTamanio();
+        }
+        if (this.hijoDer != null) {
+            res += this.hijoDer.obtenerTamanio();
+        }
+        
+        return res;
     }
 
     @Override
     public int obtenerNivel(Comparable unaEtiqueta) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        return 0;
+        
     }
 
     @Override
     public int obtenerCantidadHojas() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (hijoIzq == null && hijoDer == null) {
+            return 1;
+        }
+        int suma = 0;
+        if (hijoIzq != null) {
+            suma += hijoIzq.obtenerCantidadHojas();
+        }
+        if (hijoDer != null) {
+            suma += hijoDer.obtenerCantidadHojas();
+        }
+        return suma;
     }
-    
-     @Override
-    public TElementoAB eliminar(Comparable unaEtiqueta) {
-              throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+    @Override
+    public TElementoAB<T> eliminar(Comparable unaEtiqueta) {
+        if (unaEtiqueta.compareTo(this.getEtiqueta()) < 0) {
+            if (this.hijoIzq != null) {
+                this.hijoIzq = hijoIzq.eliminar(unaEtiqueta);
+            }
+            return this;
+        }
+
+        if (unaEtiqueta.compareTo(this.getEtiqueta()) > 0) {
+            if (this.hijoDer != null) {
+                this.hijoDer = hijoDer.eliminar(unaEtiqueta);
+
+            }
+            return this;
+        }
+
+        return quitaElNodo();
     }
 
-  
-    
- private TElementoAB quitaElNodo() {
-               throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private TElementoAB<T> quitaElNodo() {
+        if (hijoIzq == null) {    // solo tiene un hijo o es hoja
+            return hijoDer;
+        }
+
+        if (hijoDer == null) { // solo tiene un hijo o es hoja
+            return hijoIzq;
+        }
+        // tiene los dos hijos, buscamos el lexicograficamente anterior
+        TElementoAB<T> elHijo = hijoIzq;
+        TElementoAB<T> elPadre = this;
+
+        while (elHijo.getHijoDer() != null) {
+            elPadre = elHijo;
+            elHijo = elHijo.getHijoDer();
+        }
+
+        if (elPadre != this) {
+            elPadre.setHijoDer(elHijo.getHijoIzq());
+            elHijo.setHijoIzq(hijoIzq);
+        }
+
+        elHijo.setHijoDer(hijoDer);
+        setHijoIzq(null);  // para que no queden referencias y ayudar al collector
+        setHijoDer(null);
+        return elHijo;
     }
 
-
-   
-
-   	
 }

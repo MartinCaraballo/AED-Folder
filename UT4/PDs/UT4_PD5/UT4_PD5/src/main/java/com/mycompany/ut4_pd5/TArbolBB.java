@@ -104,10 +104,18 @@ public class TArbolBB<T> implements IArbolBB<T> {
     }
     
     @Override
-    public void listarHojas() {
+    public void imprimirHojas() {
         if (!esVacio()) {
             raiz.listarHojas(0);
         }
+    }
+    
+    @Override
+    public Lista<Comparable> listarHojas() {
+        if (!esVacio()) {
+            raiz.listarHojas(0);
+        }
+        return null;
     }
     
     @Override

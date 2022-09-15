@@ -40,6 +40,7 @@ public class TArbolBB<T> implements IArbolBB<T> {
     /**
      * @return recorrida en inorden del arbol, null en caso de ser vacío
      */
+    @Override
     public String inOrden() {
         if (esVacio()) {
             return null;
