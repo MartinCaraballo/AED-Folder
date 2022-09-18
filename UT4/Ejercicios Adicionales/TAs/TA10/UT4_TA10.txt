@@ -1,0 +1,26 @@
+Ejercicio 1:
+Si la clave argumento es "2", visita 4 nodos (4, 3, 1, 2).
+
+
+Ejercicio 2:
+Si la clave argumento es "3", visita 2 nodos (4, 3).
+
+
+Ejercicio 3:
+
+tipoNodoAB. encuentraLinealTres(nombreAtributo, valorAtributo): devuelve la referencia al primer nodo con esa etiqueta, y nulo en caso contrario.
+//devuelve verdadero si hay un nodo que tenga ese valor en el campo indicado, y 
+falso en caso contrario.
+Com
+	Si this.dato.nombreAtributo = valorAtributo entonces
+		Devolver this
+	Fin si
+	Está <- Falso
+	Si hijoIzquierdo <> nulo entonces
+		Está <- hijoIzquierdo. encuentraLinealDos(nombreAtributo, valorAtributo)
+	Fin si
+	Si hijoDerecho <> nulo Y no está entonces
+		Está <- hijoDerecho. encuentraLinealDos(nombreAtributo, valorAtributo)
+	Fin si
+	Devolver nulo
+Fin

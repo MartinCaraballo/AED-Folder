@@ -1,0 +1,229 @@
+Ejercicio 1:
+
+Lenguaje natural -> Recorremos en preorden el árbol existente, y por cada alumno existente en éste creamos un nuevo
+                    nodo, seteando como etiqueta el apellido del alumno y como dato el objeto alumno. Ya creado, lo
+                    agregamos a un nuevo árbol, en donde los estudiantes estarán ordenados por apellido.
+
+Precondiciones  ->  El árbol no puede ser cíclico, es decir un nodo hijo no puede apuntar a un ancestro.
+                    Las etiquetas deben ser del mismo tipo para que se puedan comparar.
+
+Postcondiciones ->  Los alumnos no pueden ser modificados, solamente se cambia la forma de agregarlos y compararlos.
+                    Los alumnos deben estar ordenados por apellido.
+
+Para TArbol:
+
+    TABB.armarIndiceCarrera(de tipo alfanumérico unaCarrera) : TABB
+    COM
+        Si raiz <> nulo entonces
+            TArbolBB ordenadoPorApellido <- Nuevo TArbolBB
+            raiz.armarIndiceCarrera(unaCarrera, ordenadoPorApellido)
+            devolver ordenadoPorApellido
+        Sino
+            devolver nulo
+        Fin Si
+    FIN
+
+Para TElementoAB:
+
+    TElementoAB.armarIndiceCarrera (de tipo alfanumérico unaCarrera, TArbolBB nuevoArbol)
+    COM
+        Si etiqueta = unaCarrera entonces
+            TElemento aux <- Nuevo TElemento(datos.apelido, datos)
+            nuevoArbol.insertar(aux)
+        Fin Si
+        Si hijoIzq <> nulo entonces
+            hijoIzq.armarIndiceCarrera(unaCarrera, nuevoArbol)
+        Fin Si
+        Si hijoDer <> nulo entonces
+            hijoDer.armarIndiceCarrera(unaCarrera, nuevoArbol)
+        Fin Si
+    FIN
+
+
+Casos de prueba:
+    - Para probar que los alumnos no fueron modificados, se puede recorrer el arbol original (que tiene todos los alumnos)
+    y comparar los alumnos de ese arbol con los alumnos del arbol ordenado por apellido.
+    - Para probar que los alumnos quedaron ordenados por apellido, se puede recorrer el arbol en inorden, y checkear
+    que el apellido a la izquierda es siempre menor que el apellido a la derecha.
+
+
+Ejercicio 2:
+
+Lenguaje natural -> Para comprobar si dos árboles son idénticos, primero comparamos si las raíces de ambos son iguales, si 
+                    es así, comparamos la parte izquierda de uno de ellos con la parte izquierda del otro de manera recursiva.
+                    Si todas las comparaciones dan verdadero, entonces quiere decir que los árboles son idénticos, en caso
+                    contrario, con que una comparación devuelva falso ya determinamos que los árboles no son idénticos.
+                    Cuando los dos elementos de los árboles sean nulos, devolvemos verdadero, pero si uno no es nulo y el otro
+                    si, devolvemos falso.
+
+Precondiciones ->   Ambos árboles deben estar inicializados. 
+                    Los árboles no pueden ser cíclicos.
+
+Postcondiciones ->  Devuelve verdadero si los dos árboles son idénticos, falso en caso contrario.
+                    Si las raíces de ambos árboles son nulas, entonces devuelve verdadero, pero si la de un árbol lo es y la otra
+                    no, devuelve falso.
+                    Si las raíces de ambos árboles son distintas de nulo pero iguales, entonces continua evaluando sus hijos.
+
+
+TArbolBB.esIdentico (TArbolBB otroArbol) : boolean
+COM
+    Si raiz <> nulo AND otroArbol.raiz <> nulo entonces
+        devolver esIdentico(raiz, otroArbol.raiz)
+    Sino si raiz = nulo AND otroArbol.raiz = nulo entonces
+        devolver verdadero
+    Sino
+        devolver falso
+    Fin Si
+FIN
+
+esIdentico (TElementoAB elementoArbol1 TElementoAB elementoArbol2) : boolean
+COM
+    Si elementoArbol1 = nulo AND elementoArbol2 = nulo entonces
+        devolver verdadero
+    Fin si
+
+    condicion <- elementoArbol1 <> nulo AND elementoArbol2 <> nulo AND elementoArbol1.datos = elementoArbol2.datos
+
+    devolver condion AND esIdentico(elementoArbol1.hijoIzq, elementoArbol2.hijoIzq) AND esIdentico(elementoArbol1.hijoDer, elementoArbol2.hijoDer)
+FIN
+
+Casos de prueba:
+    - Instanciamos dos árboles, y a cada uno le insertamos los mismos valores en el mismo orden, si el método devuelve verdadero entonces
+    funciona.
+    - Instanciamos dos árboles, y a cada uno le insertamos valores diferentes en orden diferente, si el método devuelve falso entonces
+    funciona.
+    - También prodríamos probar a insertar los mismos valores pero en orden diferente, y el árbol resultante debería ser diferente, por lo tanto
+    el método debe devolver falso.
+    - Si ambas raíces son nulas, entonces debe devolver verdadero.
+    - Si una de las raíces es nula, entonces debe devolver falso.
+
+
+Ejercicio 3:
+
+Lenguaje natural -> Recorremos el árbol en indorden, buscando las hojas. Cuando encontramos una hoja, añadimos su clave a una pila.
+                    Hacemos lo mismo con el otro árbol. Al final vamos a tener dos pilas, una con las hojas del arbol 1 y otra
+                    con las del arbol 2. En la pila, nos quedaran las hojas ordenadas de manera inversa, es decir, cuando saquemos el elementoArbol1
+                    de la pila, será el último que insertamos, es decir la hoja de mas a la derecha. Entonces, hacemos un pop de una de las pilas
+                    y lo comparamos con el pop de la otra pila, entonces si en algun momento la comparación da falso, entonces devolvemos falso.
+                    Si los elementos extraidos de una pila son exactamente iguales a los elementos extraidos de la otra pila, entonces devolvemos
+                    verdadero.
+
+Precondiciones ->   El árbol no puede ser cíclico.
+
+Postcondiciones ->  Si las raíces de ambos arboles son nulas, entonces devolvemos verdadero.
+                    Si la raíz de un arbol es nula pero la otra no, devolvemos falso.
+                
+TArbolBB.igualesBordes (TArbolBB otroArbol) : boolean
+COM
+    Si raiz <> nulo AND otroArbol.raiz <> nulo entonces
+        devolver raiz.igualesBordes(otroArbol.raiz)
+    Sino si raiz = nulo AND otroArbol.raiz = nulo entonces
+        devolver verdadero
+    Sino
+        devolver falso
+    Fin Si
+FIN
+
+TElementoAB.igualesBordes(TElementoAB elementoOtroArbol)
+COM
+    Pila esteArbol <- devolverPilaConLasHojas
+    Pila otroArbol <- elementoOtroArbol.devolverPilaConLasHojas
+    Mientras esteArbol <> esVacia() AND otroArbol <> esVacia() hacer
+        datoAuxEsteArbol <- esteArbol.pop()
+        datoAuxOtroArbol <- otroArbol.pop()
+        Si datoAuxEsteArbol <> datoAuxOtroArbol entonces
+            devolver falso
+    Fin Mientras
+    devolver esteArbol.esVacia() AND otroArbol.esVacia()    
+FIN
+
+TElementoAB.devolverPilaConLasHojas(Pila pila) : Pila
+COM
+    Si hijoIzq = nulo AND hijoDer = nulo entonces
+        pila.push(datos)
+    Fin si
+    Si hijoIzq <> nulo entonces
+        hijoIzq.devolverPilaConLasHojas(pila)
+    Fin si
+    Si hijoDer <> nulo entonces
+        hijoDer.devolverPilaConLasHojas(pila)
+    Fin si
+    devolver pila
+FIN
+
+Casos de prueba:
+    - Instanciamos dos árboles, agregamos elementos y luego obtenemos las hojas de ambos árboles. Si los bordes son iguales, las hojas
+    deben ser las mismas y estar en el mismo orden para ambos árboles, si es así el método debe devolver verdadero.
+    - Instanciamos dos árboles, agregamos elementos y luego obtenemos las hojas de ambos árboles. Si los bordes son diferentes, entonces
+    las hojas deben ser diferentes o estar en diferente orden, y para ese caso el método debe devolver falso.
+    - Si las raíces de ambos árboles son nulas, el método debe devolver verdadero.
+    - Si una de las raíces es nula, entonces el método debe devolver falso.
+
+
+Ejercicio 4:
+
+Lenguaje natural -> Empezamos fijándonos si el argumento dado es mayor o menor que la raiz. Si es menor, sabremos que tendremos que buscar
+                    en el subárbol izquierdo. Si es mayor, sabremos que tendremos que buscar en el subárbol derecho.
+                    Repetimos hasta encontrar un elemento del árbol que sea menor o igual al argumento pasado como parámetro.
+                    Cuando lo encontramos, imprimimos todos los menores a partir de él (es decir todo el subárbol izquiedo a partir de ese elemento).
+
+Precondiciones  ->  El árbol no puede ser cíclico.
+                    Las etiquetas de todos los elementos y del valor pasado como parametro se deben de poder comparar entre sí.
+
+Postcondiciones ->  Si la raiz del arbol es nula, devuelve 0.
+                    Si la raíz no es nula, y su valor es menor al buscado, entonces devolvemos 1.
+                    El árbol no debe sufrir modificaciones luego de la ejecución del método.
+
+TArbolBB.menoresQue(de tipo clave unaClave) : entero
+COM
+    Si raiz <> nulo entonces
+        devolver raiz.menoresQue(unaClave)
+    Sino si raiz <> nulo AND raiz < unaClave entonces
+        devolver 1
+    Sino
+        devolver 0
+    Fin si
+FIN
+
+TElementoAB.menoresQue(de tipo clave unaClave) : entero
+COM
+    cantidadElementos <- 0
+    Si unaClave < etiqueta entonces
+        Si hijoIzq <> nulo entonces
+            Si hijoIzq.etiqueta < unaClave entonces
+                cantidadElementos <- cantidadElementos + hijoIzq.menoresQue(unaClave)
+            Fin si
+            hijoIzq.menoresQue(unaClave)
+        Fin si
+        cantidadElementos <- cantidadElementos + 1
+    Fin si
+    Si unaClave > etiqueta entonces
+        Si hijoDer <> nulo entonces
+            Si hijoDer.etiqueta < unaClave entonces 
+                cantidadElementos <- cantidadElementos + hijoDer.menoresQue(unaClave)
+            Fin si
+            hijoIzq.menoresQue(unaClave)
+        Fin si
+        cantidadElementos <- cantidadElementos + 1
+    Fin si
+    devolver cantidadElementos
+FIN
+
+
+Casos de prueba:
+    - Obtenemos todos los elementos del árbol, y los agregamos por ejemplo a una lista. Recorremos la lista y nos fijamos cuantos elementos
+    son menores al buscado y guardamos el resultado en una variable. Luego comparamos ese valor con el que devuelve el método.
+    - Si la raíz es nula, entonces el método debe devolver 0.
+    - Si la raíz no es nula, nos fijamos si el valor es menor al buscado; si lo es devuelve 1, si no devuelve 0.
+    - Para comprobar que el árbol no sufrió modificaciones, podríamos guardar una copia del árbol antes de ejecutar el método (recorrer todo el árbol
+    y guardar todos los elementos en otro árbol creando nuevos nodos) y utilizar el método previamente desarrollado para comprobar si dos árboles son
+    idénticos comparando la copia y el árbol luego de ejecutado el método.
+
+
+Ejercicio 5:
+
+Lenguaje natural -> 
+
+Precondiciones ->   
+
+Postcondiciones ->  

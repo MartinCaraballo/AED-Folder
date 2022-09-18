@@ -1,0 +1,58 @@
+Ejercicio 1:
+
+Lenguaje natural -> Para fijarnos si un arbol es completo, basicamente nos fijamos si algun nodo tiene solamente un hijo
+                    (ignoramos el que no tenga ninguno ya que es hoja).
+
+Precondiciones ->   El árbol no puede ser cíclico.
+
+Postcondiciones ->  Si el arbol no tiene elementos, devuelve falso.
+                    Si el arbol tiene solamente la raiz, devuelve verdadero.
+
+TArbolBB.esCompleto() : boolean
+COM
+    Si esVacio() entonces
+        devolver falso
+    Sino
+        devolver raiz.esCompleto()
+    Fin si
+FIN
+
+TElementoAB.esCompleto() : boolean
+COM
+    Si hijoIzq = nulo AND hijoDer <> nulo OR hijoDer = nulo AND hijoIzq <> nulo entonces
+        devolver falso
+    Fin si
+    condicion <- true;
+    Si hijoIzq <> nulo entonces
+        condicion <- condicion AND hijoIzq.esCompleto()
+    Fin si
+    Si hijoDer <> nulo entonces
+        condicion <- condicion AND hijoDer.esCompleto()
+    Fin si
+    devolver condicion
+FIN
+
+
+Ejercicio 2:
+
+Lenguaje natural -> Primero, recorremos la lista con todos los alumnos. Si el alumno "en el que estamos parados" esta en la carrera
+                    que queremos listar, y esta matriculado entonces lo insertamos en el arbol, creando un elemento que tendrá como
+                    etiqueta el apellido del alumno.
+
+Precondiciones ->   El alumno en la lista debió haber sido ingresado con su cédula, apellido, carrera y si esta matriculado.
+
+Postcondicioens ->  La lista con todos los alumnos no debe sufrir modificaciones tras la ejecución del algoritmo.
+
+TipoLista.indizarPorApellido(de Tipo Árbol Binario de Búsqueda elIndice; tipo string laCarrera)
+COM
+    Nodo nodoActual <- Primero
+    Mientras nodoActual <> nulo hacer
+        alumno <- nodoActual.dato
+        Si alumno.carrera = laCarrera entonces
+            Si alumno.estaMatriculado entonces
+                TElemento elementoAlumno <- Nuevo TElemento(alumno.apellido, alumno)
+                elIndice.insertar(elementoAlumno)
+            Fin Si
+        Fin Si
+        nodoActual <- nodoActual.siguiente
+FIN
