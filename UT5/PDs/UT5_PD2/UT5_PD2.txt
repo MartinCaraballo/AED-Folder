@@ -1,0 +1,118 @@
+UT5_PD1
+
+Ejercicio 1:
+
+1 -> La estructura que se va a usar es TDA Árbol.
+
+NodoTrie:
+    caracter: etiqueta,
+    finalPalabra: boolean,
+    Lista<NodoTrie> hijos,
+    Lista<Entero> paginas,
+    T: dato
+
+Trie:
+    raíz: NodoTrie
+
+2 ->
+
+Lenguaje natural -> Dado el texto ingresado como parámetro, se extraen las palabras. Por cada palabra, obtenemos los caracteres de la misma.
+                    Buscamos el primer caracter en el Trie, si lo encontramos, buscamos el siguiente, y así hasta llegar al final de la palabra
+                    (sabremos que llegamos al final de la misma por el booleano: finalPalabra). Cuando busquemos un caracter y no se encuentre,
+                    entonces lo agregamos como hijo del último caracter encontrado (si es el último caracter, al momento de agregarlo debemos indicar
+                    que es el final de la palabra). Cuando insertamos la palabra al trie, agregamos a una lista la página donde se encuentra la
+                    palabra. Si la palabra ya se encuentra tal cual en el trie, entonces agregamos a la lista de páginas la página donde se encuentra.
+
+Precondiciones ->   El trie debe cumplir con todas las propiedades.
+                    El texto debe estar formado con palabras y caracteres del albafeto.
+
+Postcondicones ->   Las palabras que se encontraban antes de la ejecución del método no deben sufrir modificaciones más allá de sus hijos.
+
+construirIndice(texto)
+COM
+    Vector de strings textoPorPagina <- texto.separarPorPagina()            O(1)
+    Para cada vector de strings pagina de textoPorPagina hacer  -> se repite c veces (siendo c el numero de paginas)
+        Vector de strings palabrasPagina <- pagina.separarPorPalabras()     O(1)
+        Para cada palabra en palabrasPagina hacer   -> se repite m veces (siendo m la cantidad de palabras en la pagina)
+            Trie.insertar(palabra, paginaActual)                            O(n)
+        Fin para cada
+    Fin para cada
+FIN 
+
+El orden de ejecución del algoritmo es O(c*m*n).
+
+Trie.insertar(String unaPalabra, entero pagina)
+COM
+    Si this.raiz <> nulo entonces                                           O(1)
+        Si this.raiz.primerHijo <> nulo entonces                            O(1)
+            this.raiz.primerHijo.insertar(unaPalabra, pagina)               O(n)
+        Fin si
+    Fin si
+FIN
+
+El orden de ejecición del algoritmo es O(n).
+
+
+NodoTrie.insertar(string unaPalabra, entero pagina)
+COM
+    Nodo nodoActual <- this                             O(1)
+    Para cada caracter car de unaPalabra hacer  -> se repite n veces (siendo n el largo de la palabra)
+        unHijo <- nodoActual.obtenerHijo(car)           O(1)
+        Si unHijo = nulo entonces                       O(1)
+            unHijo <- Nuevo NodoTrie(car, car)          O(1)
+            nodoActual.agregar(unHijo)                  O(1)
+        Fin si
+        nodoActual <- unHijo                            O(1)
+    Fin Para cada
+    nodoActual.paginas.agregar(pagina)                  O(n)
+    nodoActual.esFinDePalabra <- VERDADERO              O(1)
+FIN
+
+El orden de ejecución del algoritmo es O(c*m*n).
+
+3 ->
+    ¿Cuántas comparaciones realiza el algoritmo de búsqueda si el argumento es "Programa"?
+    - Si el argumento es "programa" el algoritmo de búsqueda realiza 8 comparaciones.
+
+    ¿Cuántas comparaciones realiza el algoritmo de búsqueda si el argumento es "Proselitismo"?
+    - Si el argumento es "Proselitismo" el algoritmo de búsqueda realiza 3 comparaciones.
+
+    ¿Cuántas comparaciones se realizan para insertar la palabra "cazadores"?
+    - Para insertar la palabra "cazadores" se realizan 9 comparaciones.
+
+    ¿cuál es la altura del árbol trie resultante?
+    - Sin contar con que se agregan las cadenas del inciso 3, es decir, con la estructura del inciso 2. La altura del trie es 12.
+
+    ¿cuál es su tamaño?
+    - Sin contar con que se agregan las cadenas del inciso 3, es decir, con la estructura del inciso 2. El tamaño del trie es 46.
+
+Ejercicio 2:
+
+Trie.buscar(string unaPalabra) : devuelve las páginas en las que se encuentra la palabra, o si no se encuentra en el libro.
+COM
+    Si this.raiz = nulo OR this.raiz.primerHijo = nulo entonces
+        devolver "La palabra no se encuentra en el libro."
+    Sino
+        devolver this.raiz.primerHijo.buscar(unaPalabra)
+FIN
+
+
+NodoTrie.buscar(string unaPalabra) : devuelve las páginas en las que se encuentra la palabra, o si no se encuentra en el libro.
+COM
+    nodoActual <- this
+    Para cada caracter car de unaPalabra hacer
+        unHijo <- nodoActual.obtenerHijo(car)
+        Si unHijo = nulo entonces
+            devolver "La palabra no se encuentra en el libro."
+        fin si
+        nodoActual <- unHijo
+    fin para cada
+    Si nodoActual.esFinDePalabra entonces
+        devolver nodoActual.paginas.listarPaginas()
+    sino
+        devolver "La palabra no se encuentra en el libro."
+    fin si
+FIN
+
+
+
