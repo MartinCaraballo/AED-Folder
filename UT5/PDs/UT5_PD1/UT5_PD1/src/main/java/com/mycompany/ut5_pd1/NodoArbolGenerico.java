@@ -83,7 +83,7 @@ public class NodoArbolGenerico<T> implements INodoArbolGenerico<T> {
             primerHijo.listarIndentado(tabulaciones + 1, string);
         }
         if (siguienteHermano != null) {
-            siguienteHermano.listarIndentado(tabulaciones + 1,string);
+            siguienteHermano.listarIndentado(tabulaciones,string);
         }
     }
     
