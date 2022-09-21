@@ -1,0 +1,80 @@
+UT5_PD1
+
+Ejercicio 1:
+
+Lenguaje natural -> Si la raiz es nula, entonces se crea un nuevo nodo con la etiqueta pasada por parámetro.
+                    Si no se pasa una etiqueta al padre, entonces quiere decir que hay una nueva raiz, entonces instanciamos un nuevo nodo con
+                    la etiqueta, y le seteamos como hijo la raiz antigua (para no perder todo el arbol) y luego el nuevo nodo pasa a ser la nueva
+                    raiz. Si ninguna de las anteriores condiciones se cumple entonces, llamamos al insertar de la raiz. En este método, lo que se
+                    hace es buscar al padre con la etiqueta pasada por parámetro, si se encuentra entonces nos fijamos si tiene hijos. Si tiene,
+                    entonces agregamos el nuevo nodo como hermano de éste, si no tiene entonces el nuevo nodo pasa a ser el hijo de él.
+                    Si no se encuentra ningún padre, entonces devolvemos falso.
+
+Precondiciones ->   El árbol no puede ser cíclico.
+
+Postcondiciones ->  Los nodos que ya estaban insertados no deben modificar con la ejecución del método.
+
+
+TArbolGenerico.insertar(unaEtiqueta, etiquetaPadre) : devuelve "true" si la inserción se hace correctamente, o "false" si no se puede realizar.
+COM
+    Si raiz = nulo AND etiquetaPadre.esVacia() entonces
+        raiz <- Nuevo Nodo(unaEtiqueta, "")
+        devolver verdadero
+    Sino si etiquetaPadre = "" entonces
+        Nodo nodo <- Nuevo Nodo(unaEtiqueta)
+        nodo.hijo <- raiz
+        raiz <- nodo
+        devolver verdadero
+    Sino si raiz <> nulo
+        devolver raiz.insertar(unaEtiqueta, etiquetaPadre)
+    Sino
+        devolver falso
+    Fin si
+FIN
+
+
+NodoArbolGenerico.insertar(unaEtiqueta, etiquetaPadre) : devuelve "true" si la inserción se hace correctamente, o "false" si no se puede realizar.
+COM
+    NodoArbolGenerico nodoPadre <- buscar(etiquetaPadre)
+    Si nodoPadre <> nulo entonces
+        Si nodoPadre.hijo = nulo entonces
+            nodoPadre.hijo <- Nuevo NodoArbolGenerico(unaEtiqueta)
+            devolver verdadero
+        Sino
+            NodoArbolGenerico nodoActual <- nodoPadre.hijo
+            Mientras nodoActual.hermano <> nulo hacer
+                nodoActual <- nodoActual.hermano
+            Fin Mientras
+            nodoActual.hermano <- Nuevo NodoArbolGenerico(unaEtiqueta)
+            devolver verdadero
+        Fin si
+    Sino
+        devolver falso
+    Fin si
+FIN
+
+Casos de prueba:
+    - Insertar: - Primero insertamos en un arbol nulo, es decir uno sin raiz, sin pasarle una etiqueta padre. Al finalizar la inserción, checkeamos que
+        la raiz ahora es ese nodo que insertamos y el método devuelve verdadero.
+                - Llamamos al método insertar de un arbol nulo, con una etiqueta padre distinta de vacío, al finalizar el árbol debe continuar sin raiz ya
+        el método devuelve falso.
+                - Llamamos al método insertar con la etiqueta padre vacía, checkeamos que la raíz ahora tiene la etiqueta que pasamos como parámetro y que
+        el método devuelve verdadero.
+                - Insertamos varios elementos. Llamamos al método insertar con una etiqueta y una etiqueta padre que exista. Al finalizar checkeamos que el
+        el método devuelve verdadero y que el nodo con la etiqueta ingresada ahora es hijo o hermano (si ya tenía hijos) del nodo con la etiqueta pasada como
+        etiqueta padre.
+                - Insertamos varios elementos y llamamos al método insertar con una etiqueta y una etiqueta padre que no exista. Al finalizar checkeamos que el
+        método devuelve falso y que no se realizó ninguna inserción en el arbol.
+
+    - Buscar:   - Primero probamos buscar en un árbol nulo, y checkeamos que el método devuelve nulo.
+                - Insertamos un solo elemento, y llamamos al método con la misma etiqueta del nodo que agregamos. El método debe devolver el mismo nodo que agregamos.
+                - Insertamos un solo elemento, y llamamos al método con una etiqueta diferente a la que agregamos, el método debe devolver nulo.
+                - Insertamos varios elementos, y llamamos al método buscar con una etiqueta que existe, el método debe devolver el mismo nodo que agregamos con esa
+        etiqueta.
+                - Insertamos varios elementos y llamamos al método buscar con una etiqueta que no existe, el método debe devolver nulo.
+
+    - ListarIndentado:  - Llamamos al método listarIndentado de un true nulo, debe devolver un string vacio o nulo.
+                        - Insertamos un elemento en el arbol y llamamos el método. Debe devolver solamente ese elemento.
+                        - Insertamos varios elementos y llamamos al método. Debe devolver todos los elementos insertados y con las tabulaciones correctas (en las
+        posiciones correctas).
+

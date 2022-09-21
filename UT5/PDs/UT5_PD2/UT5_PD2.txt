@@ -9,7 +9,6 @@ NodoTrie:
     finalPalabra: boolean,
     Lista<NodoTrie> hijos,
     Lista<Entero> paginas,
-    T: dato
 
 Trie:
     raíz: NodoTrie
@@ -25,7 +24,7 @@ Lenguaje natural -> Dado el texto ingresado como parámetro, se extraen las pala
 
 Precondiciones ->   El trie debe cumplir con todas las propiedades.
                     El texto debe estar formado con palabras y caracteres del albafeto.
-
+                    
 Postcondicones ->   Las palabras que se encontraban antes de la ejecución del método no deben sufrir modificaciones más allá de sus hijos.
 
 construirIndice(texto)
@@ -43,11 +42,10 @@ El orden de ejecución del algoritmo es O(c*m*n).
 
 Trie.insertar(String unaPalabra, entero pagina)
 COM
-    Si this.raiz <> nulo entonces                                           O(1)
-        Si this.raiz.primerHijo <> nulo entonces                            O(1)
-            this.raiz.primerHijo.insertar(unaPalabra, pagina)               O(n)
-        Fin si
+    Si raiz = nulo entonces                             O(1)
+        raiz <- Nuevo NodoTrie("")                      O(1)
     Fin si
+    raiz.insertar(unaPalabra, pagina)                   O(n)
 FIN
 
 El orden de ejecición del algoritmo es O(n).
@@ -81,19 +79,34 @@ El orden de ejecución del algoritmo es O(c*m*n).
     - Para insertar la palabra "cazadores" se realizan 9 comparaciones.
 
     ¿cuál es la altura del árbol trie resultante?
-    - Sin contar con que se agregan las cadenas del inciso 3, es decir, con la estructura del inciso 2. La altura del trie es 12.
+    - Sin contar con que se agregan las cadenas del inciso 3, es decir, con la estructura del inciso 2, la altura del trie es 12.
 
     ¿cuál es su tamaño?
-    - Sin contar con que se agregan las cadenas del inciso 3, es decir, con la estructura del inciso 2. El tamaño del trie es 46.
+    - Sin contar con que se agregan las cadenas del inciso 3, es decir, con la estructura del inciso 2, el tamaño del trie es 46.
 
 Ejercicio 2:
 
+Lenguaje natural -> Para buscar una palabra, primero nos fijamos si la raiz tiene al menos un hijo. Si no lo tiene, sabemos que no existe
+                    ninguna palabra en el trie. Si tiene uno o más hijos, nos fijamos si alguno de ellos corresponde al primer caracter de
+                    la palabra que estamos buscando, si ninguno coincide, entonces devolvemos que la palabra no se encuentra. Si se encuentra,
+                    entonces volvemos a fijarnos en el o los hijos de este. Y asi repetimos hasta buscar todos los caracteres, si los encontramos
+                    todos entonces encontramos la palabra y devolvemos las páginas en las que aparece.
+
+Precondiciones ->   La palabra ingresada para la búsqueda debe tener solamente los caracteres admitidos por el alfabeto usado en el trie.
+                    El trie debe estar bien estructurado, es decir cumplir todas las propiedades.
+
+Postcondicones ->   El trie no debe sufrir ninguna modifación con la ejecución del método.
+                    Si la palabra se encuentra devuelve la o las páginas en las que se encuentra.
+                    Si la palabra no se encuentra entonces devuelve un mensaje indicándolo.
+
+
 Trie.buscar(string unaPalabra) : devuelve las páginas en las que se encuentra la palabra, o si no se encuentra en el libro.
 COM
-    Si this.raiz = nulo OR this.raiz.primerHijo = nulo entonces
-        devolver "La palabra no se encuentra en el libro."
+    Si raiz.unHijo = nulo entonces
+        devolver nulo
     Sino
-        devolver this.raiz.primerHijo.buscar(unaPalabra)
+        devolver raiz.buscar(unaPalabra)
+    Fin si
 FIN
 
 
