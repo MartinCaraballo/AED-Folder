@@ -15,6 +15,10 @@ public class ArbolGenerico<T> implements IArbolGenerico<T> {
     public ArbolGenerico() {
         raiz = null;
     }
+    
+    public boolean esRaizDelArbol(NodoArbolGenerico<T> unNodo) {
+        return raiz == unNodo;
+    } 
 
     @Override
     public boolean insertar(Comparable unaEtiqueta, Comparable etiquetaPadre) {
@@ -35,7 +39,7 @@ public class ArbolGenerico<T> implements IArbolGenerico<T> {
 
     @Override
     public NodoArbolGenerico<T> buscar(Comparable unaEtiqueta) {
-        if (raiz.getPrimerHijo() == null) {
+        if (raiz == null) {
             return null;
         } else {
             return raiz.buscar(unaEtiqueta);

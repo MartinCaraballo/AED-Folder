@@ -78,7 +78,7 @@ public class NodoArbolGenerico<T> implements INodoArbolGenerico<T> {
 
     @Override
     public void listarIndentado(int tabulaciones, StringBuffer string) {
-        string.append("    ".repeat(tabulaciones)).append(etiqueta).append("\n");
+        string.append("\t".repeat(tabulaciones)).append(etiqueta).append("\n");
         if (primerHijo != null) {
             primerHijo.listarIndentado(tabulaciones + 1, string);
         }

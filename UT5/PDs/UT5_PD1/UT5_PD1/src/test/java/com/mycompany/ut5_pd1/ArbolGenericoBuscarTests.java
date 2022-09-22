@@ -6,6 +6,7 @@ package com.mycompany.ut5_pd1;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  *
@@ -13,10 +14,11 @@ import org.junit.jupiter.api.Test;
  */
 public class ArbolGenericoBuscarTests {
     
-    ArbolGenerico<Integer> arbolPruebas;
+    ArbolGenerico<Comparable> arbolPruebas;
     
     @BeforeEach
     public void setUp() {
+        arbolPruebas = new ArbolGenerico<>();
     }
     
 
@@ -25,26 +27,48 @@ public class ArbolGenericoBuscarTests {
     //
     @Test
     public void testBuscarArbolNulo() {
+        NodoArbolGenerico<Comparable> resultado = arbolPruebas.buscar("algo");
         
+        assertNull(resultado);
     }
     
     @Test
     public void testBuscarArbolEtiquetaExistente() {
+        Comparable etiquetaToInsertar = "unElemento";
+        arbolPruebas.insertar(etiquetaToInsertar, "");
+        NodoArbolGenerico<Comparable> resultado = arbolPruebas.buscar("unElemento");
         
+        assertEquals(etiquetaToInsertar, resultado.getEtiqueta()); 
     }
     
     @Test
     public void testbuscarArbolEtiquetaInexistente() {
+        Comparable etiquetaToInsertar = "unElemento";
+        arbolPruebas.insertar(etiquetaToInsertar, "");
+        NodoArbolGenerico<Comparable> resultado = arbolPruebas.buscar("otroElemento");
         
+        assertNull(resultado);
     }
     
     @Test
     public void testBuscarArbolVariosElementosEtiquetaExistente() {
+        arbolPruebas.insertar("Rectoria", "");
+        arbolPruebas.insertar("Vicerectoria del medio universitario", "Rectoria");
+        arbolPruebas.insertar("Vicerectoria academica", "Rectoria");
+        arbolPruebas.insertar("Vicerectoria administrativa", "Rectoria");
         
+        NodoArbolGenerico<Comparable> resultado = arbolPruebas.buscar("Vicerectoria academica");
+        assertEquals("Vicerectoria academica", resultado.getEtiqueta());
     }
     
     @Test
     public void testBuscarArbolVariosElementosEtiquetaInexistente() {
+        arbolPruebas.insertar("Rectoria", "");
+        arbolPruebas.insertar("Vicerectoria del medio universitario", "Rectoria");
+        arbolPruebas.insertar("Vicerectoria academica", "Rectoria");
+        arbolPruebas.insertar("Vicerectoria administrativa", "Rectoria");
         
+        NodoArbolGenerico<Comparable> resultado = arbolPruebas.buscar("Asuntos Estudiantiles");
+        assertNull(resultado);
     }
 }

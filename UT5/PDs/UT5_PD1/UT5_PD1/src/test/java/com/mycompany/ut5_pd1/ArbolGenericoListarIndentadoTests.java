@@ -6,6 +6,7 @@ package com.mycompany.ut5_pd1;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  *
@@ -13,10 +14,11 @@ import org.junit.jupiter.api.Test;
  */
 public class ArbolGenericoListarIndentadoTests {
     
-    ArbolGenerico<Integer> arbolPruebas;
+    ArbolGenerico<Comparable> arbolPruebas;
     
     @BeforeEach
     public void setUp() {
+        arbolPruebas = new ArbolGenerico<>();
     }
 
     // TODO add test methods here.
@@ -24,16 +26,32 @@ public class ArbolGenericoListarIndentadoTests {
     //
     @Test
     public void testListarIndentadoArbolNulo() {
+        String resultado = arbolPruebas.listarIndentado();
         
+        assertEquals("El arbol no tiene elementos.", resultado);
     }
     
     @Test
     public void testListarIndentadoElementoArbol() {
+        arbolPruebas.insertar("unElemento", "");
+        String resultado = arbolPruebas.listarIndentado();
         
+        assertEquals("unElemento\n", resultado);
     }
     
     @Test
     public void testListarIndentadoElementosArbol() {
+        arbolPruebas.insertar("unElemento", "");
+        arbolPruebas.insertar("otroElemento1", "unElemento");
+        arbolPruebas.insertar("otroElemento2", "unElemento");
+        arbolPruebas.insertar("otroElemento3", "unElemento");
+        arbolPruebas.insertar("elementoFinal", "otroElemento3");
+        arbolPruebas.insertar("elementoFinalFinal", "elementoFinal");
+        String resultado = arbolPruebas.listarIndentado();
+        
+        String expected = "unElemento\n\totroElemento1\n\totroElemento2\n\totroElemento3\n\t\telementoFinal\n\t\t\telementoFinalFinal\n";
+        
+        assertEquals(expected, resultado);
         
     }
 }
