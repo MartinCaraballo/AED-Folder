@@ -13,8 +13,8 @@ import java.util.LinkedList;
  */
 public interface INodoTrieTelefonos {
 
-    void buscarTelefonos(String primerosDigitos, LinkedList<TAbonado> abonados);
+    public void buscarTelefonos(String codigoPais, String codigoArea, LinkedList<TAbonado> abonados);
 
-    void insertar(TAbonado unAbonado);
+    void insertar(String numero, TAbonado unAbonado);
     
 }

@@ -14,6 +14,5 @@ public interface IArbolTrieTelefonos {
 
     LinkedList<TAbonado> buscarTelefonos(String pais, String area);
 
-    void insertar(TAbonado unAbonado);
-    
+    void insertar(String numero, TAbonado unAbonado);
 }

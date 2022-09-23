@@ -1,0 +1,24 @@
+Ejercicio 3:
+1 ->
+    Si se utilizaran listas para resolver el problema, se usaría muchísima más memoria, ya que en el trie los caracteres se "reutilizan",
+    es decir, si por ejemplo tenemos dos palabras que comienzan con A, la A no se inserta 2 veces en el trie, pero en la lista las palabras
+    se deben ingresar como un elemento nuevo, es decir se deben ingresar las palabras tal cual son. Además, el orden de búsqueda en la lista
+    es lineal (O(n)), por lo tanto si hay n elementos tengo que revisar los n elementos. Por otro lado, la inserción en la lista llevaría
+    también un orden lineal, por lo cual por ese lado tampoco es una ventaja. Si se usara una cola, la inserción sería una ventaja, ya que en
+    la cola se mantiene una referencia al último elemento, y acceder a el es de orden constante. Pero fuera de la inserción, con la cola estamos
+    en la misma situación que con la lista.
+    Por otro lado, los árboles binarios son una buena opción, pero en ellos solamente puedo tener dos hijos, lo cual no es práctico para el manejo
+    de palabras donde se manejan alfabetos con más de 2 caracteres. Pero para alfabetos de hasta 2 caracteres son una buena opción, ya que los
+    ordenes de insercion y búsqueda son logaritmicos. Igualmente, hasta ahora nada le gana al trie con sus órdenes constantes.
+    Los árboles genéricos también son una buena opción, ya que nos permite tener n hijos por cada raíz. Si por ejemplo, insertamos en cada nodo hijo
+    del árbol genérico el primer carácter de la palabra, y en cada uno de sus hermanos un nodo que guarde el resto de caracteres de la palabra (quedaría
+    un trie) sigue teniendo la desventaja de que para acceder a los hermanos es lo mismo que recorrer una lista, por lo tanto es de orden lineal.
+    En mi opinión, para manejar grandes cantidades de palabras no hay nada mejor que un trie, ya que el acceso a cada caracter de la palabra es de orden
+    constante, y eso es una gran ventaja para realizar búsquedas rápidas en los escenarios de por ejemplo predecir una palabra (como vimos en clase) o
+    en el predecir del autocorrector del celular.
+
+2 ->
+    En mi opinión, sin importar el largo de los archivos la mejor implementación es el trie, aunque la diferencia sea muy pequeña con pocas palabras,
+    los tries son bastantes rápidos para implementar una vez se "les agarra la mano", aparte los algoritmos de tiempos constantes son escasos y cuando
+    encontramos uno debemos aprovechar. Aparte aunque se traten de archivos de pocas líneas, nada quita que el día de mañana tengamos que procesar un
+    archivo más grande, y si lo hacemos con tries no deberíamos realizar modificaciones (por lo tanto es escalable).

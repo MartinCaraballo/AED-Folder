@@ -7,14 +7,20 @@ public class TArbolTrieTelefonos implements IArbolTrieTelefonos {
 
     @Override
     public LinkedList<TAbonado> buscarTelefonos(String pais, String area) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (raiz == null) {
+            return null;
+        } else {
+            LinkedList<TAbonado> resultado = new LinkedList<>();
+            raiz.buscarTelefonos(pais, area, resultado);
+            return resultado;
+        }
     }
 
     @Override
-    public void insertar(TAbonado unAbonado) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void insertar(String numero, TAbonado unAbonado) {
+        if (raiz == null) {
+            raiz = new TNodoTrieTelefonos();
+        }
+        raiz.insertar(numero, unAbonado);
     }
-
- 
-    
 }
