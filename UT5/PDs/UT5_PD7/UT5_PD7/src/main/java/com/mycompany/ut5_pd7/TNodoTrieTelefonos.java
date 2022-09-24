@@ -1,3 +1,5 @@
+package com.mycompany.ut5_pd7;
+
 
 import java.util.LinkedList;
 
@@ -11,6 +13,10 @@ public class TNodoTrieTelefonos implements INodoTrieTelefonos {
     public TNodoTrieTelefonos() {
         hijos = new TNodoTrieTelefonos[CANT_NUMEROS];
         esNumero = false;
+    }
+    
+    public TAbonado getAbonado() {
+        return abonado;
     }
     
     @Override
@@ -42,7 +48,7 @@ public class TNodoTrieTelefonos implements INodoTrieTelefonos {
         TNodoTrieTelefonos nodo = this;
         int comparaciones = 0;
         for (int c = 0; c < s.length(); c++) {
-            int indice = s.charAt(c) - 'a';
+            int indice = (int)s.charAt(c) - '0';
             if (nodo.hijos[indice] == null) {
                 return null;
             } else {

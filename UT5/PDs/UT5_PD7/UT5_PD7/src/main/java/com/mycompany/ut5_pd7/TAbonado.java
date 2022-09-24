@@ -1,3 +1,5 @@
+package com.mycompany.ut5_pd7;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -13,7 +15,7 @@ public class TAbonado implements Comparable {
     private String nombre;
     private String telefono;
 
-    TAbonado(String unNombre, String unTelefono) {
+    public TAbonado(String unNombre, String unTelefono) {
 
         this.nombre = unNombre;
         this.telefono = unTelefono;

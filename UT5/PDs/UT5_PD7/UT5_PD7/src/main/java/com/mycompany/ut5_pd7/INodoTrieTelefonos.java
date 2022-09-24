@@ -1,3 +1,6 @@
+package com.mycompany.ut5_pd7;
+
+
 import java.util.LinkedList;
 
 /*
@@ -10,10 +13,11 @@ import java.util.LinkedList;
  *
  * @author ernesto
  */
-public interface IArbolTrieTelefonos {
+public interface INodoTrieTelefonos {
 
-    LinkedList<TAbonado> buscarTelefonos(String pais, String area);
+    public void buscarTelefonos(String codigoPais, String codigoArea, LinkedList<TAbonado> abonados);
 
     void insertar(String numero, TAbonado unAbonado);
-    public TNodoTrieTelefonos buscar(String palabra);
+    TNodoTrieTelefonos buscar(String s);
+    
 }

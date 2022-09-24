@@ -2,7 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
  */
+package TrieTelefonosTest;
 
+import com.mycompany.ut5_pd7.TAbonado;
+import com.mycompany.ut5_pd7.TArbolTrieTelefonos;
+import com.mycompany.ut5_pd7.TNodoTrieTelefonos;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -11,8 +15,8 @@ import static org.junit.jupiter.api.Assertions.*;
  *
  * @author Martin
  */
-public class AgregarAbonadosArbolTrieTest {
-
+public class AgregarAbonadosTest {
+    
     TArbolTrieTelefonos arbolPrueba;
 
     @BeforeEach
@@ -30,7 +34,7 @@ public class AgregarAbonadosArbolTrieTest {
         arbolPrueba.insertar("59899677264", abonado1);
         TNodoTrieTelefonos actual = arbolPrueba.buscar("59899677264");
         
-        assertEquals(abonado1, actual);
+        assertEquals(abonado1, actual.getAbonado());
     }
 
     @Test
@@ -44,8 +48,8 @@ public class AgregarAbonadosArbolTrieTest {
         TNodoTrieTelefonos actual = arbolPrueba.buscar("59899677264");
         TNodoTrieTelefonos actual2 = arbolPrueba.buscar("59899132654");
         
-        assertEquals(abonado1, actual);
-        assertEquals(abonado2, actual2);
+        assertEquals(abonado1, actual.getAbonado());
+        assertEquals(abonado2, actual2.getAbonado());
     }
 
     @Test
@@ -65,9 +69,9 @@ public class AgregarAbonadosArbolTrieTest {
         TNodoTrieTelefonos actual3 = arbolPrueba.buscar("59899258147");
         TNodoTrieTelefonos actual4 = arbolPrueba.buscar("59899369852");
         
-        assertEquals(abonado1, actual);
-        assertEquals(abonado2, actual2);
-        assertEquals(abonado3, actual3);
-        assertEquals(abonado4, actual4);
+        assertEquals(abonado1, actual.getAbonado());
+        assertEquals(abonado2, actual2.getAbonado());
+        assertEquals(abonado3, actual3.getAbonado());
+        assertEquals(abonado4, actual4.getAbonado());
     }
 }
