@@ -23,4 +23,13 @@ public class TArbolTrieTelefonos implements IArbolTrieTelefonos {
         }
         raiz.insertar(numero, unAbonado);
     }
+    
+    @Override
+    public TNodoTrieTelefonos buscar(String palabra) {
+        if (raiz== null){
+              raiz = new TNodoTrieTelefonos();
+        }
+        return raiz.buscar(palabra);
+    }
+
 }

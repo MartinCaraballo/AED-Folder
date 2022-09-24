@@ -37,6 +37,22 @@ public class TNodoTrieTelefonos implements INodoTrieTelefonos {
         nodo.abonado = unAbonado;
     }
     
+    @Override
+    public TNodoTrieTelefonos buscar(String s) {
+        TNodoTrieTelefonos nodo = this;
+        int comparaciones = 0;
+        for (int c = 0; c < s.length(); c++) {
+            int indice = s.charAt(c) - 'a';
+            if (nodo.hijos[indice] == null) {
+                return null;
+            } else {
+                nodo = nodo.hijos[indice];
+                comparaciones += 1;
+            }
+        }
+        return nodo;
+    }
+    
     private String comprobar(String cadena) {
         cadena = cadena.toLowerCase();
         char[] partes = cadena.toCharArray();

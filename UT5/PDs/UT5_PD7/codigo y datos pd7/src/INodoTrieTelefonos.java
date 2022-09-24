@@ -16,5 +16,6 @@ public interface INodoTrieTelefonos {
     public void buscarTelefonos(String codigoPais, String codigoArea, LinkedList<TAbonado> abonados);
 
     void insertar(String numero, TAbonado unAbonado);
+    TNodoTrieTelefonos buscar(String s);
     
 }
