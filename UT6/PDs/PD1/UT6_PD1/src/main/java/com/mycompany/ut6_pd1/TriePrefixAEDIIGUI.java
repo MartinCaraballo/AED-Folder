@@ -19,13 +19,13 @@ import javax.swing.JOptionPane;
  */
 public class TriePrefixAEDIIGUI extends javax.swing.JFrame {
     
-    private TArbolTrie trie;
+    private TArbolTrieHashMap trie;
     
     /**
      * Creates new form TriePrefixAEDIIGUI
      */
     public TriePrefixAEDIIGUI() {
-        this.trie = new TArbolTrie();
+        this.trie = new TArbolTrieHashMap();
         String[] libro = ManejadorArchivosGenerico.leerArchivo("src/libro.txt");
         //TODO: CARGAR PALABRAS CON EL LECTOR DE ARCHIVOS GENÉRICO
         for (String linea : libro) {

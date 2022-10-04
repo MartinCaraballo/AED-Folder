@@ -1,16 +1,18 @@
+package com.mycompany.ut6_pd1;
+
 
 
 import java.util.LinkedList;
 
 
-public class TArbolTrie implements IArbolTrie {
+public class TArbolTrieHashMap implements IArbolTrie {
 
-    private TNodoTrie raiz;
+    private TNodoTrieHashMap raiz;
 
     @Override
     public void insertar(String palabra) {
         if (raiz == null) {
-            raiz = new TNodoTrie();
+            raiz = new TNodoTrieHashMap();
         }
         raiz.insertar(palabra);
     }
@@ -25,7 +27,7 @@ public class TArbolTrie implements IArbolTrie {
     @Override
     public int buscar(String palabra) {
         if (raiz== null){
-              raiz = new TNodoTrie();
+              raiz = new TNodoTrieHashMap();
         }
         return raiz.buscar(palabra);
     }

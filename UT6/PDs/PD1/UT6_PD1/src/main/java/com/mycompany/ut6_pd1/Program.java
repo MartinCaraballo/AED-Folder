@@ -12,7 +12,7 @@ package com.mycompany.ut6_pd1;
 public class Program {
 
     public static void main(String[] args) {
-        TArbolTrie trie = new TArbolTrie();
+        TArbolTrieHashMap trie = new TArbolTrieHashMap();
 
         String[] palabrasclave = ManejadorArchivosGenerico.leerArchivo("./src/palabras1.txt");
         for (String p : palabrasclave) {
