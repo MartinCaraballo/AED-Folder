@@ -1,0 +1,5 @@
+UT6_PD4
+
+Ejercicio 1
+
+a) Se selecciona la estructura de datos HashMap porque se compone de claves y valores, esto para poder almacenar las claves correspondientes a la palabra y los valores como numero que representa las repeticiones de la palabra en el texto. Además de que el acceso a los objetos es constante y no tiene orden.

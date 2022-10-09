@@ -2,14 +2,14 @@ package com.mycompany.ut6_pd1;
 
 
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
 
-public class TArbolTrieHashMap implements IArbolTrie {
+public class TArbolTrieHashMap implements Serializable {
 
     private TNodoTrieHashMap raiz;
 
-    @Override
     public void insertar(String palabra) {
         if (raiz == null) {
             raiz = new TNodoTrieHashMap();
@@ -17,14 +17,12 @@ public class TArbolTrieHashMap implements IArbolTrie {
         raiz.insertar(palabra);
     }
 
-    @Override
     public void imprimir() {
         if (raiz != null) {
             raiz.imprimir();
         }
     }
 
-    @Override
     public int buscar(String palabra) {
         if (raiz== null){
               raiz = new TNodoTrieHashMap();
@@ -32,7 +30,6 @@ public class TArbolTrieHashMap implements IArbolTrie {
         return raiz.buscar(palabra);
     }
 
-    @Override
     public LinkedList<String> predecir(String prefijo) {
         if (raiz == null) {
             return null;

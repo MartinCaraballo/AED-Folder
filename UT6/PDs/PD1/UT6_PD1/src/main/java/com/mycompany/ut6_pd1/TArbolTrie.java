@@ -1,13 +1,15 @@
+package com.mycompany.ut6_pd1;
 
 
+
+
+import java.io.Serializable;
 import java.util.LinkedList;
 
-
-public class TArbolTrie implements IArbolTrie {
+public class TArbolTrie implements Serializable {
 
     private TNodoTrie raiz;
 
-    @Override
     public void insertar(String palabra) {
         if (raiz == null) {
             raiz = new TNodoTrie();
@@ -15,31 +17,25 @@ public class TArbolTrie implements IArbolTrie {
         raiz.insertar(palabra);
     }
 
-    @Override
     public void imprimir() {
         if (raiz != null) {
             raiz.imprimir();
         }
     }
 
-    @Override
-    public int buscar(String palabra) {
-        if (raiz== null){
-              raiz = new TNodoTrie();
+    public LinkedList<String> predecir(String prefijo) {
+        if (raiz != null) {
+            LinkedList<String> palabras = new LinkedList<String>();
+            raiz.predecir(prefijo,palabras);
+            return palabras;
         }
-        return raiz.buscar(palabra);
+        return null;
     }
 
-    @Override
-    public LinkedList<String> predecir(String prefijo) {
-        if (raiz == null) {
-            return null;
-        } else {
-            LinkedList<String> resultado = new LinkedList<>();
-            raiz.predecir(prefijo, resultado);
-            return resultado;
+    public int buscar(String palabra) {
+        if (raiz != null) {
+            return raiz.buscar(palabra);
         }
+        return 0;
     }
-    
-    
 }

@@ -1,0 +1,21 @@
+UT6_PD7
+
+Ejercicio 1
+
+En Java un hashCode es un identificador de 32 bits que almacena en un Hash la instancia de la clase (Toda clase Object provee un método hashCode()).
+Dentro del método hashCode de un objeto, su funcionamiento ocurre de la siguiente manera: se asigna una variable hash en 1 y se va acumulando con el
+valor de lo que devuelve en hashCode() todos los atributos del objeto multiplicado un número primo cada uno.
+
+Ejercicio 2
+
+0
+1 => Hola 
+2 => HolaMundo 
+3 => HashMap 
+4 => Colecciones
+5
+
+Ejercicio 3
+
+Ambos métodos (equals y hashCode) tienen un contrato informal, en el que en caso de que equals entre dos objetos devuelva true, entonces ambos hashCode
+deben ser iguales.

@@ -1,7 +1,11 @@
+package com.mycompany.ut6_pd1;
 
+
+
+import java.io.Serializable;
 import java.util.LinkedList;
 
-public class TNodoTrie implements INodoTrie {
+public class TNodoTrie implements Serializable {
 
     private static final int CANT_CHR_ABECEDARIO = 26;
     private TNodoTrie[] hijos;
@@ -12,7 +16,6 @@ public class TNodoTrie implements INodoTrie {
         esPalabra = false;
     }
 
-    @Override
     public void insertar(String unaPalabra) {
         TNodoTrie nodo = this;
         for (int c = 0; c < unaPalabra.length(); c++) {
@@ -29,7 +32,6 @@ public class TNodoTrie implements INodoTrie {
         if (nodo != null) {
             if (nodo.esPalabra) {
                 System.out.println(s);
-
             }
             for (int c = 0; c < CANT_CHR_ABECEDARIO; c++) {
                 if (nodo.hijos[c] != null) {
@@ -39,10 +41,26 @@ public class TNodoTrie implements INodoTrie {
         }
     }
 
-    @Override
     public void imprimir() {
-
         imprimir("", this);
+    }
+
+    private void predecir(String s, String prefijo, LinkedList<String> palabras, TNodoTrie nodo) {
+        if (nodo != null) {
+            if (nodo.esPalabra) {
+                palabras.add(prefijo + s);
+            }
+            for (int c = 0; c < CANT_CHR_ABECEDARIO; c++) {
+                if (nodo.hijos[c] != null) {
+                    predecir(s + (char) (c + 'a'), prefijo, palabras, nodo.hijos[c]);
+                }
+            }
+        }
+    }
+
+    public void predecir(String prefijo, LinkedList<String> palabras) {
+        TNodoTrie nodo = buscarNodoTrie(prefijo);
+        predecir("", prefijo, palabras, nodo);
     }
 
     private TNodoTrie buscarNodoTrie(String s) {
@@ -57,43 +75,21 @@ public class TNodoTrie implements INodoTrie {
         return nodo;
     }
 
-    private void predecir(String s, LinkedList<String> palabras, TNodoTrie nodo) {
-        // implementar
-        if (nodo != null) {
-            if (nodo.esPalabra) {
-                palabras.add(s);
-            }
-            for (int c = 0; c < CANT_CHR_ABECEDARIO; c++) {
-                if (nodo.hijos[c] != null) {
-                    nodo.hijos[c].predecir(s + (char) (c + 'a'), palabras, nodo.hijos[c]);
-                }
-            }
-        }
-        
-    }
-
-    @Override
-    public void predecir(String prefijo, LinkedList<String> palabras) {
-        TNodoTrie ultimoPrefijo = buscarNodoTrie(prefijo);
-        if (ultimoPrefijo != null) {
-            ultimoPrefijo.predecir(prefijo, palabras, ultimoPrefijo);
-        }
-    }
-
-    @Override
     public int buscar(String s) {
         TNodoTrie nodo = this;
-        int comparaciones = 0;
+        int temp = 0;
         for (int c = 0; c < s.length(); c++) {
             int indice = s.charAt(c) - 'a';
+            temp++;
             if (nodo.hijos[indice] == null) {
-                return 0;
-            } else {
-                nodo = nodo.hijos[indice];
-                comparaciones += 1;
+                return -temp;
             }
+            nodo = nodo.hijos[indice];
         }
-        return comparaciones;
+        if (nodo.esPalabra) {
+            return temp;
+        }
+        return -temp;
     }
 
 }

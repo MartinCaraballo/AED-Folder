@@ -1,10 +1,11 @@
 package com.mycompany.ut6_pd1;
 
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-public class TNodoTrieHashMap implements INodoTrie {
+public class TNodoTrieHashMap implements Serializable {
 
     private static final int CANT_CHR_ABECEDARIO = 26;
     private HashMap<Comparable, TNodoTrieHashMap> hijos;
@@ -15,7 +16,6 @@ public class TNodoTrieHashMap implements INodoTrie {
         esPalabra = false;
     }
 
-    @Override
     public void insertar(String unaPalabra) {
         TNodoTrieHashMap nodo = this;
         for (int c = 0; c < unaPalabra.length(); c++) {
@@ -42,7 +42,6 @@ public class TNodoTrieHashMap implements INodoTrie {
         }
     }
 
-    @Override
     public void imprimir() {
 
         imprimir("", this);
@@ -75,7 +74,6 @@ public class TNodoTrieHashMap implements INodoTrie {
         
     }
 
-    @Override
     public void predecir(String prefijo, LinkedList<String> palabras) {
         TNodoTrieHashMap ultimoPrefijo = buscarNodoTrie(prefijo);
         if (ultimoPrefijo != null) {
@@ -83,7 +81,6 @@ public class TNodoTrieHashMap implements INodoTrie {
         }
     }
 
-    @Override
     public int buscar(String s) {
         TNodoTrieHashMap nodo = this;
         int comparaciones = 0;

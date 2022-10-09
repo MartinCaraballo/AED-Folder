@@ -1,0 +1,55 @@
+Comparaciones de insertar con factor de carga 0,7: 34
+Comparaciones de buscar con exito con factor de carga 0,7: 8
+Comparaciones de buscar sin exito con factor de carga 0,7: 110
+
+Comparaciones de insertar con factor de carga 0,75: 38
+Comparaciones de buscar con exito con factor de carga 0,75: 13
+Comparaciones de buscar sin exito con factor de carga 0,75: 110
+
+Comparaciones de insertar con factor de carga 0,8: 38
+Comparaciones de buscar con exito con factor de carga 0,8: 12
+Comparaciones de buscar sin exito con factor de carga 0,8: 109
+
+Comparaciones de insertar con factor de carga 0,85: 40
+Comparaciones de buscar con exito con factor de carga 0,85: 15
+Comparaciones de buscar sin exito con factor de carga 0,85: 111
+
+Comparaciones de insertar con factor de carga 0,9: 41
+Comparaciones de buscar con exito con factor de carga 0,9: 15
+Comparaciones de buscar sin exito con factor de carga 0,9: 109
+
+Comparaciones de insertar con factor de carga 0,91: 37
+Comparaciones de buscar con exito con factor de carga 0,91: 17
+Comparaciones de buscar sin exito con factor de carga 0,91: 110
+
+Comparaciones de insertar con factor de carga 0,92: 49
+Comparaciones de buscar con exito con factor de carga 0,92: 14
+Comparaciones de buscar sin exito con factor de carga 0,92: 108
+
+Comparaciones de insertar con factor de carga 0,93: 51
+Comparaciones de buscar con exito con factor de carga 0,93: 16
+Comparaciones de buscar sin exito con factor de carga 0,93: 110
+
+Comparaciones de insertar con factor de carga 0,94: 44
+Comparaciones de buscar con exito con factor de carga 0,94: 20
+Comparaciones de buscar sin exito con factor de carga 0,94: 110
+
+Comparaciones de insertar con factor de carga 0,95: 52
+Comparaciones de buscar con exito con factor de carga 0,95: 14
+Comparaciones de buscar sin exito con factor de carga 0,95: 110
+
+Comparaciones de insertar con factor de carga 0,96: 56
+Comparaciones de buscar con exito con factor de carga 0,96: 17
+Comparaciones de buscar sin exito con factor de carga 0,96: 110
+
+Comparaciones de insertar con factor de carga 0,97: 66
+Comparaciones de buscar con exito con factor de carga 0,97: 17
+Comparaciones de buscar sin exito con factor de carga 0,97: 111
+
+Comparaciones de insertar con factor de carga 0,98: 54
+Comparaciones de buscar con exito con factor de carga 0,98: 17
+Comparaciones de buscar sin exito con factor de carga 0,98: 110
+
+Comparaciones de insertar con factor de carga 0,99: 128
+Comparaciones de buscar con exito con factor de carga 0,99: 16
+Comparaciones de buscar sin exito con factor de carga 0,99: 110

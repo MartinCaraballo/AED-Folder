@@ -1,0 +1,11 @@
+algoritmo,tiempo,memoria
+
+MedicionPredecirTrie,19547400,330487
+
+MedicionPredecirTrieHashMap,25589800,291377
+
+La salida, al predecir todas las palabras que comienzan con F, repitiendo 100 veces, tenemos que la implementación de la UT5 con trie,
+ocupa 330487 bytes, y la búsqueda llevó 21603100 nanosegundos.
+En cuanto a la implementación del trie utilizando hashmap, tenemos que ocupa 291377 bytes, y la búsqueda llevó 28273400 nanosegundos.
+En conclusión, con estos valores, tenemos que la implementación de la UT5 es ligeramente más rápida (6042400 nanosegundos menos), pero
+por otro lado es más pesada (39110 bytes más) en comparación con la implementación del trie utilizando hashmap.
