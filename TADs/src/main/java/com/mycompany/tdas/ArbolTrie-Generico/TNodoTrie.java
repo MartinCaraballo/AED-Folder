@@ -1,5 +1,6 @@
 package com.mycompany.tdas;
 
+import Grafos.ManejadorArchivosGenerico;
 import java.util.LinkedList;
 
 public class TNodoTrie implements INodoTrie {
