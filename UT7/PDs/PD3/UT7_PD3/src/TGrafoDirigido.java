@@ -177,12 +177,12 @@ public class TGrafoDirigido implements IGrafoDirigido {
     }
     
     private Map<Comparable, Double> obtenerExcentricidades() {
-        Double[][] matrizFloyd = floyd();
-        int tamanio = vertices.size();
+        Double[][] matrizFloyd = this.floyd();
+        int tamanio = this.getVertices().size();
         
         Comparable[] etiquetas = new Comparable[tamanio];
         int i = 0;
-        for (Comparable eti : vertices.keySet()) {
+        for (Comparable eti : this.getVertices().keySet()) {
             etiquetas[i++] = eti;
         }
         Map<Comparable, Double> res = new HashMap<>(tamanio * 4 / 3);
@@ -206,7 +206,7 @@ public class TGrafoDirigido implements IGrafoDirigido {
     public Comparable obtenerExcentricidad(Comparable etiquetaVertice) {
         return obtenerExcentricidades().get(etiquetaVertice);
     }
-    
+
     public boolean obtenerConectividad(Comparable verticeOrigen, Comparable verticeDestino) {
         boolean[][] warshall = warshall();
         int tamanio = vertices.size();
@@ -218,10 +218,12 @@ public class TGrafoDirigido implements IGrafoDirigido {
         }
         
         for (int y = 0; y < tamanio; y++) {
-            if (etiquetas[y] == verticeOrigen) {
+            if (etiquetas[y].equals(verticeOrigen)) {
                 for (int x = 0; x < tamanio; x++) {
-                    if (warshall[x][y]) {
-                        return true;
+                    if (etiquetas[x].equals(verticeDestino)) {
+                        if (warshall[x][y]) {
+                            return true;
+                        }
                     }
                 }
             }
@@ -231,7 +233,7 @@ public class TGrafoDirigido implements IGrafoDirigido {
 
     @Override
     public boolean[][] warshall() {
-        Double[][] C = UtilGrafos.obtenerMatrizCostos(getVertices());
+        Double[][] C = UtilGrafos.obtenerMatrizCostos(vertices);
         boolean[][] A = new boolean[C.length][C.length];
         for (int i = 0; i < A.length; i++) {
             for (int j = 0; j < A.length; j++) {
@@ -243,13 +245,15 @@ public class TGrafoDirigido implements IGrafoDirigido {
 
         for (int k = 0; k < A.length; k++) {
             for (int i = 0; i < A.length; i++) {
+                if (!A[i][k]) {
+                    continue;
+                }
                 for (int j = 0; j < A.length; j++) {
-                    if (A[i][j] == false) {
-                        A[i][j] = A[i][k] && A[k][j];                        
-                    }
+                    A[i][j] |= A[i][k] && A[k][j];
                 }
             }
         }
+
         return A;
     }
 
