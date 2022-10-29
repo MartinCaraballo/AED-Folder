@@ -1,13 +1,16 @@
-
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ *
+ * @author Ernesto
+ */
 public class TGrafoDirigido implements IGrafoDirigido {
 
-    private Map<Comparable, TVertice> vertices; // vertices del grafo.-
+    private final Map<Comparable, TVertice> vertices; // vertices del grafo.-
 
     public TGrafoDirigido(Collection<TVertice> vertices, Collection<TArista> aristas) {
         this.vertices = new HashMap<>();
@@ -20,11 +23,15 @@ public class TGrafoDirigido implements IGrafoDirigido {
     }
 
     /**
-     * Metodo encargado de eliminar una arista dada por un origen y destino. En
-     * caso de no existir la adyacencia, retorna falso. En caso de que las
-     * etiquetas sean invalidas, retorna falso.
+     * Metodo encargado de eliminar una arista dada por un origen y destino.
+     * En caso de no existir la adyacencia, retorna falso. En caso de que las
+     * etiquetas sean inv�lidas, retorna falso.
      *
+     * @param nomVerticeOrigen
+     * @param nomVerticeDestino
+     * @return 
      */
+    @Override
     public boolean eliminarArista(Comparable nomVerticeOrigen, Comparable nomVerticeDestino) {
         if ((nomVerticeOrigen != null) && (nomVerticeDestino != null)) {
             TVertice vertOrigen = buscarVertice(nomVerticeOrigen);
@@ -35,13 +42,30 @@ public class TGrafoDirigido implements IGrafoDirigido {
         return false;
     }
 
-    
     /**
-     * Metodo encargado de verificar la existencia de una arista. Las etiquetas
-     * pasadas por par�metro deben ser v�lidas.
+     * Metodo encargado de eliminar un vertice en el grafo. En caso de no
+     * existir el vertice, retorna falso. En caso de que la etiqueta sea
+     * inv�lida, retorna false.
      *
+     * @param nombreVertice
+     * @return 
+     */
+  
+    @Override
+    public boolean eliminarVertice(Comparable nombreVertice) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+
+    /**
+     * Metodo encargado de verificar la existencia de una arista. Las
+     * etiquetas pasadas por par�metro deben ser v�lidas.
+     *
+     * @param etiquetaOrigen
+     * @param etiquetaDestino
      * @return True si existe la adyacencia, false en caso contrario
      */
+    @Override
     public boolean existeArista(Comparable etiquetaOrigen, Comparable etiquetaDestino) {
         TVertice vertOrigen = buscarVertice(etiquetaOrigen);
         TVertice vertDestino = buscarVertice(etiquetaDestino);
@@ -57,10 +81,11 @@ public class TGrafoDirigido implements IGrafoDirigido {
      *
      * La etiqueta especificada como par�metro debe ser v�lida.
      *
-     * @param unaEtiqueta Etiqueta del vertice a buscar.-
+     * @param unaEtiqueta Etiqueta del v�rtice a buscar.-
      * @return True si existe el vertice con la etiqueta indicada, false en caso
      * contrario
      */
+    @Override
     public boolean existeVertice(Comparable unaEtiqueta) {
         return getVertices().get(unaEtiqueta) != null;
     }
@@ -70,7 +95,7 @@ public class TGrafoDirigido implements IGrafoDirigido {
      *
      * La etiqueta especificada como parametro debe ser valida.
      *
-     * @param unaEtiqueta Etiqueta del vertice a buscar.-
+     * @param unaEtiqueta Etiqueta del v�rtice a buscar.-
      * @return El vertice encontrado. En caso de no existir, retorna nulo.
      */
     private TVertice buscarVertice(Comparable unaEtiqueta) {
@@ -79,17 +104,19 @@ public class TGrafoDirigido implements IGrafoDirigido {
 
     /**
      * Metodo encargado de insertar una arista en el grafo (con un cierto
-     * costo), dado su vertice origen y destino.- Para que la arista sea valida,
-     * se deben cumplir los siguientes casos: 1) Las etiquetas pasadas por
-     * parametros son v�lidas.- 2) Los vertices (origen y destino) existen
+     * costo), dado su vertice origen y destino.- Para que la arista sea
+     * valida, se deben cumplir los siguientes casos: 1) Las etiquetas pasadas
+     * por parametros son v�lidas.- 2) Los vertices (origen y destino) existen
      * dentro del grafo.- 3) No es posible ingresar una arista ya existente
      * (miso origen y mismo destino, aunque el costo sea diferente).- 4) El
      * costo debe ser mayor que 0.
      *
+     * @param arista
      * @return True si se pudo insertar la adyacencia, false en caso contrario
      */
+    @Override
     public boolean insertarArista(TArista arista) {
-        if ((arista.getEtiquetaOrigen() != null) && (arista.getEtiquetaDestino() != null)) {
+        if ((arista.getEtiquetaOrigen()!= null) && (arista.getEtiquetaDestino() != null)) {
             TVertice vertOrigen = buscarVertice(arista.getEtiquetaOrigen());
             TVertice vertDestino = buscarVertice(arista.getEtiquetaDestino());
             if ((vertOrigen != null) && (vertDestino != null)) {
@@ -98,16 +125,17 @@ public class TGrafoDirigido implements IGrafoDirigido {
         }
         return false;
     }
-
+ 
     /**
      * Metodo encargado de insertar un vertice en el grafo.
      *
-     * No pueden ingresarse vertices con la misma etiqueta. La etiqueta
+     * No pueden ingresarse v�rtices con la misma etiqueta. La etiqueta
      * especificada como par�metro debe ser v�lida.
      *
-     * @param unaEtiqueta Etiqueta del vertice a ingresar.
+     * @param unaEtiqueta Etiqueta del v�rtice a ingresar.
      * @return True si se pudo insertar el vertice, false en caso contrario
      */
+    @Override
     public boolean insertarVertice(Comparable unaEtiqueta) {
         if ((unaEtiqueta != null) && (!existeVertice(unaEtiqueta))) {
             TVertice vert = new TVertice(unaEtiqueta);
@@ -116,22 +144,24 @@ public class TGrafoDirigido implements IGrafoDirigido {
         }
         return false;
     }
-
     @Override
-
-    public boolean insertarVertice(TVertice vertice) {
-        Comparable unaEtiqueta = vertice.getEtiqueta();
-        if ((unaEtiqueta != null) && (!existeVertice(unaEtiqueta))) {
+ public boolean insertarVertice(TVertice vertice) {
+     Comparable unaEtiqueta = vertice.getEtiqueta();
+     if (!existeVertice(unaEtiqueta)) {
             getVertices().put(unaEtiqueta, vertice);
             return getVertices().containsKey(unaEtiqueta);
         }
         return false;
     }
 
+    
+    
     public Object[] getEtiquetasOrdenado() {
         TreeMap<Comparable, TVertice> mapOrdenado = new TreeMap<>(this.getVertices());
         return mapOrdenado.keySet().toArray();
     }
+    
+ 
 
     /**
      * @return the vertices
@@ -239,7 +269,6 @@ public class TGrafoDirigido implements IGrafoDirigido {
                 }
             }
         }
-
         for (int k = 0; k < A.length; k++) {
             for (int i = 0; i < A.length; i++) {
                 for (int j = 0; j < A.length; j++) {
@@ -253,8 +282,54 @@ public class TGrafoDirigido implements IGrafoDirigido {
     }
 
     @Override
-    public boolean eliminarVertice(Comparable nombreVertice) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Collection<TVertice> bpf() {
+        Collection<TVertice> visitados = new LinkedList<>();
+        vertices.forEach((etiqueta, vertice) -> {
+            if (!vertice.getVisitado()) {
+                vertice.bpf(visitados);
+            }
+        });
+        desvisitarVertices();
+        return visitados;
     }
 
+   
+    @Override
+    public Collection<TVertice> bpf(Comparable etiquetaOrigen) {
+        Collection<TVertice> visitados = new LinkedList<>();
+        TVertice origen = vertices.get(etiquetaOrigen);
+        origen.bpf(visitados);
+        visitados.addAll(bpf());
+        return visitados;
+    }
+
+
+    @Override
+    public Collection<TVertice> bpf(TVertice vertice) {
+        Collection<TVertice> visitados = new LinkedList<>();
+        vertice.bpf(visitados);
+        visitados.addAll(bpf());
+        return visitados;
+    }
+
+    @Override
+    public void desvisitarVertices() {
+        vertices.forEach((etiqueta, vertice) -> {
+            vertice.setVisitado(false);
+        });
+    }
+
+    @Override
+    public TCaminos todosLosCaminos(Comparable etiquetaOrigen, Comparable etiquetaDestino) {
+        TCaminos todosLosCaminos = new TCaminos();
+        TVertice v = vertices.get(etiquetaOrigen);
+        if (v != null) {
+            TCamino caminoPrevio = new TCamino(v);
+            v.todosLosCaminos(etiquetaDestino, caminoPrevio, todosLosCaminos);
+            return todosLosCaminos;
+        }
+        return null;
+    }
+    
+    
 }

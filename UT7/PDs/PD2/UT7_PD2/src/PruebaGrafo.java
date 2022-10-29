@@ -15,7 +15,7 @@ public class PruebaGrafo {
             System.out.println("excentricidad de " + etiquetasarray[i] + " : " + gd.obtenerExcentricidad((Comparable) etiquetasarray[i]));
         }
         System.out.println();
-        System.out.println("Centro del grafo: " + gd.centroDelGrafo());
+        System.out.println("\nCentro del grafo: " + gd.centroDelGrafo());
 
         // EJERCICIO 1:
         TGrafoDirigido grafoDirigido = UtilGrafos.cargarGrafo("src/ciudades.txt", "src/conexionesCiudades.txt", true, TGrafoDirigido.class);
@@ -31,6 +31,6 @@ public class PruebaGrafo {
         for (Object object : etiquetasGrafoDirigido) {
             System.out.println("Excentricidad de: " + object + " : " + grafoDirigido.obtenerExcentricidad((Comparable) object));
         }
-        System.out.println("Centro del grafo: " + grafoDirigido.centroDelGrafo());
+        System.out.println("\nCentro del grafo: " + grafoDirigido.centroDelGrafo());
     }
 }

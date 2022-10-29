@@ -142,16 +142,7 @@ public class TGrafoDirigido implements IGrafoDirigido {
 
     @Override
     public Comparable centroDelGrafo() {
-        Map<Comparable, Double> excentricidades = obtenerExcentricidades();
-        Double minimo = Double.MAX_VALUE;
-        Comparable etiquetaMinimo = "";
-        for (Map.Entry<Comparable, Double> entry : excentricidades.entrySet()) {
-            if (entry.getValue() < minimo && entry.getValue() > -1) {
-                minimo = entry.getValue();
-                etiquetaMinimo = entry.getKey();
-            }
-        }
-        return etiquetaMinimo;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -175,38 +166,12 @@ public class TGrafoDirigido implements IGrafoDirigido {
         }
         return matrizFloyd;
     }
-    
-    private Map<Comparable, Double> obtenerExcentricidades() {
-        Double[][] matrizFloyd = floyd();
-        int tamanio = vertices.size();
-        
-        Comparable[] etiquetas = new Comparable[tamanio];
-        int i = 0;
-        for (Comparable eti : vertices.keySet()) {
-            etiquetas[i++] = eti;
-        }
-        Map<Comparable, Double> res = new HashMap<>(tamanio * 4 / 3);
-        for (int y = 0; y < tamanio; y++) {
-            double max = 0;
-            for (int x = 0; x < tamanio; x++) {
-                if (max < matrizFloyd[x][y]) {
-                    max = matrizFloyd[x][y];
-                }
-            }
-            if (max == Double.MAX_VALUE) {
-                max = -1;
-            }
-            res.put(etiquetas[y], max);
-        }
-        
-        return res;
-    }
 
     @Override
     public Comparable obtenerExcentricidad(Comparable etiquetaVertice) {
-        return obtenerExcentricidades().get(etiquetaVertice);
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     public boolean obtenerConectividad(Comparable verticeOrigen, Comparable verticeDestino) {
         boolean[][] warshall = warshall();
         int tamanio = vertices.size();
