@@ -9,7 +9,6 @@ public class TVertice<T> implements IVertice {
     private LinkedList<TAdyacencia> adyacentes;
     private boolean visitado;
     private T datos;
-    private TVertice predecesor;
 
     public Comparable getEtiqueta() {
         return etiqueta;
@@ -21,20 +20,6 @@ public class TVertice<T> implements IVertice {
 
     public T getDatos() {
         return datos;
-    }
-
-    /**
-     * @return the predecesor
-     */
-    public TVertice getPredecesor() {
-        return predecesor;
-    }
-
-    /**
-     * @param predecesor the predecesor to set
-     */
-    public void setPredecesor(TVertice predecesor) {
-        this.predecesor = predecesor;
     }
 
     public TVertice(Comparable unaEtiqueta) {
@@ -88,6 +73,14 @@ public class TVertice<T> implements IVertice {
     }
 
     @Override
+    public TVertice primerAdyacente() {
+        if (this.adyacentes.getFirst() != null) {
+            return this.adyacentes.getFirst().getDestino();
+        }
+        return null;
+    }
+
+    @Override
     public TAdyacencia buscarAdyacencia(Comparable etiquetaDestino) {
         for (TAdyacencia adyacencia : adyacentes) {
             if (adyacencia.getDestino().getEtiqueta().compareTo(etiquetaDestino) == 0) {
@@ -98,23 +91,16 @@ public class TVertice<T> implements IVertice {
     }
 
     @Override
-    public TVertice primerAdyacente() {
-        if (this.adyacentes.getFirst() != null) {
-            return this.adyacentes.getFirst().getDestino();
-        }
-        return null;
+    public void bpf(Collection<TVertice> visitados) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public TVertice siguienteAdyacente(TVertice w) {
-        TAdyacencia adyacente = buscarAdyacencia(w.getEtiqueta());
-        int index = adyacentes.indexOf(adyacente);
-        if (index + 1 < adyacentes.size()) {
-            return adyacentes.get(index + 1).getDestino();
-        }
-        return null;
+    public TCaminos todosLosCaminos(Comparable etVertDest, TCamino caminoPrevio, TCaminos todosLosCaminos) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
     public void bea(Collection<TVertice> visitados) {
         Queue<TVertice> cola = new LinkedList<>();
         this.visitado = true;
@@ -133,4 +119,15 @@ public class TVertice<T> implements IVertice {
             }
         }
     }
+
+    @Override
+    public TVertice siguienteAdyacente(TVertice w) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean tieneCiclo(LinkedList<Comparable> camino) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

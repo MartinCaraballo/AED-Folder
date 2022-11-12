@@ -1,3 +1,4 @@
+package com.mycompany.ut8_pd4;
 
 import java.util.Collection;
 
@@ -62,6 +63,9 @@ public class TAristas extends LinkedList<TArista> {
     }
 
     void insertarAmbosSentidos(Collection<TArista> aristas) {
+        if (aristas == null) {
+            return;
+        }
         TArista tempArista;
         for (TArista ta : aristas) {
             this.add(ta);

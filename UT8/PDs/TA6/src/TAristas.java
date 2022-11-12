@@ -50,7 +50,16 @@ public class TAristas extends LinkedList<TArista> {
         }
         return minA;
     }
-
+        //---------COMPLETAR ALGORITMO--------
+        // para todo u en Vertices U
+        // para todo v en Vertices V
+        // tA =buscar (u, v)
+        // si tA <> null y tA.costo < costoMin entonces
+        // tAMin = tA y costoMin = tA.costo
+        // fin para todo v
+        // fin para todo u
+        // devolver tAMin
+    
     public String imprimirEtiquetas() {
         if (this.isEmpty()) {
             return null;

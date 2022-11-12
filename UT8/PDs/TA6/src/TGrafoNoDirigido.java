@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 
-public class TGrafoNoDirigido extends TGrafoDirigido implements IGrafoRedElectrica {
+public class TGrafoNoDirigido extends TGrafoDirigido implements IGrafoNoDirigido {
 
     protected TAristas lasAristas = new TAristas();
 
@@ -34,6 +34,7 @@ public class TGrafoNoDirigido extends TGrafoDirigido implements IGrafoRedElectri
         return lasAristas;
     }
 
+    @Override
     public TGrafoNoDirigido Prim() {
         if (!this.esConexo()) {
             return null;
@@ -42,7 +43,7 @@ public class TGrafoNoDirigido extends TGrafoDirigido implements IGrafoRedElectri
         LinkedList<TVertice> verticesV = new LinkedList();
         verticesV.addAll(this.getVertices().values());
         LinkedList<TArista> aristasT = new LinkedList<>();
-        int costo = 0;
+        double costo = 0;
 
         verticesU.add(verticesV.pollFirst());
         while (!verticesV.isEmpty()) {
@@ -55,10 +56,10 @@ public class TGrafoNoDirigido extends TGrafoDirigido implements IGrafoRedElectri
                 costo += tempA.getCosto();
             }
         }
-        System.out.println(costo);
+        //System.out.println("Costo total de Prim: " + costo);
         return new TGrafoNoDirigido(verticesU, aristasT);
     }
-    
+
     public TAristas PrimAristas() {
         if (!this.esConexo()) {
             return null;
@@ -80,14 +81,11 @@ public class TGrafoNoDirigido extends TGrafoDirigido implements IGrafoRedElectri
                 costo += tempA.getCosto();
             }
         }
-        System.out.println("Costo total de Prim: " + costo);
+        //System.out.println("Costo total de Prim: " + costo);
         return aristasT;
     }
 
-    // Los componentes estan definidos por su rai­z, la cual se representa por un par clave-valor donde la clave y 
-    //el valor son iguales.
-    // Si una etiqueta no apunta a si­ misma en el mapa, entonces pertenece al mismo componente que la etiqueta a 
-    //la cual si­ apunta.
+    @Override
     public TGrafoNoDirigido Kruskal() {
         if (esConexo()) {
             TAristas F = new TAristas();
@@ -126,17 +124,17 @@ public class TGrafoNoDirigido extends TGrafoDirigido implements IGrafoRedElectri
                 return null;
             }
             TGrafoNoDirigido kruskal = new TGrafoNoDirigido(this.getVertices().values(), F);
-            System.out.println("Costo de Kruskal: " + costoTotal);
+            //System.out.println("Costo de Kruskal: " + costoTotal);
             return kruskal;
 
         }
         return null;
     }
-    
+
     public TAristas KruskalAristas() {
         if (esConexo()) {
             TAristas F = new TAristas();
-            double costoTotal = 0; 
+            double costoTotal = 0;
             int numVertices = this.getVertices().size();
             Map<Comparable, Integer> componentes = new HashMap<>();
             int i = 0;
@@ -145,7 +143,7 @@ public class TGrafoNoDirigido extends TGrafoDirigido implements IGrafoRedElectri
                 i++;
             }
             int contador = numVertices - 1;
-            
+
             TAristas aristasOrdenadas = this.lasAristas;
             aristasOrdenadas.sort((a1, a2) -> Double.compare(a1.costo, a2.costo));
 
@@ -194,7 +192,8 @@ public class TGrafoNoDirigido extends TGrafoDirigido implements IGrafoRedElectri
         return false;
     }
 
-    public Collection<TVertice> bea() {
+    @Override
+    public Collection<TVertice> bea(Comparable etiquetaOrigen) {
         LinkedList<TVertice> visitados = new LinkedList();
         for (TVertice vertice : this.getVertices().values()) {
             if (!vertice.getVisitado()) {
@@ -204,10 +203,4 @@ public class TGrafoNoDirigido extends TGrafoDirigido implements IGrafoRedElectri
         this.desvisitarVertices();
         return visitados;
     }
-
-    @Override
-    public TAristas mejorRedElectrica() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
 }
