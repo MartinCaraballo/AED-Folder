@@ -6,13 +6,12 @@ import java.util.Collection;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author ocamp
  */
-public class TGrafoRedElectrica extends TGrafoNoDirigido implements IGrafoRedElectrica{
-    
+public class TGrafoRedElectrica extends TGrafoNoDirigido implements IGrafoRedElectrica {
+
     public TGrafoRedElectrica(Collection<TVertice> vertices, Collection<TArista> aristas) {
         super(vertices, aristas);
     }
