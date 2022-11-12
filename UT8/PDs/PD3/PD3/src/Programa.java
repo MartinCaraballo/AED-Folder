@@ -11,8 +11,8 @@ public class Programa {
     public static void main(String[] args) {
       // cargar grafo con casas y distancias
         TGrafoRedElectrica laRed =  (TGrafoRedElectrica) UtilGrafos.cargarGrafo(
-                "src/barrio.csv",
-                "src/distancias.csv",
+                "src/barrio.txt",
+                "src/distancias.txt",
                 false, TGrafoRedElectrica.class);
        
         /*
