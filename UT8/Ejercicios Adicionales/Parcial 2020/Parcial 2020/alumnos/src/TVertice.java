@@ -1,4 +1,5 @@
 import java.util.LinkedList;
+import java.util.Queue;
 
 public class TVertice<T> implements IVertice, IVerticeContagio {
 
@@ -128,7 +129,25 @@ public class TVertice<T> implements IVertice, IVerticeContagio {
 
     @Override
     public void obtenerAnillos(TAnillosContagio losAnillos, int maxDistancia) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Queue<TVertice> colaDeVertices = new LinkedList<>();
+        colaDeVertices.add(this);
+        visitado = true;
+        while (!colaDeVertices.isEmpty()) {
+            TVertice verticeX = colaDeVertices.poll();
+            if (verticeX.getNumDist() >= maxDistancia && maxDistancia != 0) {
+                return;
+            }
+            LinkedList<TAdyacencia> adyacentes = verticeX.getAdyacentes();
+            for (TAdyacencia adyacente : adyacentes) {
+                TVertice verticeY = adyacente.getDestino();
+                if (!verticeY.visitado) {
+                    verticeY.visitado = true;
+                    colaDeVertices.add(verticeY);
+                    verticeY.setNumDist(verticeX.getNumDist() + 1);
+                    losAnillos.agregarContagio(verticeY.getNumDist(), verticeY.getEtiqueta().toString());
+                }
+            }
+        }
     }
 
    

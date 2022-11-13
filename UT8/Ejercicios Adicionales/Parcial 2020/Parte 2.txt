@@ -1,0 +1,83 @@
+Ejercicio 1:
+
+    Lenguaje natural -> Para resolver este problema se hace uso del TDA GrafoNoDirigido. En el vertice guardamos un entero "nivel" inicializado en 0 para saber
+                        en que anillo se encuentra la persona. Se realiza una búsqueda en amplitud (bea) partiendo desde la persona infectada y recorriendo
+                        mientras el nivel sea menor a maxDistancia. Por cada persona que encontremos llamamos al metodo agregarContagio pasandole la persona y el nivel.
+
+    Precondiciones  ->  Los vértices no pueden estar visitados.
+                        No existen dos vértices con la misma etiqueta.
+    
+    Postcondiciones ->  Si la persona infectada no esta registrada devuelve nulo.
+                        Todos los adyacentes a la persona infectada deben quedar visitados luego de la ejecución del método.
+    
+
+    TGrafoNoDirigido.anillosDeProbablesContagiados(de tipo Persona personaCOVID, de tipo entero maxDistancia) devuelve una instancia de la clase AnillosContagio
+    COM
+        TVertice origen <- todosLosVertices.obtener(personaCOVID)
+        Si origen = nulo entonces
+            devolver nulo
+        Fin Si
+        AnillosContagio resultado <- Nuevo AnillosContagio
+        origen.anillosDeProbablesContagiados(resultado, maxDistancia)
+        devolver resultado
+    FIN
+
+    TVertice.anillosDeProbablesContagiados(AnillosContagio resultado, entero maxDistancia)
+    COM
+        Cola colaDeVertices <- Nueva Cola
+        colaDeVertices.insertar(this)
+        visitado <- true
+        Mientras (!colaDeVertices.esVacia()) hacer
+            TVertice verticeX <- colaDeVertices.quitarPrimero()
+            Si verticeX.nivel >= maxDistacia AND maxDistancia <> 0 entonces
+                return // salir
+            Fin Si
+            Para cada adyacente en verticeX.adyacentes hacer
+                TVertice verticeY <- adyacente.destino
+                Si !verticeY.visitado entonces
+                    verticeY.visitado <- true
+                    colaDeVertices.insertar(verticeY)
+                    resultado.agregarContagio(verticeX.nivel + 1, verticeY.persona)
+                    verticeY.setNivel(verticeX.nivel + 1)
+                Fin Si
+            Fin Para cada
+        Fin Mientras
+    FIN
+
+    El ordend de ejecucion del algoritmo es O(n2)
+
+Ejercicio 2:
+
+    Lenguaje natural -> Se realiza una bpf, preguntando al principio si el vertice actual es el vertice destino. Si lo es, salimos devolviendo true, y en
+                        caso contrario se realiza la llamada recursiva a alguno de los adyacentes. Si nunca encuentra el vertice destino, devolvemos false.
+
+    Precondiciones  ->  Los vertices no pueden estar visitados.
+                        No existen dos vértices con la misma etiqueta.
+
+    Postcondiciones ->  Si el vertice origen es nulo entonces devuelve falso.
+                        El grafo no se modifica luego de la ejecución.
+
+    TGrafo.hayCamino(TVertice verticeOrigen, TVertice verticeDestino) : booleano
+    COM
+        Si verticeOrigen = nulo OR verticeDestino = nulo entonces
+            devolver nulo
+        Fin Si
+        devolver verticeOrigen.hayCamino(verticeDestino)
+    FIN
+
+    TVertice.hayCamino(TVertice destino): booleano
+    COM
+        Si this.etiqueta = destino.etiqueta
+            devolver true
+        Fin si
+        visitado <- true
+        Para cada adyacente en adyacentes hacer
+            TVertice vertice <- adyacente.destino
+            Si vertice no esta visitado entonces
+                devolver vertice.hayCamino(verticeDestino)
+            Fin Si
+        Fin Para Cada
+        devolver falso
+    FIN
+
+    El orden de ejecución del algoritmo es O(v * a).

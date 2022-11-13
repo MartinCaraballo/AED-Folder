@@ -1,0 +1,92 @@
+Ejercicio 1:
+
+    Lenguaje natural -> Desde el vértice que se pasa por parámetro, se hace una búsqueda en profundidad pasando por parámetro el vertice destino.
+                        Si llegamos a él, entonces devolvemos verdadero. En caso contrario, devolvemos falso.
+
+    Precondiciones  ->  Todos los vértices no pueden estar visitados.
+                        No existen dos vértices con la misma etiqueta.
+
+    Postcondiciones ->  Si existe camino entre los dos vértices, devuelve verdadero.
+                        Si alguno de los vértices es nulo entonces devuelve falso.
+                        Todos los vértices que se encuentran en el camino entre el vertice de inicio y el vertice de destino quedan visitados.
+
+    TGrafo.conectados(u, v de tipo vértices) : booleano
+    COM
+        Si u = nulo OR v = nulo entonces
+            devolver falso
+        Fin Si
+        devolver u.conectados(v)
+    FIN
+
+    TVertice.conectadoA(w de tipo vértice) : booleano
+    COM
+        this.visitado = verdadero					        O(1)
+        Si this.getEtiqueta() = w.getEtiqueta() entonces 	O(1)
+            devolver verdadero					            O(1)
+        Fin Si
+        Para cada adyacente en adyacentes hacer		        O(n)
+            Si adyacente.visitado es falso entonces		    O(1)
+                devolver adyacente.conectados(w)			O(1)
+            Fin Si				
+        Fin Para cada
+        devolver falso							            O(1)
+    FIN
+
+    El orden de ejecución de este algoritmo es O(n), siendo n la cantidad de adyacentes del vértice.
+    
+    - ¿Qué diferencia debería haber entre los métodos de un Grafo Dirigido y de un Grafo No Dirigido?
+        En este caso, el algoritmo realiza una bpf partiendo desde el vertice de origen pasado por parámetro, por lo tanto no
+        debería haber diferencia entre los métodos de los diferentes grafos.
+
+Ejercicio 2:
+
+    Lenguaje natural -> Para resolver este problema, se deben usar grafos no dirigidos. Cada persona en la red social, esta representada
+                        por un vértice, y su amistad con otra con una arista que conecta a los dos vértices. Luego de cargar el grafo con las
+                        personas y enlaces entre ellas, se realiza una búsqueda en amplitud (bea), partiendo desde la persona que se desea.
+                        Para que podamos conocer los contactos que se encuentran a menos de 6 enlaces, pasamos una lista por parámetro, en
+                        en la cual iremos agregando los contactos a ella.
+
+    Precondiciones   -> Los vertices no pueden estar visitados.
+                        El grafo debe estar correctamente cargado.
+                        Los vertices tienen que tener un entero "nivel" inicializado en 0.
+
+    Postcondiciones  -> Si la persona no existe en la red social, no se devuelve nada.
+                        Los vertices adyacentes a la persona en la que empezamos la búsqueda, deben estar visitados al terminar la ejecución del método.
+
+
+    TGrafoNoDirigido.seisGradosDeSeparacion(de tipo etiqueta: persona) : lista con los contactos alcanzables
+    COM
+        TVertice inicio <- vertices.get(persona)
+        Si inicio = nulo entonces
+            devolver nulo
+        Fin Si
+        Lista contactosAlcanzables <- Nueva Lista
+        inicio.seisGradosDeSeparacion(contactosAlcanzables)
+        devolver contactosAlcanzables
+    FIN
+        
+
+    TVertice.seisGradosDeSeparacion(de tipo lista: contactosAlcanzables)
+    COM
+        Cola colaDeVertices <- Nueva Cola                           O(1)
+        colaDeVertices.insertar(this)                               O(1)
+        visitado <- true                                            O(1)
+        Mientras colaDeVertices no es vacia hacer  -> se repite n veces, siendo n la cantidad de adyacentes de todos los vertices que se han ido visitando
+            TVertice verticeX <- colaDeVertices.quitarPrimero()     O(1)
+            Si verticeX.nivel > 6 entonces                          O(1)
+                devolver //salir                                    O(1)
+            Fin si
+            Para cada adyacente en verticeX.adyacentes hacer -> se repite n veces, siendo n la cantidad de adyacentes para ese vertice.
+                TVertice verticeY <- adyacente.destino              O(1)
+                Si verticeY no esta visitado entonces               O(1)
+                    verticeY.visitado <- true                       O(1)
+                    colaDeVertices.insertar(verticeY)               O(1)
+                    verticeY.setNivel(verticeX.nivel + 1)           O(1)
+                    contactosAlcanzables.insertar(verticeY)         O(n)
+                Fin si
+            Fin Para Cada
+        Fin Mientras
+    FIN
+
+    El orden de ejecución de este algoritmo es de O(n2).
+                    

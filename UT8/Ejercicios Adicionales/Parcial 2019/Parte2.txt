@@ -1,0 +1,189 @@
+Ejercicio 1:
+    
+    Lenguaje natural -> Se hace uso de un grafo no dirigido para la solución del problema. En este se representan las casas como vértices y los cables entre las casas
+                        como aristas. Si la cantidad de casas al cuadrado es menor que la cantidad de cables, entonces conviene usar el algoritmo de Kruskal. En caso
+                        contrario, es más conveniente utilizar el de Prim. Cualquiera de estos dos algoritmos, devuelve un nuevo grafo con la cantidad mínima de cables
+                        necesaria para conectar todas las casas.
+
+    Estructura      ->  Para la representación de las casas (vértices) se utiliza un hashmap, teniendo como clave la etiqueta de la casa y como valor el objeto vértice.
+                        Para la representación de los cables (aristas) se utiliza una linkedlist, cargando el origen y destino de cada arista, y también al reves, es decir
+                        se carga la arista que va desde el vértice A al B y se carga también una arista que va desde B a A.
+
+    Pseudocódigo    ->
+
+        PRIM
+		LN:
+			Se inicializan distintas linkedlist, U de vertices (vacia), V de los vertices del grafo y res de aristas (vacia)
+			Se quita el primer vertice de V y se lo agrega a U.
+			Luego, mientras V no sea vacia, se busca la menor arista entre cualquier vertice de U y cualquiera de V,
+			si esa arista no es nula se la agrega a res, y su vertice destino es eliminado de V y agregado a U.
+			Una vez que V sea vacia, devolvemos un nuevo grafo no dirigido con U y res como parametros. 
+			
+		Precondiciones:
+			El grafo es conexo
+			El grafo está bien formado
+			El conjunto de aristas del grafo contiene la arista (v, u) para toda arista (u, v) en el grafo
+
+		Postcondiciones:
+			El grafo se mantiene intacto
+
+		Pseudocódigo:
+		FUNCIÓN TGrafoNoDirigido.Prim(vertice: TVertice): TGrafoNoDirigido
+		COMIENZO	
+			SI no es conexo ENTONCES								O(1)
+				devolver nulo									    O(1)
+			FIN SI
+			U = nueva LinkedList<TVertice>							O(1)
+			V = this.vertices.copia									O(1)
+			res = nueva LinkedList<TArista>							O(1)
+			U.agregar(V.primero)									O(1)
+			V.eliminarPrimero()									    O(1)
+
+			MIENTRAS V no vacio HACER								O(n)	 --> } --> Por la regla de la multiplicacion
+				TArista nuevaArista = this.aristas.buscarMin(U, V)			O(n^2) --> } --> el algoritmo es O(n^3)
+				SI nuevaArista <> nulo ENTONCES						O(1)
+					res.agregar(nuevaArista)						O(1)
+					TVertice vDest = nuevaArista.destino				O(1)
+					res.agregar(nuevaArista)						O(1)
+					V.eliminar(vDest)								O(n) 	 --> Se hace la regla de la suma con O(n^2)
+					U.agregar(vDest)								O(1)
+				FIN SI
+			FIN MIENTRAS
+			devolver nuevo TGrafoNoDirigido(U,res)						O(1)
+		FIN
+
+		TAristas.buscarMin(U, V: colecciones de vertices): TArista
+		COM
+    			TArista minArista <- null								O(1)
+    			int minCosto <- maxInt									O(1)
+   			Para cada verticeV en V hacer								O(n)	} --> Por la regla de la multiplicacion
+   			      tempArista <- buscar(u, v)							O(n)	} -->	el algoritmo es O(n^2)
+        			Si tempArista <> nulo entonces						O(1)
+            			Si tempArista.costo < minCosto entonces			O(1)	
+                				minArista <- tempArista					O(1)
+                				minCosto <- tempArista.costo			O(1)
+            			Fin si
+        			Fin si
+    			Fin para cada
+    			devolver minArista									    O(1)
+		FIN
+
+		TAristas.buscar(Comparable etO, Comparable etD): TArista
+		COM
+			PARA CADA arista en this HACER							    O(n) --> El algoritmo es O(n)
+				SI arista.etiO == etO y arista.etiD == etD ENTONCES			O(1)
+					devolver arista								O(1)
+				FIN SI
+			FIN PARA CADA
+			devolver null										O(1)
+		FIN
+
+        Orden de tiempo de ejecución O(n^3).
+
+
+        KRUSKAL
+
+        Lenguaje natural:   Se empeiza con un grafo que tiene solamente los vértices, donde cada vértice es conexo a sí mismo. Al avanzar, habrá siempre una colección
+                            de componentes conexos. Para cada componente se seleccionaran las aristas que formen un árbol abarcador. Para construir componentes cada vez
+                            mayores, se agrega la arista de costo mínimo que conecte dos componentes distintos; la arista se descarta si conecta dos vértices del mismo componente.
+                            El algoritmo finaliza cuando todos los vértices se encuentran en el mismo componente.
+
+        Precondiciones:
+			El grafo es conexo
+			El grafo está bien formado
+			El grafo tiene una lista de sus aristas ordenadas por costo de menor a mayor
+			El conjunto de aristas del grafo contiene la arista (v, u) para toda arista (u, v) en el grafo
+
+		Postcondiciones:
+			El grafo se mantiene intacto
+	
+	
+            FUNCION TGrafoNoDirigido.kruskal(): TGrafoNoDirigido
+            COMIENZO
+                TAristas F = nueva TAristas()
+                entero numVertices = this.getVertices().size()
+                Map<Comparable, Integer> componentes = nuevo HashMap<>()
+                entero i = 0
+                PARA CADA(vertice : this.getVertices().keySet())HACER
+                    componentes.poner(vertice, i)
+                    i++
+                FIN PARA CADA
+                entero contador = numVertices - 1
+
+                Iterator<TArista> iter = aristas.iterator()
+                MIENTRAS (contador > 0 && iter.hasNext()) HACER
+                    TArista arista = iter.next()
+                    entero comp1 = componentes.get(arista.etiquetaOrigen)
+                    entero comp2 = componentes.get(arista.etiquetaDestino)
+                    SI (comp1.equals(comp2) == falso) ENTONCES
+                        F.agregar(arista)
+                        PARA CADA (vertice : this.getVertices().keySet()) HACER
+                            SI(componentes.get(vertice).equals(comp1)) ENTONCES
+                                componentes.put(vertice, comp2)
+                            FIN SI
+                        FIN PARA CADA
+                        contador--
+                    FIN SI
+                FIN MIENTRAS
+                SI (contador > 0) ENTONCES
+                    return null
+                FIN SI 
+                TGrafoNoDirigido kruskal = nuevo TGrafoNoDirigido(this.getVertices().values(), F);
+                devolver kruskal;
+            FIN
+
+            El orden de tiempo de ejecucion del algoritmo de kruskal es partido.
+		    O(aloga)	si a<n^2    (Siendo a la cantidad de aristas y n la cantidad de vertices)
+		    O(n^2)		si a>= n^2  (Siendo a la cantidad de aristas y n la cantidad de vertices)
+
+Ejercicio 2:
+	
+	Lenguaje natural ->	Dado un vértice de origen y uno de destino, se recuperan todos los caminos entre ambos, y nos quedamos con el que tenga menos cantidad de
+						aeropuertos visitados antes de llegar al destino. Primero se obtiene el aeropuerto de origen, y desde el vamos recorriendo todos los adyacentes
+						visitando cada aeropuerto adyacente a éste hasta llegar al destino. Al llegar, se copia el camino previo y a la copia se le agrega la adyacencia.
+						Si no se llega al vértice destino, se vuelve a llamar recursivamente desde el actual.
+
+
+	Precondiciones ->	Los vértices no pueden estar visitados.
+						No existen dos vértices con la misma etiqueta.
+						El grafo debe existir.
+
+	Postcondiciones ->	Si los vértices origen y destino existen busca los caminos y devuelve el que tenga menos aeropuertos, sino devuelve nulo.
+
+
+	TGrafoDirigido.menosEscalas(Comparable origen, Comparable, destino) : TLista de tipo aeropuerto
+	COM
+		Aeropuerto aeropuertoOrigen <- todosLosAeropuertos.obtener(origen)
+		Si aeropuertoOrigen = nulo entonces
+			devolver nulo
+		Fin si
+		Lista de tipo aeropuerto aeropuertoPrevio <- Nueva Lista
+		aeropuertoPrevio.insertar(this)
+		Lista de tipo lista de aeropuertos resultado <- Nueva Lista
+		aeropuertoOrigen.menosEscalas(destino, aeropuertoPrevio, resultado)
+		Para cada lista de tipo aeropuerto en resultado hacer
+			devolver lista con menor cantidad de elementos
+		Fin para cada
+	Fin
+
+	Aeropuerto.menosEscalas(Comparable destino, Lista aeropuertoPrevio, Lista resultado)
+	COM
+		visitado <- true
+		Para cada adyacente en adyacentes hacer
+			Aeropuerto aeropuerto <- adyacente.destino
+			Si aeropuerto no esta visitado entonces
+				Si aeropuerto.etiqueta = destino.etiqueta entonces
+					Lista copia <- aeropuertoPrevio.copiar
+					copia.insertar(aeropuerto)
+					resultado.insertar(copia)
+				Sino
+					aeropuertoPrevio.insertar(aeropuerto)
+					aeropuerto.menosEscalas(destino, aeropuertoPrevio, resultado)
+					aeropuertoPrevio.eliminar(aeropuerto)
+				Fin Si
+			Fin Si
+		Fin Para Cada
+		visitado <- false
+	FIN
+
+

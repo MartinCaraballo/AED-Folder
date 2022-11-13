@@ -1,6 +1,7 @@
 
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.Queue;
 
 public class TVertice implements IVertice, IVerticeKevinBacon {
 
@@ -130,7 +131,26 @@ public class TVertice implements IVertice, IVerticeKevinBacon {
 
     @Override
     public void listarContactos(Collection<TVertice> visitados, int maxSaltos) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Queue<TVertice> colaDeVertices = new LinkedList<>();
+        colaDeVertices.add(this);
+        visitado = true;
+        while (!colaDeVertices.isEmpty()) {
+            TVertice verticeX = colaDeVertices.poll();
+            if (verticeX.getNumBacon() > maxSaltos) {
+                return;
+            }
+            LinkedList<TAdyacencia> adyacentes = verticeX.getAdyacentes();
+            for (TAdyacencia adyacente : adyacentes) {
+                TVertice verticeY = adyacente.getDestino();
+                if (!verticeY.visitado) {
+                    verticeY.visitado = true;
+                    colaDeVertices.add(verticeY);
+                    visitados.add(verticeY);
+                    verticeY.setNumBacon(verticeX.getNumBacon() + 1);
+                }
+            }
+            
+        }
     }
 
     

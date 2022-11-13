@@ -3,7 +3,6 @@ Kevin_Bacon,Carrie_Fisher,1
 Kevin_Bacon,Peter_Cushing,1
 Kevin_Bacon,Anthony_Daniels,1
 Kevin_Bacon,Allison_Janney,1
-Harrison_
 Harrison_Ford,Mykelti_Williamson,1
 Harrison_Ford,Sally_Field,1
 Carrie_Fisher,Sean_Bean,1

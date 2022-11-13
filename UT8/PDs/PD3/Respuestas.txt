@@ -1,9 +1,13 @@
 Ejercicio 1
 	Parte1:
-		El problema describe claramente un Grafo No Dirigido donde las casas son los vértices y las áristas representan la relación cableada entre las casas. El costo de cada arista es la distancia entre casa y casa. Para optimizar el cableado del sistema de viviendas se debería utilizar el algoritmo de Prim o Kruskal, el algoritmo de Kruskal es mejor si la cantidad de casas al cuadrado es menor a la cantidad de cables.
+		El problema describe claramente un Grafo No Dirigido donde las casas son los vértices y las áristas representan la relación cableada entre las casas.
+		El costo de cada arista es la distancia entre casa y casa. Para optimizar el cableado del sistema de viviendas se debería utilizar el algoritmo de Prim
+		o Kruskal, el algoritmo de Kruskal es mejor si la cantidad de casas al cuadrado es menor a la cantidad de cables.
 	
 	Parte2:
-		Ya que para la solución de este problema utilizaremos un Grafo No Dirigido, los vértices serán representados con un HashMap de vértices (casas), a su vez tendremos una LinkedList de aristas (cables); con pares no ordenados, es decir que el cable que va de la casa A a la casa B es el mismo que va de la B a la A.
+		Ya que para la solución de este problema utilizaremos un Grafo No Dirigido, los vértices serán representados con un HashMap de vértices (casas),
+		a su vez tendremos una LinkedList de aristas (cables); con pares no ordenados, es decir que el cable que va de la casa A a la casa B es el mismo
+		que va de la B a la A.
 
 	Parte3:
 

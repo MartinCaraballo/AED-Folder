@@ -40,7 +40,14 @@ public TAristas getLasAristas() {
 
     @Override
     public Collection<TVertice> listarContactos(String nombreActor, int maxSaltos) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TVertice actor = getVertices().get(nombreActor);
+        if (actor == null) {
+            return null;
+        }
+        Collection<TVertice> contactos = new LinkedList<>();
+        actor.listarContactos(contactos, maxSaltos);
+        desvisitarVertices();
+        return contactos;
     }
     
   

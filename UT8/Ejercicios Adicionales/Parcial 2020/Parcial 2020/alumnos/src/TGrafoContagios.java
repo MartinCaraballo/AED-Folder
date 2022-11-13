@@ -20,8 +20,13 @@ public class TGrafoContagios extends TGrafoNoDirigido implements IGrafoContagio{
 
     @Override
     public TAnillosContagio anillosDeProbablesContagiados(String personaCOVID, int maxDistancia) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        // debe realizarse invocando el metodo de TVertice "obtenerAnillos"...
+        TVertice origen = getVertices().get(personaCOVID);
+        if (origen == null) {
+            return null;
+        }
+        TAnillosContagio resultado = new TAnillosContagio();
+        origen.obtenerAnillos(resultado, maxDistancia);
+        return resultado;
     }
     
   
