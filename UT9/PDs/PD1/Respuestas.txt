@@ -1,0 +1,50 @@
+UT9_PD1
+
+Ejercicio 1:
+
+    1) ¿Cómo se genera un vector monótonamente ascendente?
+
+        En el método que se encarga de generar el vector ascendente, primero se genera un nuevo vector con el tamaño de la cantidad de elementos máximos, y
+        luego con un bucle for se itera desde un valor i = 0 mientras i sea menor al tamaño máximo de elementos, y en cada iteración se incrementa i en 1.
+        Luego en la posición i del vector se le asigna el valor i actual. Al finalizar, se retorna el vector generado.
+
+    2) ¿Cómo se genera un vector monótonamente descendente?
+
+        El método encargado de generar un vector descendente es análogo al anterior, primero se genera un vector con el tamaño de la cantidad de elementos
+        máximos, y también se itera desde i = 0 mientras i sea menor al tamaño máximo, incrementando i en 1. La diferencia se encuentra en como se asignan
+        los valores al vector, en este método, en la posición i del vector para el valor de i actual, se asigna el resultado de restar el tamaño máximo de
+        elementos - 1, resultando en un vector de valores decrecientes. Al finalizar, se retorna el vector generado.
+
+    3) ¿Cómo se genera un vector con valores aleatorios? ¿Pueden existir claves repetidas? ¿Cuál es el orden del tiempo de ejecución de este método?
+
+        En el método que se encarga de generar el vector de valores aleatorios, primero nos encontramos que se guarda una instancia de la clase Random en una
+        variable "rnd". Como en los anteriores, se crea un nuevo vector para volcar los valores, nuevamente, con la cantidad de elementos máximos que se van a generar.
+        En este caso, también se genera otro vector de booleanos, que guarda los datos que ya fueron utilizados, esto a fines de evitar que se repitan los valores
+        generados aleatoriamente. Nuevamente, se itera desde un valor i = 0 mientras i sea menor al largo del vector de los datos, incrementando i en 1. Dentro del bucle,
+        se genera un número pseudo-aleatorio haciendo uso del método nextInt pasando como parámetro el valor máximo de elementos, lo cual asegura que el valor pseudo-aleatorio
+        se encuentre entre 0 y el máximo. Dentro de este bucle, se encuentra otro, que se encarga de evitar los datos repetidos. Básicamente, se fija si el valor que se genero
+        se encuentra en el vector, si es así al valor generado lo incrementa en uno y le aplica el operador % (módulo o resto) con el valor máximo de elementos para evitar que
+        el valor generado e incrementado sea mayor que el largo del vector y se genere una excepción. Al finalizar el bucle (independientemente de si se ejecutó) se guarda en
+        la posición j del vector de los datos el valor de i, y en la posición j pero del vector de booleanos se guarda true. Al finalizar se devuelve el vector de datos.
+        
+        Gracias al segundo bucle, se evita que se generen datos repetidos, por lo tanto el vector resultante del método no contendrá elementos repetidos.
+
+        En orden del tiempo de ejecución de este método es dividido, en el mejor caso es O(n), ya que si no generan datos repetidos el segundo bucle nunca se ejecuta, y la función
+        Random.nextInt usa la función next (tambien de la clase Random), y viendo la documentación de java ambas tienen un orden de ejecución de O(1), por lo tanto el orden final
+        del mejor caso es O(n). Por otro lado tenemos el peor caso, el cual es O(n2), ya que si se generan datos duplicados el segundo bucle se ejecuta y en el peor caso ese bucle
+        también se ejecutaría n veces, dejando un orden total de n * n, entonces el orden de ejecución final del peor caso es de O(n2). 
+
+    4) ¿Cuántos elementos contiene el vector de datos generados? ¿Cómo se puede modificar esta clase para que la cantidad de elementos del vector sea parametrizable?
+
+        El vector de datos generados tiene un total de 50 elementos. Para que esta cantidad de elementos sea parametrizable, podemos modificar los métodos que se encargan de generar
+        los datos para que tome como parámetro el máximo de elementos, o también podemos añadir un constructor a la clase GeneradorDatosGenericos que tome como parámetro la cantidad
+        de elementos que se quieren generar y guardar ese dato en una variable de instancia para que se pueda usar solamente en el objeto creado. Esta segunda forma requiere solamente
+        extender codigo de la clase y no modificación de los métodos, por lo cual en mi opinión es una mejor opción.
+
+    5) ¿Cómo podemos verificar que un conjunto está ordenado? ¿Cuál sería el orden del tiempo de ejecución de un algoritmo que lo haga?
+
+        Para verificar que un conjunto esta ordenado, podemos recorrerlo con un bucle for desde el inicio, y checkear si el elemento actual (en el que "estamos parados") es mayor a su
+        siguiente, y si esta condición se cumple retornamos falso. Si al terminar el recorrido por todos los elementos en ninguna iteración entra en esa condición, devolvemos verdadero,
+        ya que si el elemento actual es menor a su siguiente entonces el conjunto se encuentra ordenado.
+
+        El orden de ejecución de este algoritmo es O(n), ya que recorre todos los elementos del conjunto.
