@@ -1,3 +1,6 @@
+package ut9_pd1;
+
+import java.util.Arrays;
 
 public class TClasificador {
 
@@ -5,6 +8,7 @@ public class TClasificador {
     public static final int METODO_CLASIFICACION_SHELL = 2;
     public static final int METODO_CLASIFICACION_BURBUJA = 3;
     public static final int METODO_CLASIFICACION_QUICKSORT = 4;
+    public static final int METODO_CLASIFICACION_HEAPSORT = 5;
 
     /**
      * Punto de entrada al clasificador
@@ -25,6 +29,8 @@ public class TClasificador {
                 return ordenarPorBurbuja(datosParaClasificar);
             case METODO_CLASIFICACION_QUICKSORT:
                 return ordenarPorQuickSort(datosParaClasificar);
+            case METODO_CLASIFICACION_HEAPSORT:
+                return ordenarPorHeapSort(datosParaClasificar);
 
             default:
                 System.err.println("Este codigo no deberia haberse ejecutado");
@@ -107,15 +113,14 @@ public class TClasificador {
         quicksort(datosParaClasificar, 0, datosParaClasificar.length - 1);
         return datosParaClasificar;
     }
-    
+
     /*
     protected int[] ordenarPorQuickSort(int[] datosParaClasificar) {
         int altura = quicksort(datosParaClasificar, 0, datosParaClasificar.length - 1);
         System.out.println("Altura: " + altura);
         return datosParaClasificar;
     }
-    */
-
+     */
     private void quicksort(int[] entrada, int i, int j) {
         int izquierda = i;
         int derecha = j;
@@ -149,7 +154,7 @@ public class TClasificador {
             }
         }
     }
-    
+
     /*
     private int quicksort(int[] entrada, int i, int j) {
         int izquierda = i;
@@ -200,8 +205,7 @@ public class TClasificador {
         }
         return 0;
     }
-    */
-
+     */
     private int encuentraPivote(int izquierda, int derecha, int[] entrada) {
         int medio = (izquierda + derecha) / 2;
         if ((izquierda < derecha && derecha < medio) || (medio < izquierda && izquierda > derecha)) {
@@ -210,6 +214,46 @@ public class TClasificador {
             return izquierda;
         } else {
             return medio;
+        }
+    }
+
+    protected int[] ordenarPorHeapSort(int[] datosParaClasificar) {
+        for (int i = (datosParaClasificar.length - 1) / 2; i >= 0; i--) { //Armo el heap inicial de n-1 div 2 hasta 0
+            armaHeap(datosParaClasificar, i, datosParaClasificar.length - 1);
+        }
+        for (int i = datosParaClasificar.length - 1; i > 0; i--) {
+            intercambiar(datosParaClasificar, 0, i);
+            armaHeap(datosParaClasificar, 0, i - 1);
+        }
+        return datosParaClasificar;
+    }
+
+    private void armaHeap(int[] datosParaClasificar, int primero, int ultimo) {
+        if (primero < ultimo) {
+            int r = primero;
+            while (r <= ultimo / 2) {
+                if (ultimo == 2 * r) { //r tiene un hijo solo
+                    if (datosParaClasificar[r] < datosParaClasificar[r * 2]) {
+                        intercambiar(datosParaClasificar, r, 2 * r);
+                        // r = 2;
+                    } else {
+                        r = ultimo;
+                    }
+                } else { //r tiene 2 hijos
+                    int posicionIntercambio = 0;
+                    if (datosParaClasificar[2 * r] > datosParaClasificar[2 * r + 1]) {
+                        posicionIntercambio = 2 * r;
+                    } else {
+                        posicionIntercambio = 2 * r + 1;
+                    }
+                    if (datosParaClasificar[r] < datosParaClasificar[posicionIntercambio]) {
+                        intercambiar(datosParaClasificar, r, posicionIntercambio);
+                        r = posicionIntercambio;
+                    } else {
+                        r = ultimo;
+                    }
+                }
+            }
         }
     }
 
@@ -226,10 +270,10 @@ public class TClasificador {
             System.out.print(resAleatorio[i] + " ");
         }
          */
-        int[] resQui = clasif.clasificar(vectorAleatorio, METODO_CLASIFICACION_QUICKSORT);
-        for (int i = 0; i < resQui.length; i++) {
-            System.out.print(resQui[i] + " ");
-        }
+//        int[] resQui = clasif.clasificar(vectorAleatorio, METODO_CLASIFICACION_QUICKSORT);
+//        for (int i = 0; i < resQui.length; i++) {
+//            System.out.print(resQui[i] + " ");
+//        }
         /*int[] resAscendente = clasif.clasificar(vectorAscendente,
 				METODO_CLASIFICACION_INSERCION);
 		for (int i = 0; i < resAscendente.length; i++) {
@@ -240,5 +284,26 @@ public class TClasificador {
 		for (int i = 0; i < resDescendente.length; i++) {
 			System.out.print(resDescendente[i] + " ");
 		}*/
+        int[] prueba = {256, 458, 365, 298, 043, 648};
+
+        long inicial = System.nanoTime();
+        clasif.clasificar(vectorAleatorio, METODO_CLASIFICACION_HEAPSORT);
+        long vFinal = System.nanoTime();
+
+        System.out.println(vFinal - inicial);
+
+        inicial = System.nanoTime();
+        clasif.clasificar(vectorAscendente, METODO_CLASIFICACION_HEAPSORT);
+        vFinal = System.nanoTime();
+
+        System.out.println(vFinal - inicial);
+
+        inicial = System.nanoTime();
+        clasif.clasificar(vectorDescendente, METODO_CLASIFICACION_HEAPSORT);
+        vFinal = System.nanoTime();
+
+        System.out.println(vFinal - inicial);
+
+        //System.out.println(Arrays.toString(prueba));
     }
 }

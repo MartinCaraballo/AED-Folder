@@ -1,9 +1,10 @@
+package ut9_pd1;
 
 
 import java.util.Random;
 
 public class GeneradorDatosGenericos {
-	private static int TAMANIO_MAX = 50; 
+	private static int TAMANIO_MAX = 10000; 
 	public int[] generarDatosAleatorios() {
 		Random rnd = new Random();
 		int[] datosGenerados = new int[TAMANIO_MAX];
