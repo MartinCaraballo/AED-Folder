@@ -1,0 +1,128 @@
+UT9_TA3
+
+Ejercicio 1:
+
+	primer funcion "encuentraPivote":
+		Suma el primer numero del vector con el úlltimo, y lo divide entre 2. Luego checkea que el valor se encuentre
+		encontrado realmente sea el medio, si lo es lo devuelve, y si no devuelve el que se encuentre al medio de los
+		3 valores (izquierda, derecha o el medio calculado).
+		
+		TClasificador.encuentraPivote(de tipo entero: izquierda, derecha, de tipo vector de enteros: entrada) : entero
+		COM
+			medio <- (izquierda + derecha) ? 2;									O(1)
+			Si izquierda < derecha AND derecha < medio OR medio < izquierda AND izquierda > derecha entonces	O(1)
+				devolver derecha										O(1)
+			Sino Si derecha < izquierda AND izquierda < medio OR medio < izquierda AND izquierda < derecha entonces	O(1)
+				devolver izquierda										O(1)
+			Sino
+				devolver medio											O(1)
+		FIN
+
+		El orden de ejecución de esta funcion es de O(1), es decir, constante.
+
+	Segunda funcion "encuentraPivote":
+		En este caso lo que hace la función es obtener un número random que se encuentre entre el primer valor del vector
+		y el ultimo.
+
+		TClasificador.encuentraPivoteRandom(de tipo entero: primero, ultimo) : entero
+		COM
+			generador <- Nuevo GeneradorNumerosAleatorios()		O(1)
+			devolver generador.siguienteEntero(primero, ultimo)	O(1)
+		FIN
+		
+		El orden de ejecución de esta función también es constante, ya que obtener un número aleatorio lleva un tiempo constante.
+
+	Tercera función "encuentraPivote";
+		En este caso la función suma todos los elementos del vector, y el resultado lo resta entre la cantidad de elementos en el
+		vector, es decir, calcula el promedio de todos los valores del vector.
+
+		TClasificador.encuentraPivotePromedio(vector de enteros: entrada) : entero
+		COM
+			sumaTotal <- 0				O(1)
+			Para cada numero en entrada hacer	-> se repite n veces, siendo n la cantidad de elementos del vector "entrada"
+				sumaTotal <- sumaTotal + numero	O(1)
+			Fin Para Cada
+			devolver sumaTotal / entrada.tamaño	O(1)
+		FIN
+
+		En este caso, el orden de ejecución de este algoritmo es de O(n), ya que recorre todo el vector.
+
+Es bastante notable que las dos primeras funciones van a ofrecer mejores resultados al momento de hacer las ordenaciones, ya que se tratan de
+algoritmos con órdenes de ejecución constantes. Y entre estas, la mejor es la primera, ya que en promedio, cuando se utilizan números random
+el número generado no siempre se encuentra en el medio, puede acercarse a uno de los extremos, y esto nos juega en contra al momento de utilizar
+el pivote en el algoritmo de ordenación. En cuanto a la tercera función, se obtiene una mejor precisión al elegir el pivote, pero a coste de
+un orden de ejecución lineal, el cual es inviable al momento de utilizar grandes conjuntos de datos.
+
+
+Resultado de las diferentes funciones:
+
+Funcion de pivote "encuentraPivote" (suma el primero y el ultimo y lo divide entre 2)
+
+	Con 300 elementos:
+		Vector ascendente:
+			Tiempo: 3836ns
+
+		Vector descendente:
+			Tiempo: 3072ns
+
+		Vector aleatorio:
+			Tiempo: 23931ns
+
+	Con 10000 elementos:
+		Vector ascendente:
+			Tiempo: 111860ns
+		
+		Vector descendente:
+			Tiempo: 128114ns
+
+		Vector aleatorio:
+			Tiempo: 843098
+
+Funcion de pivote "encuentraPivoteRandom" (genera un numero random que se encuentra entre el primer elemento y el ultimo)
+
+	Con 300 elementos:
+		Vector ascendente:
+			Tiempo: 30226ns
+
+		Vector descendente:
+			Tiempo: 23390ns
+
+		Vector aleatorio:
+			Tiempo: 74477ns
+
+	Con 10000 elementos:
+		Vector ascendente:
+			Tiempo: 575595ns
+		
+		Vector descendente:
+			Tiempo: 580891ns
+
+		Vector aleatorio:
+			Tiempo: 1273816ns
+
+Funcion de pivote "encuentraPivotePromedio" (suma todos los elementos y obtiene el promedio)
+
+	Con 300 elementos:
+		Vector ascendente:
+			Tiempo: 345432ns
+
+		Vector descendente:
+			Tiempo: 457851ns
+
+		Vector aleatorio:
+			Tiempo: 383084ns
+
+	Con 10000 elementos:
+		Vector ascendente:
+			Tiempo: 42532855ns
+		
+		Vector descendente:
+			Tiempo: 43720227ns
+
+		Vector aleatorio:
+			Tiempo: 38194798ns
+
+Como pensabamos, las dos primeras alternativas ofrecen mejores tiempos generales, y entre estas la primer opcion parece ser la mejor.
+
+
+		

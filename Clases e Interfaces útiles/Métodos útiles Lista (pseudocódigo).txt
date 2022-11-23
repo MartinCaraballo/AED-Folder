@@ -1,0 +1,197 @@
+clase Lista
+    Nodo cabeza <- null
+
+clase Nodo
+    Etiqueta etiqueta
+    Nodo siguiente
+    Elemento elemento
+
+______________________________________________________________________________________________________________________________________________________
+
+Insertar elementos en una lista ->
+
+Lenguaje natural -> Para insertar un dato o carga en la lista, debemos recorrer la misma hasta llegar al último nodo, y enseguida a éste, 
+                    insertar un nuevo nodo con el dato. Las referencias van a cambiar, puesto que el nodo que era el último ahora deja de 
+                    apuntar a un nodo null, ahora apunta al nodo que agregamos, y este que agregamos si apunta a un nodo null. En caso de
+                    que la lista no tuviera elementos, el nodo que agregaremos con el dato pasará a ser el nodo "cabeza", y apuntará a un
+                    nodo null.
+
+Precondiciones ->   El dato a agregar debe de ser del tipo correcto.
+
+Postcondiciones ->  Si ya habían elementos, ninguno debe de cambiar su estado o posición, el único cambio es que ahora hay un elemento más
+                    en la lista.
+                    Si la lista estaba vacía, el elemento agregado pasa a ser la cabeza, y su siguiente es null.
+                    El último elemento debe de apuntar a un nodo nulo.
+                    El largo de la lista es una unidad mayor.
+
+insertarElemento(nodoInsertar)
+COM
+    Si primero es nulo entonces
+        primero <- nodoInsertar
+        primero.siguiente <- nulo
+    Si no
+	Nodo nodoActual <- primero
+        mientras nodoActual.siguiente <> nulo hacer
+            nodoActual <- nodoActual.siguiente
+        Finmientras
+        nodoActual.siguiente <- nodoInsertar
+    Fin si
+Fin
+
+El orden de ejecución de este algoritmo es O(n).
+
+______________________________________________________________________________________________________________________________________________________
+
+Lenguaje natural -> Para insertar ordenado, si la lista esta vacía, el primero pasa a ser el elemento que queremos insertar; en caso de que
+                    haya un elemento, nos fijamos si el elemento existente es mayor que el nodo a insertar, si lo es, el nodo a insertar es menor, 
+                    por lo tanto pasa a ser el primero de la lista, y el nodo que antes era el primero pasa a ser el siguiente; en caso de que haya
+                    más de un nodo, por cada nodo de la lista, nos fijamos en el siguiente. Si el dato del nodo siguiente es mayor que el dato del nodo
+                    que queremos insertar, entonces insertamos el nodo entre el nodo que estamos "parados" y su siguiente. 
+
+Precondiciones ->   El dato a agregar debe ser del tipo correcto.
+                    La etiqueta se debe de comparar (Comparable)
+
+Postcondiciones ->  Si ya habían elementos, ninguno debe de cambiar su estado o posición, el único cambio es que ahora hay un elemento más
+                    en la lista.
+                    Si la lista estaba vacía, el elemento agregado pasa a ser la cabeza, y su siguiente es null.
+                    El último elemento debe de apuntar a un nodo nulo.
+                    El largo de la lista es una unidad mayor.
+                    La lista debe estar ordenada.
+
+
+insertarElementoOrdenado(nodoInsertar)
+COM
+    Si primero = null entonces
+        primero <- nodoInsertar
+        primero.siguiente <- nulo
+    Si no si primero.etiqueta.comparar(nodoInsertar.etiqueta) > 0 entonces
+        Nodo aux <- primero
+        primero <- nodoInsertar
+        primero.siguiente <- aux
+    Si no
+        Si primero.siguiente <> nulo entonces
+            Nodo nodoAnterior <- primero
+            Nodo nodoActual <- primero.siguiente
+            Mientras nodoActual <> nulo hacer
+                Si nodoActual.etiqueta.comparar(nodoInsertar.etiqueta) > 0 entonces
+                    nodoAnterior.siguiente <- nodoInsertar
+                    nodoInsertar.siguiente <- nodoActual
+                    retornar
+                Fin si
+                nodoAnterior <- nodoAnterior.siguiente
+                nodoActual <- nodoActual.siguiente
+            Fin mientras
+            nodoAnterior.siguiente <- nodoInsertar
+            retornar
+        Fin si
+        primero.siguiente <- nodoInsertar
+FIN
+
+______________________________________________________________________________________________________________________________________________________
+
+Buscar un elemento en una lista ->
+Lenguaje natural -> Para buscar un elemento en una lista, debemos recorrer todos los nodos de la misma, hasta que la etiqueta con la clave
+                    ingresada coincida con la etiqueta de alguno de los nodos. Si hay una coincidencia, devolvemos el elemento, y si no, 
+                    indicamos que no lo encontramos.
+
+Precondiciones  ->  Una clave a buscar pasada como parámetro.
+                    La lista debe de tener al menos un elemento.
+                    La clave a buscar debe ser del tipo de la lista.
+
+Postcondiciones ->  La lista debe permanecer exactamente igual a como lo estaba antes de invocar el método.
+                    Si se encuentra el elemento, se devuelve, y si no, se devuelve null.
+
+
+buscarElemento(clave)
+COM
+    Si primero es nulo entonces
+        devolver nulo
+    Si no
+        Nodo nodoActual <- primero
+        Mientras nodoActual <> nulo hacer
+            Si nodoActual.etiqueta = clave entonces
+                devolver nodoActual
+            Fin si
+            nodoActual <- nodoActual.siguiente
+        Fin mientras
+        devolver nulo
+    Fin si
+Fin
+
+El orden de ejecución de este algoritmo es O(n).
+
+______________________________________________________________________________________________________________________________________________________
+
+Listar (imprimir) todos los elementos de la lista ->
+Lenguaje natural -> Si la lista no se encuentra vacía, recorre todos los nodos de la lista e imprime la etiqueta de los mismos
+                    (o cualquier otro elemento que sea necesario) hasta que se llegue a un nodo que sea nulo.
+
+Precondiciones  ->  Los elementos de la lista se deben de poder imprimir.
+
+Postcondiciones ->  El estado de los elementos de la lista se debe mantener, es decir no se deben de modificar.
+                    El numero de elementos impresos debe ser igual al largo de la lista.
+
+listarElementos()
+COM
+    Si primero es nulo entonces
+        devolver nulo
+    Si no
+	Nodo nodoActual <- primero
+        Mientras nodoActual <> nulo hacer
+            Imprimir(nodoActual.elemento)
+            nodoActual <- nodoActual.siguiente
+        Fin mientras
+    Fin si
+Fin
+
+El orden de ejecución de este algoritmo es O(n).
+
+______________________________________________________________________________________________________________________________________________________
+
+Eliminar un elemento de la lista, dada su clave
+
+Lenguaje natural -> Si la lista no esta vacía, por cada nodo, nos fijamos si la etiqueta del siguiente coincide con la clave, si es así
+                    cambiamos la referencia del nodo en el que "estamos parados" para el siguiente del nodo de la coincidencia. Si la lista
+                    tiene solamente un elemento, nos fijamos en ese solamente.
+
+Precondiciones  ->  La clave tiene que ser del tipo de la lista.
+
+Postcondiciones ->  En caso de que se encuentre el elemento, el largo de la lista debe ser decrementado en 1 y
+                    el elemento debe ser devuelto; la lista no debe de resultar modificada, es decir el estado debe de continuar siendo el mismo.
+                    En caso de que no se encuentre el elemento, la lista debe permanecer sin cambios y el valor devuelto va a ser nulo.
+
+eliminarElemento(clave)
+COM
+    Si esVacia() es nulo entonces
+        devolver falso
+    Si no
+        Si primero.siguiente = nulo AND primero.clave = clave entonces
+            primero <- nulo
+            devolver verdadero
+        Si no si primero.clave = clave entonces
+            primero <- primero.siguiente
+            devolver verdadero
+        Si no
+            Nodo nodoAnterior <- primero
+            Nodo nodoActual <- primero.siguiente
+            Mientras nodoActual <> nulo AND nodoActual.clave <> clave hacer
+                nodoAnterior <- nodoAnterior.siguiente
+                nodoActual <- nodoActual.siguiente
+            Fin mientras
+            Si nodoActual <> nulo entonces
+                nodoAnterior.siguiente <- nodoActual.siguiente
+                devolver verdadero
+            Fin si
+        Fin si
+    Fin si
+    devolver falso
+Fin
+
+El orden de ejecución de este algoritmo es O(n).
+
+
+
+        
+
+
+

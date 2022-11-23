@@ -1,0 +1,107 @@
+Algoritmo QuickSort:
+
+Funcion de pivote "encuentraPivote" (suma el primero y el ultimo y lo divide entre 2)
+
+	Con 300 elementos:
+		Vector ascendente:
+			Tiempo: 3836ns
+
+		Vector descendente:
+			Tiempo: 3072ns
+
+		Vector aleatorio:
+			Tiempo: 23931ns
+
+	Con 10000 elementos:
+		Vector ascendente:
+			Tiempo: 111860ns
+		
+		Vector descendente:
+			Tiempo: 128114ns
+
+		Vector aleatorio:
+			Tiempo: 843098
+
+Funcion de pivote "encuentraPivoteRandom" (genera un numero random que se encuentra entre el primer elemento y el ultimo)
+
+	Con 300 elementos:
+		Vector ascendente:
+			Tiempo: 30226ns
+
+		Vector descendente:
+			Tiempo: 23390ns
+
+		Vector aleatorio:
+			Tiempo: 74477ns
+
+	Con 10000 elementos:
+		Vector ascendente:
+			Tiempo: 575595ns
+		
+		Vector descendente:
+			Tiempo: 580891ns
+
+		Vector aleatorio:
+			Tiempo: 1273816ns
+
+Funcion de pivote "encuentraPivotePromedio" (suma todos los elementos y obtiene el promedio)
+
+	Con 300 elementos:
+		Vector ascendente:
+			Tiempo: 345432ns
+
+		Vector descendente:
+			Tiempo: 457851ns
+
+		Vector aleatorio:
+			Tiempo: 383084ns
+
+	Con 10000 elementos:
+		Vector ascendente:
+			Tiempo: 42532855ns
+		
+		Vector descendente:
+			Tiempo: 43720227ns
+
+		Vector aleatorio:
+			Tiempo: 38194798ns
+
+De las tres funciones para encontrar un pivote que elegí, la que tuvo mayor éxito (ya que es más rápida) fue la primera, la que suma el primer número y el último y lo divide entre dos.
+La segunda mejor fue la del número random, y por ultimo la peor fue la del promedio. Esto se debe a que generar un número random tiene un orden de ejecución de O(1) (segun documentacion de java),
+y la del promedio tiene un orden de ejecución de O(n).
+Ya que las dos primeras tienen un orden constante, es evidente que van a tener mayor rendimiento que un orden lineal, y es deducible de antemano que las dos primeras sean las mejores.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Nivel máximo de profundidad de llamada recursiva alcanzado:
+	con 300 elementos:
+		Altura vector Ascendente: 8
+		Altura vector Descendente: 8
+		Altura vector Aleatorio: 15
+
+	con 10000 elementos:
+		Altura vector Ascendente: 13
+		Altura vector Descendente: 13
+		Altura vector Aleatorio: 29
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Algoritmo más rápido:
+
+	Con 300 elementos:
+		Vector ascendente: Algoritmo: inserción, llevó 440ns.
+		Vector descendente: Algoritmo: QuickSort, llevó 3072ns.
+		Vector aleatorio: Algoritmo: QuickSort, llevó 23931ns.
+
+	Con 10000 elementos:
+		Vector ascendente: Algoritmo: inserción, llevó 16374ns.
+		Vector descendente: Algoritmo: QuickSort, llevó 128114ns
+		Vector aleatorio: Algoritmo: QuickSort, llevó 843098ns
+
+	Con 30000 elementos:
+		Vector ascendente: Algoritmo: inserción, llevó 38156ns
+		Vector descendente: Algoritmo: QuickSort, llevó 365498ns
+		Vector aleatorio: Algoritmo: QuickSort, llevó 2783183ns
+
+En conclusión, en los vectores monotamente ascendentes, el algoritmo de inserción es el que presenta los mejores tiempos.
+En cambio, en los vectores tanto distribuidos aleatoriamente como en los monotamente descendentes el algoritmo de quicksort presenta los mejores tiempos.
