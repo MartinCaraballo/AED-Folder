@@ -1,0 +1,19 @@
+UT9_TA6_Ej1
+
+1. El algoritmo insertar, inserta el nuevo elemento lo más a la izquierda posible en el nivel más bajo, creando un nuevo nivel si éste ya se encuentra completo.
+Luego ejecuta el método Desplazar() que lo que hace es corregir el arbol parcialmente ordenado para ubicar este nuevo elemento en su lugar debido.
+SuprimeMinimo lo que hace es eliminar la raíz (en caso de ser representado por un vector sería el primer elemento) y devolverla,
+se ejecuta Desplazar() en la nueva raíz para que esta se ubique en su lugar correspondiente en el APO.
+
+2. Si el árbol APO se representa en la forma estándar, la operación de insertar tiene un orden de O(n2), ya que insertar es O(n) porque recorre todo el árbol
+para buscar la posicion inicial, y luego para desplazar el valor insertado hasta encontrar su lugar debe hacer uso de la función Padre() que tiene un orden de
+O(n). Por lo tanto el orden total es O(n2).
+Para la operación SuprimeMinimo el orden es O(n), ya que extrae la raiz (O(1)) y luego debe recorrer el arbol hasta encontrar la hoja de más a la derecha del
+nivel más bajo (O(n)) y setearlo como la nueva raiz. Luego vuelve a llevarse este elemento lo más abajo posible, intercambiándolo con el hijo que tenga la 
+prioridad más baja o hasta llegar a que el elemento sea una hoja o hasta que los hijos tengan una clave igual o mayor. Esta parte también es O(n) ya que recorre
+todo el árbol.
+DesplazaElemento tiene un orden de O(log n).
+
+3. En cambio si el árbol APO se representa mediante un vector, las operaciones de insertar y suprimir son de orden logarítmico (O(log n)).
+DesplazaElemento tiene un orden de O(log n).
+Por lo tanto el algoritmo en total tiene un orden de O(N log n). 

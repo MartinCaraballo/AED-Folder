@@ -1,0 +1,129 @@
+UT9_PD2
+
+Ejercicio 1:
+
+	2.
+		shellsort(vector de enteros: entrada)
+		COM
+			Inc <- Vector de incrementos
+			desde k = t hasta 1 hacer
+				h <- Inc[k]
+				desde i = 1 + h hasta N hacer
+					Aux <- entrada[i]
+					j = i - h
+					mientras j > 0 y Aux.clave < entrada[j].clave hacer
+						entrada[j + h] <- V[j]
+						j <- j - h
+					fin mientras
+					entrada[j + h] <- Aux
+				fin desde
+			fin desde
+		FIN
+		
+		El orden de ejecución de este algoritmo es O(n**1.26)
+	
+Ejercicio 2:
+
+	2. Algoritmo de burbuja de la cátedra:
+	
+		burbuja(vector de enteros: entrada)
+		COM
+			desde i = 1 hasta N - 1 hacer
+				desde j = N hasta i + 1 hacer
+					Si entrada[j].clave < entrada[j - 1].clave entonces
+						intercambia (entrada[j], entrada[j - 1])
+					Fin si
+				Fin desde
+			Fin desde
+		FIN
+
+	Versión mejorada:
+
+		burbujaMejorado(vector de enteros: entrada)
+		COM
+			boolean cambio <- true
+			desde i = 1 mientras cambio = true AND i < entrada.tamanio hacer
+				cambio <- false
+				desde j = entrada.tamanio - 1 hasta i hacer
+					Si entrada[j].clave < entrada[j - 1].clave entonces
+						intercambia (entrada[j], entrada[j - 1])
+						cambio <- true
+					Fin si
+				fin desde
+			fin desde
+		FIN
+
+
+	Pruebas: 300 elementos:
+
+		Burbuja:
+			Vector aleatorio:
+				Tiempo: 73392ns
+		
+			Vector ascendente:
+				Tiempo: 23441ns
+			
+			Vector descendente:
+				Tiempo: 37808ns
+
+		Burbuja Mejorado:
+			Vector aleatorio:
+				Tiempo: 80077ns
+			
+			Vector ascendente:
+				Tiempo: 169ns
+			
+			Vector descendente:
+				Tiempo: 41014ns
+
+	3000 elementos:
+
+		Burbuja:
+			Vector aleatorio:
+				Tiempo: 6978261ns
+		
+			Vector ascendente:
+				Tiempo: 1500955ns
+			
+			Vector descendente:
+				Tiempo: 3401310ns
+
+		Burbuja Mejorado:
+			Vector aleatorio:
+				Tiempo: 9490724ns
+			
+			Vector ascendente:
+				Tiempo: 1611ns
+			
+			Vector descendente:
+				Tiempo: 3335875ns
+
+	30000 elementos:
+
+		Burbuja:
+			Vector aleatorio:
+				Tiempo: 1068001709ns
+		
+			Vector ascendente:
+				Tiempo: 147658484ns
+			
+			Vector descendente:
+				Tiempo: 335075302ns
+
+		Burbuja Mejorado:
+			Vector aleatorio:
+				Tiempo: 1192423520ns
+			
+			Vector ascendente:
+				Tiempo: 18378ns
+			
+			Vector descendente:
+				Tiempo: 333452746ns
+
+	En las comparaciones de tiempos podemos ver que con los vectores ascendentes y descendentes se comporta de manera similar
+	con la primera versión, pero en los vectores ascendentes podemos ver una notable mejora con esta nueva versión, ya que con
+	el booleano cambio se ahorra muchas iteraciones.
+
+	3. El ordenamiento es el mismo que con la versión anterior.
+
+	4.

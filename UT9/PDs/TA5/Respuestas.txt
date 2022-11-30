@@ -1,0 +1,19 @@
+UT9_TA5 - Ejercicio 2
+
+	1. Un Árbol Parcialmente Ordenado es
+		Respuesta: A - Un árbol binario que siempre está balanceado.
+
+	2. ¿Qué operaciones primitivas del TDA ARBOL BINARIO (y el correspondiente nodo) no precisaríamos para implementar
+	   las dos operaciones indicadas del TDA APO?
+		Respuesta: C - TNodoArbolBinario.Buscar(unaClave).
+
+	3. ¿Cuál sería el orden del tiempo de ejecución de la operación TNodoArbolBinario.Padre() si el árbol está representado
+	   como los árboles comunes ya tratados?
+		Respuesta: A - O(n) (ya que recorre todo el árbol).
+
+	4. Si el TDA Árbol Binario Parcialmente Ordenado – TDA APO – hereda del TDA Arbol Binario, para insertar un nuevo elemento deberíamos:
+		Respuesta: C - Escribir una nueva operación que coloque el nuevo elemento en la posición más a la izquierda del último nivel y
+			       luego haga los intercambios necesarios para que finalmente quede en el lugar que le corresponde.
+
+	5. ¿Cuál sería el orden del tiempo de ejecución de la primitiva “Insertar” del TDA APO representado en la forma habitual de árboles?
+		Respuesta: O(n2) (ya que recorre todo el arbol para insertar y luego tiene que buscar al padre que es O(n))

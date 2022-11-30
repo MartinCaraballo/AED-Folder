@@ -9,7 +9,7 @@ Ejercicio 1:
 		
 		TClasificador.encuentraPivote(de tipo entero: izquierda, derecha, de tipo vector de enteros: entrada) : entero
 		COM
-			medio <- (izquierda + derecha) ? 2;									O(1)
+			medio <- (izquierda + derecha) / 2;									O(1)
 			Si izquierda < derecha AND derecha < medio OR medio < izquierda AND izquierda > derecha entonces	O(1)
 				devolver derecha										O(1)
 			Sino Si derecha < izquierda AND izquierda < medio OR medio < izquierda AND izquierda < derecha entonces	O(1)

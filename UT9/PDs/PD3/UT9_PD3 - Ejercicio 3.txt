@@ -1,0 +1,29 @@
+UT9_PD3
+
+Con el lanzamiento de Java 7, entre las mejoras se encuentra una mejora al algoritmo de Quicksort, en el cuál,
+la implementación de dicho algoritmo ha sido reemplazada por una variante llamada Quicksort de doble pivote.
+
+La idea de esta variante es tomar dos pivotes, uno en el extremo izquierdo de la matriz y el segundo en el
+extremo derecho. El pivote izquierdo debe ser menor o igual uque el derecho, por lo que si es necesario debemos
+intercambiarlos. Luego, comenzamos a dividir la matriz en tres partes:
+	- En la primera parte, todos los elementos serán menores que el pivote izquierdo,
+	- En la segunda parte todos los elementos serán mayores o iguales al pivote izquierdo y también serán
+	  menores o iguales al pivote derecho,
+ 	- Por último, en la tercera parte todos los elementos serán mayores que el pivote derecho.
+Luego, cambiamos los dos pivotes a sus posiciones apropiadas, y después de eso comenzamos a ordenar rápidamente
+estas tres partes recursivamente.
+
+Comparaciones:
+	Las comparaciones se efectuaron con 10 millones de enteros, aleatorios y duplicados:
+
+		Datos aleatorios:
+			- Quicksort: 1222ms
+			- Quicksort de doble pivote: 1066ms
+
+		Datos duplicados:
+			- Quicksort: 378ms
+			- Quicksort de doble pivote: 6ms
+
+Según el artículo, la implementación del autor del quicksort de doble pivote no tuvo buenos resultados con elementos
+duplicados, obtuvo un orden de ejecución de O(n2), por lo tanto podemos decir que su implementación del algoritmo
+no es estable.

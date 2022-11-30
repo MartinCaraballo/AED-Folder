@@ -1,0 +1,108 @@
+UT9_TA7 - Ejercicio 1
+
+	2. ¿Cuántas comparaciones y movimientos se realizaron? ¿Cómo se compara con Heapsort (será necesario ordenar el conjunto también por este método)
+		Este algoritmo no realiza comparaciones. En cuánto a los movimientos realiza N movimientos (en este caso 16).
+		Comparándolo con heapsort, vemos que el algoritmo de Cuenta por Distribucion es superior, dejando los siguientes tiempos:
+		
+		Con 300 elementos:
+			Vector ascendente:
+				Tiempo:
+					Heapsort: 5550ns
+					C. Distribucion: 1493ns
+			Vector descendente:
+				Tiempo:
+					Heapsort: 5018ns
+					C. Distribucion: 1153ns
+			Vector aleatorio:
+				Tiempo:
+					Heapsort: 5455ns
+					C. Distribucion: 1010ns
+		Con 3000 elementos:
+			Vector ascendente:
+				Tiempo:
+					Heapsort: 157680ns
+					C. Distribucion: 10578ns
+			Vector descendente:
+				Tiempo:
+					Heapsort: 164279ns
+					C. Distribucion: 10404ns
+			Vector aleatorio:
+				Tiempo:
+					Heapsort: 211229ns
+					C. Distribucion: 10129ns
+
+		Con 30000 elementos:
+			Vector ascendente:
+				Tiempo:
+					Heapsort: 1746938ns
+					C. Distribucion: 92314ns
+			Vector descendente:
+				Tiempo:
+					Heapsort: 1790647ns
+					C. Distribucion: 92402ns
+			Vector aleatorio:
+				Tiempo:
+					Heapsort: 2690436ns
+					C. Distribucion: 267344ns
+
+
+
+	3. ¿Qué consideraciones puedes hacer en referencia a la estabilidad del algoritmo?
+		El algoritmo es estable ya que es capaz de mantener un orden relativo con las claves iguales.
+
+	4.  Dado el seudocódigo del método de ordenación “Cuenta por distribución”, analiza detalladamente el orden del tiempo de ejecución.
+
+		CuentaPorDistribucion()
+		COM
+			for i = u to v do	-> se repite v - u veces
+				Cuenta[i] = 0	O(1)
+			endfor
+			for j = 1 to N do		-> se repite N veces
+				incrementar Cuenta[Kj]	O(1)
+			enfor
+			for i = u + 1 to v	-> se repite v - (u + 1) veces
+				Cuenta[i] = Cuenta[i] + Cuenta[i - 1]	O(1)
+			endfor
+			for j = N downto 1 do	-> se repite N veces
+				i = Cuenta[Kj]	O(1)
+				S[i] = R[j]	O(1)
+				Cuenta[Kj] = i - 1	O(1)
+			enfor
+		FIN
+
+		El orden de ejecución del algoritmo es de O(n).
+
+	5.  Implementa el algoritmo de Cuenta en el TClasificador y utilizando las planillas electrónicas para medición del tiempo calcula los tiempos de
+	    ordenación para los mismos conjuntos de datos que en los ejercicios anteriores.
+
+		Tiempos algoritmo CuentaPorDistribucion()
+			300 elementos:
+				Vector aleatorio:
+					Tiempo: 1011ns
+			
+				Vector ascendente:
+					Tiempo: 984ns
+				
+				Vector descendente:
+					Tiempo: 994ns
+			
+			3000 elementos:
+				Vector aleatorio:
+					Tiempo: 9652ns
+				
+				Vector ascendente:
+					Tiempo: 9430ns
+				
+				Vector descendente:
+					Tiempo: 9599ns
+		
+			30000 elementos:
+				Vector aleatorio:
+					Tiempo: 245687ns
+		
+				Vector ascendente:
+					Tiempo: 88441ns
+				
+				Vector descendente:
+					Tiempo: 89225ns
+			
