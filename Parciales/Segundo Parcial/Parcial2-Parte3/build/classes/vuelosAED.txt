@@ -1,0 +1,5 @@
+Metodo: esPosibleLLegarATodos
+PHL, Si
+ORF, No
+ABQ, No
+ZZZ, No
